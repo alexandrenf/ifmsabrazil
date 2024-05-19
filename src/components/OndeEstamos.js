@@ -65,7 +65,7 @@ export default function MyComponent() {
         <>
           <strong>Temos +11000</strong>
           <br />
-          <strong>membrosfiliados</strong>
+          <strong>membros filiados</strong>
         </>
       ),
     },
