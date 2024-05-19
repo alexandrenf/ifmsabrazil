@@ -17,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/teste" element={<MarkdownPage />} />
+        <Route path="/estrutura" element={<MarkdownPage />} />
         {/* Add other routes here */}
       </Routes>
     </Router>
