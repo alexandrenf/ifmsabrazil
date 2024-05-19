@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import backgroundImage from '../assets/background-image.png'; // Adjust the path as needed
+import OndeEstamos from './OndeEstamos.js'; // Import the OndeEstamos component
 
 const HomeContainer = styled.div`
   display: flex;
@@ -148,9 +149,10 @@ const Home = () => {
         </ScrollButton>
       </HeroSection>
       <ContentSection>
-        <h2>Lorem Ipsum</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at libero id ipsum dictum feugiat. Vivamus scelerisque quam eu urna hendrerit, vel vestibulum nulla fermentum. Quisque vitae lacus at nisi varius gravida. Donec nec bibendum justo. Vestibulum feugiat eros a est sodales, a vestibulum dui blandit. Phasellus condimentum magna id justo dignissim, a mollis ligula tristique. Integer aliquet interdum nulla, ac malesuada felis varius nec. Sed at dictum velit, et bibendum libero.</p>
+        <h2>Breve Introdução</h2>
+        <p>Fundada em 1991 como primeira Associação vinculada à International Federation of Medical Students’ Association da América Latina (IFMSA), a IFMSA Brazil interliga estudantes de medicina de todo o país para fazer a diferença na sociedade e na formação médica.</p>
       </ContentSection>
+      <OndeEstamos />
     </HomeContainer>
   );
 };
