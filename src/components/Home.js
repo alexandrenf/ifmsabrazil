@@ -1,33 +1,32 @@
-// src/components/Home.js
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import backgroundImage from '../assets/background-image.png'; // Adjust the path as needed
-import OndeEstamos from './OndeEstamos.js'; // Import the OndeEstamos component
+import OndeEstamos from './OndeEstamos.js';
+import AreasOfIFMSABrazil from './AreasOfIFMSABrazil.js';
 
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  overflow: hidden; /* Ensure no overflow from children */
+  overflow: hidden;
 `;
 
 const HeroSection = styled.div`
   width: 100%;
   height: 100vh;
   background-image: url(${backgroundImage});
-  background-size: cover; /* Ensure full coverage */
-  background-position: center; /* Center the background image */
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  position: relative;
   text-align: center;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const HeroText = styled.h1`
@@ -153,6 +152,7 @@ const Home = () => {
         <p>Fundada em 1991 como primeira Associação vinculada à International Federation of Medical Students’ Association da América Latina (IFMSA), a IFMSA Brazil interliga estudantes de medicina de todo o país para fazer a diferença na sociedade e na formação médica.</p>
       </ContentSection>
       <OndeEstamos />
+      <AreasOfIFMSABrazil />
     </HomeContainer>
   );
 };

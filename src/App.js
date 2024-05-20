@@ -6,6 +6,7 @@ import Home from './components/Home.js';
 import GlobalStyles from './styles/GlobalStyles.js';
 import './styles/Fonts.js';
 import MarkdownPage from './components/MarkdownPage.js';
+import Footer from './components/Footer.js';
 import { CssBaseline } from '@material-ui/core';
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/estrutura" element={<MarkdownPage />} />
         {/* Add other routes here */}
       </Routes>
+      <Footer />
     </Router>
   );
 };
