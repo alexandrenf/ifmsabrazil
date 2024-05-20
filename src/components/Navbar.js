@@ -64,6 +64,22 @@ const SubMenu = styled.div`
   }
 `;
 
+const JoinButton = styled(Link)`
+  background: #28a745; /* Verde */
+  color: white; /* Letras brancas */
+  font-weight: bold; /* Negrito */
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #218838; /* Verde mais escuro para hover */
+  }
+`;
+
 const MobileIcon = styled.div`
   display: none;
 
@@ -120,22 +136,6 @@ const MobileSubLink = styled(Link)`
   }
 `;
 
-const JoinButton = styled(Link)`
-  background: #28a745; /* Verde */
-  color: white; /* Letras brancas */
-  font-weight: bold; /* Negrito */
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  transition: background 0.3s;
-
-  &:hover {
-    background: #218838; /* Verde mais escuro para hover */
-  }
-`;
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState('');
@@ -176,7 +176,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('oQueFazemosMobile')}
         >
           O Que Fazemos
-          <SubMenu isOpen={activeSubMenu === 'oQueFazemos' || activeSubMenu === 'oQueFazemosMobile')}>
+          <SubMenu isOpen={activeSubMenu === 'oQueFazemos' || activeSubMenu === 'oQueFazemosMobile'}>
             <Link to="/eixos">Eixos de Atuação</Link>
             <Link to="/acoes">Ações e Temáticas</Link>
             <Link to="/eventos">Eventos e Workshops</Link>
@@ -188,7 +188,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('mobilidadeMobile')}
         >
           Mobilidade Estudantil
-          <SubMenu isOpen={activeSubMenu === 'mobilidade' || activeSubMenu === 'mobilidadeMobile')}>
+          <SubMenu isOpen={activeSubMenu === 'mobilidade' || activeSubMenu === 'mobilidadeMobile'}>
             <Link to="/nacionais">Intercâmbios Nacionais</Link>
             <Link to="/internacionais">Intercâmbios Internacionais</Link>
             <Link to="/outras-modalidades">Outras Modalidades de Intercâmbio</Link>
@@ -201,7 +201,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('midiasMobile')}
         >
           Mídias e Documentos
-          <SubMenu isOpen={activeSubMenu === 'midias' || activeSubMenu === 'midiasMobile')}>
+          <SubMenu isOpen={activeSubMenu === 'midias' || activeSubMenu === 'midiasMobile'}>
             <Link to="/ressonancia">Ressonância Poética</Link>
             <Link to="/informa-susi">Informa SUSi</Link>
             <Link to="/brazilian-medical-students">Brazilian Medical Students</Link>
@@ -216,7 +216,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('membrosMobile')}
         >
           Membros
-          <SubMenu isOpen={activeSubMenu === 'membros' || activeSubMenu === 'membrosMobile')}>
+          <SubMenu isOpen={activeSubMenu === 'membros' || activeSubMenu === 'membrosMobile'}>
             <Link to="/solar">SOLAR</Link>
             <Link to="/database">DATABASE</Link>
             <Link to="/exchange">EXCHANGE</Link>
