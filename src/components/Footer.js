@@ -8,7 +8,7 @@ import { styled } from '@mui/system';
 const FooterContainer = styled('footer')({
   backgroundColor: '#00508C',
   color: 'white',
-  padding: '40px 0',
+  padding: '20px 0',
   textAlign: 'center',
 });
 
@@ -24,7 +24,7 @@ const ContactItem = styled('div')({
 });
 
 const SocialLinks = styled('div')({
-  marginTop: '20px',
+  marginTop: '10px',
 });
 
 const SocialLink = styled(IconButton)({
@@ -47,13 +47,13 @@ const Footer = () => (
             Endereço
           </Typography>
           <ContactItem>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
+          <FontAwesomeIcon icon={faMapMarkerAlt} />
             <Typography variant="body1">
-              Alameda Santos, n.º 1.800, 8º andar, 8032, Bairro Cerqueira César, São Paulo/SP - Brasil
+              Avenida Paulista nº 1765 - 7º Andar
             </Typography>
           </ContactItem>
           <Typography variant="body1">
-            CEP: 01418-200 | CNPJ: 02.300.156/0001-13
+            Boa Vista, São Paulo/SP - Brasil
           </Typography>
         </Grid>
         <Grid item xs={12} md={4}>
