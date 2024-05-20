@@ -65,11 +65,11 @@ const AreaText = styled.div`
 
 export default function AreasOfIFMSABrazil() {
   const areasData = [
-    { id: 1, bgColor: 'rgba(250, 200, 0, 1)', text: 'Representatividade estudantil', icon: faGraduationCap },
+    { id: 1, bgColor: 'rgba(182, 120, 38, 1)', text: 'Representatividade estudantil', icon: faGraduationCap },
     { id: 2, bgColor: 'rgba(0, 0, 0, 1)', text: 'Capacity Building', icon: faBook },
     { id: 3, bgColor: '#FFFFFF', text: 'Educação Médica', icon: faHospital, color: '#000', border: '2px solid #000' },
     { id: 4, bgColor: 'rgba(220, 0, 0, 1)', text: 'Promoção de Saúde', icon: faHeartbeat },
-    { id: 5, bgColor: 'rgba(0, 80, 140, 1)', text: 'Humanização', icon: faHandsHelping },
+    { id: 5, bgColor: 'rgba(0, 150, 60, 1)', text: 'Humanização', icon: faHandsHelping },
     { id: 6, bgColor: 'rgba(0, 80, 140, 1)', text: 'Mobilidade Estudantil', icon: faUniversity },
     { id: 7, bgColor: 'rgba(128, 128, 128, 1)', text: 'Pesquisa e Extensão', icon: faSearch },
   ];
