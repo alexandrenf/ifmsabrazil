@@ -1,91 +1,89 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Container, Grid, Typography, Link as MuiLink, IconButton } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faMapMarkerAlt, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { styled } from '@mui/system';
 
-const FooterContainer = styled.footer`
-  background: #00508C;
-  color: white;
-  padding: 40px 20px;
-  text-align: center;
-`;
+const FooterContainer = styled('footer')({
+  backgroundColor: '#00508C',
+  color: 'white',
+  padding: '40px 0',
+  textAlign: 'center',
+});
 
-const FooterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
+const ContactItem = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  margin: '5px 0',
+  justifyContent: 'center',
 
-const FooterText = styled.p`
-  font-family: 'Poppins', sans-serif;
-  margin: 10px 0;
-  line-height: 1.5;
-`;
+  '& svg': {
+    marginRight: '10px',
+  },
+});
 
-const ContactInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;
+const SocialLinks = styled('div')({
+  marginTop: '20px',
+});
 
-const ContactItem = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
+const SocialLink = styled(IconButton)({
+  color: 'white',
+  margin: '0 10px',
+  fontSize: '1.5rem',
+  transition: 'color 0.3s',
 
-  svg {
-    margin-right: 10px;
-  }
-`;
-
-const SocialLinks = styled.div`
-  margin-top: 20px;
-`;
-
-const SocialLink = styled.a`
-  color: white;
-  margin: 0 10px;
-  font-size: 1.5rem;
-  transition: color 0.3s;
-
-  &:hover {
-    color: #FAC800;
-  }
-`;
+  '&:hover': {
+    color: '#FAC800',
+  },
+});
 
 const Footer = () => (
   <FooterContainer>
-    <FooterContent>
-      <FooterText>
-        Alameda Santos, n.º 1.800, 8º andar, 8032, Bairro Cerqueira César, São Paulo/SP - Brasil | CEP: 01418-200 | CNPJ: 02.300.156/0001-13
-      </FooterText>
-      <ContactInfo>
-        <ContactItem>
-          <FontAwesomeIcon icon={faEnvelope} />
-          <span>atendimento@ifmsabrazil.org</span>
-        </ContactItem>
-        <ContactItem>
-          <FontAwesomeIcon icon={faPhone} />
-          <span>Tel: + 55 11 3170-3251</span>
-        </ContactItem>
-        <ContactItem>
-          <FontAwesomeIcon icon={faMapMarkerAlt} />
-          <span>Alameda Santos, n.º 1.800, 8º andar, 8032, Bairro Cerqueira César, São Paulo/SP - Brasil</span>
-        </ContactItem>
-      </ContactInfo>
-      <SocialLinks>
-        <SocialLink href="https://twitter.com/ifmsabrazil" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faTwitter} />
-        </SocialLink>
-        <SocialLink href="https://instagram.com/ifmsabrazil" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faInstagram} />
-        </SocialLink>
-      </SocialLinks>
-    </FooterContent>
+    <Container maxWidth="lg">
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6" gutterBottom>
+            Endereço
+          </Typography>
+          <ContactItem>
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
+            <Typography variant="body1">
+              Alameda Santos, n.º 1.800, 8º andar, 8032, Bairro Cerqueira César, São Paulo/SP - Brasil
+            </Typography>
+          </ContactItem>
+          <Typography variant="body1">
+            CEP: 01418-200 | CNPJ: 02.300.156/0001-13
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6" gutterBottom>
+            Contato
+          </Typography>
+          <ContactItem>
+            <FontAwesomeIcon icon={faEnvelope} />
+            <Typography variant="body1">atendimento@ifmsabrazil.org</Typography>
+          </ContactItem>
+          <ContactItem>
+            <FontAwesomeIcon icon={faPhone} />
+            <Typography variant="body1">Tel: + 55 11 3170-3251</Typography>
+          </ContactItem>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6" gutterBottom>
+            Siga-nos
+          </Typography>
+          <SocialLinks>
+            <SocialLink href="https://twitter.com/ifmsabrazil" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faTwitter} />
+            </SocialLink>
+            <SocialLink href="https://instagram.com/ifmsabrazil" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faInstagram} />
+            </SocialLink>
+          </SocialLinks>
+        </Grid>
+      </Grid>
+    </Container>
   </FooterContainer>
 );
 
