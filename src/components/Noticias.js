@@ -99,7 +99,7 @@ const Noticias = ({ posts, loading }) => {
 
   return (
     <BlogSection>
-      <Title>Últimas Notícias</Title>
+      <Title>Últimas Publicações</Title>
       <FilterContainer>
         <TextField
           label="Buscar por Título"

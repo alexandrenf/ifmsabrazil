@@ -217,7 +217,7 @@ const Navbar = () => {
         </NavLink>
         <NavLink>
           <Link to="/noticias" style={{ color: 'white', textDecoration: 'none' }}>
-            Notícias
+            <span style={{ transition: 'color 0.3s' }}>Notícias</span>
           </Link>
         </NavLink>
         <NavLink
