@@ -15,7 +15,7 @@ const BlogSection = styled.section`
   background-color: #FFFFFF;
 `;
 
-const Title = styled(Typography)`
+const Title = styled.h2`
   font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   color: #333;
@@ -30,7 +30,7 @@ const Blog = ({ posts, loading }) => {
 
   return (
     <BlogSection>
-      <Title>Blog Posts</Title>
+      <Title>Últimas Notícias</Title>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           {posts.map((post, index) => (

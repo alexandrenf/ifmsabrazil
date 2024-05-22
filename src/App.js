@@ -35,7 +35,7 @@ const App = () => {
       <CssBaseline />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
+        <Route path="/" element={<Home posts={posts} loading={loading}/>} />
         <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} />} />
         <Route path="/teste" element={<MarkdownPage />} />
         <Route path="/estrutura" element={<MarkdownPage />} />

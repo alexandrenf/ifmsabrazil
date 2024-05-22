@@ -108,7 +108,7 @@ const ContentSection = styled.div`
   }
 `;
 
-const Home = ({ posts }) => {
+const Home = ({ posts, loading}) => {
   const [showScrollButton, setShowScrollButton] = useState(true);
 
   const handleScroll = () => {
@@ -154,7 +154,7 @@ const Home = ({ posts }) => {
       </ContentSection>
       <OndeEstamos />
       <AreasOfIFMSABrazil />
-      <Blog posts={posts} />
+      <Blog posts={posts} loading={loading}/>
     </HomeContainer>
   );
 };

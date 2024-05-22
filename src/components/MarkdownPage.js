@@ -22,6 +22,7 @@ const MarkdownContainer = styled('div')({
 const Title = styled(Typography)({
   color: '#00508C',
   marginBottom: '16px',
+  fontWeight: 'bold',
 });
 
 const MetaData = styled('div')({
