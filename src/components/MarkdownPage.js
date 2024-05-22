@@ -1,49 +1,71 @@
-// src/components/MarkdownPage.js
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, makeStyles } from '@material-ui/core';
+import { Container, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 import Markdown from 'markdown-to-jsx';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
+import { convertToAscii } from './characterConversion.js';
+import Loading from './Loading.js';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(3),
-    backgroundColor: '#FFFFFF',
-    color: '#333',
-  },
-  markdownContainer: {
-    maxWidth: 800,
-    margin: '0 auto',
-    padding: theme.spacing(2),
-  },
-  title: {
-    color: '#00508C',
-    marginBottom: theme.spacing(2),
-  },
-}));
+const Root = styled(Container)({
+  padding: '24px',
+  backgroundColor: '#FFFFFF',
+  color: '#333',
+});
 
-const MarkdownPage = () => {
-  const classes = useStyles();
+const MarkdownContainer = styled('div')({
+  maxWidth: '800px',
+  margin: '0 auto',
+  padding: '16px',
+});
+
+const Title = styled(Typography)({
+  color: '#00508C',
+  marginBottom: '16px',
+});
+
+const MarkdownPage = ({ posts }) => {
+  const { title } = useParams();
+  const navigate = useNavigate();
   const [markdownContent, setMarkdownContent] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/markdown/pagina.md')
-      .then(response => {
+    const fetchMarkdown = async () => {
+      try {
+        const asciiTitle = convertToAscii(title);
+        const post = posts.find((p) => convertToAscii(p.titulo.toLowerCase()).replace(/[^a-z0-9]+/g, '-') === asciiTitle);
+
+        if (!post) {
+          throw new Error('Post not found');
+        }
+
+        const response = await axios.get(post.link);
         setMarkdownContent(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error loading markdown file:', error);
-      });
-  }, []);
+        setMarkdownContent('# 404 Not Found\n\nThe requested post could not be found.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMarkdown();
+  }, [title, posts, navigate]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
-    <Container className={classes.root}>
-      <Typography variant="h4" className={classes.title}>
+    <Root>
+      <Title variant="h4">
         Página IFMSA Brazil
-      </Typography>
-      <div className={classes.markdownContainer}>
+      </Title>
+      <MarkdownContainer>
         <Markdown>{markdownContent}</Markdown>
-      </div>
-    </Container>
+      </MarkdownContainer>
+    </Root>
   );
 };
 

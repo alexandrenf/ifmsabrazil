@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import BlogPost from './BlogPost.js';
+import React from 'react';
 import styled from 'styled-components';
 import { Container, Grid, Typography } from '@mui/material';
+import BlogPost from './BlogPost.js';
+import { Link } from 'react-router-dom';
+import { convertToAscii } from './characterConversion.js'; // Import the conversion function
 
 const BlogSection = styled.section`
   display: flex;
@@ -21,15 +23,21 @@ const Title = styled.h2`
 `;
 
 const Blog = ({ posts }) => {
+  const generateLink = (title) => {
+    const asciiTitle = convertToAscii(title);
+    return asciiTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  };
 
   return (
     <BlogSection>
-      <Title>Notícias Recentes</Title>
+      <Title>Blog Posts</Title>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           {posts.map((post, index) => (
             <Grid item key={index} xs={12} sm={6}>
-              <BlogPost post={post} />
+              <Link to={`/post/${generateLink(post.titulo)}`}>
+                <BlogPost post={post} />
+              </Link>
             </Grid>
           ))}
         </Grid>

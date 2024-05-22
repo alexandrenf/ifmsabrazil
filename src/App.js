@@ -29,6 +29,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
+        <Route path="/post/:title" element={<MarkdownPage posts={posts} />} />
         <Route path="/teste" element={<MarkdownPage />} />
         <Route path="/estrutura" element={<MarkdownPage />} />
         {/* Add other routes here */}

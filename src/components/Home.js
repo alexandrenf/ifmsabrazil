@@ -5,7 +5,6 @@ import OndeEstamos from './OndeEstamos.js';
 import AreasOfIFMSABrazil from './AreasOfIFMSABrazil.js';
 import Blog from './Blog.js'; // Adjust the path as needed
 
-
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
