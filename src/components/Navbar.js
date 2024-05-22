@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import logo from '../assets/logo-fundo-azul.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -166,7 +165,7 @@ const Navbar = () => {
   return (
     <Nav>
       <Link to="/">
-        <NavLogo src={logo} alt="Logo" />
+        <NavLogo src="https://s6.imgcdn.dev/3hEUy.png" alt="Logo" />
       </Link>
       <MobileIcon onClick={toggleMobileMenu}>
         <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
@@ -302,7 +301,6 @@ const Navbar = () => {
           <MobileLink onClick={() => toggleSubMenu('membrosMobile')}>
             Membros
           </MobileLink>
-          <MobileLink to="/noticias" onClick={toggleMobileMenu}>Notícias</MobileLink>
           {activeSubMenu === 'membrosMobile' && (
             <>
               <MobileSubLink to="/solar" onClick={toggleMobileMenu}>SOLAR</MobileSubLink>
@@ -311,6 +309,7 @@ const Navbar = () => {
             </>
           )}
         </MobileSubMenu>
+        <MobileLink to="/noticias" onClick={toggleMobileMenu}>Notícias</MobileLink>
         <MobileLink to="/filie-se" onClick={toggleMobileMenu}>FILIE-SE</MobileLink>
       </MobileMenu>
     </Nav>
