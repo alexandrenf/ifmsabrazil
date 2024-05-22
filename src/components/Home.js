@@ -16,7 +16,7 @@ const HomeContainer = styled.div`
 const HeroSection = styled.div`
   width: 100%;
   height: 100vh;
-  background-image: url(${backgroundImage});
+  background-image: url('https://s6.imgcdn.dev/3hHLD.png');
   background-size: cover;
   background-position: center;
   display: flex;
