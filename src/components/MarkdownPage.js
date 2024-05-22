@@ -56,6 +56,10 @@ const MarkdownContainer = styled('div')({
       textDecoration: 'underline',
     },
   },
+  '& img': {
+    maxWidth: '100%',
+    height: 'auto',
+  },
 });
 
 const Title = styled(Typography)({
@@ -113,6 +117,11 @@ const MarkdownOptions = {
     a: {
       component: ({ children, ...props }) => (
         <a {...props}>{children}</a>
+      ),
+    },
+    img: {
+      component: ({ children, ...props }) => (
+        <img {...props} style={{ maxWidth: '100%', height: 'auto' }} />
       ),
     },
   },

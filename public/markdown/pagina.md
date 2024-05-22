@@ -164,7 +164,7 @@ Para adicionar imagens, use a mesma sintaxe dos links, mas adicione um ponto de 
 ![Descrição da Imagem](https://via.placeholder.com/150)
 ```
 
-![Descrição da Imagem](https://via.placeholder.com/150)
+![Descrição da Imagem](https://maxipx.com/wp-content/uploads/2023/09/HD-Wallpapers-For-Large-Screens-2048x1280.jpg)
 
 ## Código
 
