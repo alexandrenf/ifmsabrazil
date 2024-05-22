@@ -3,7 +3,7 @@ import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import Markdown from 'markdown-to-jsx';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { convertToAscii, removeDashes } from './characterConversion.js';
 import Loading from './Loading.js';
 import Prism from 'prismjs';
@@ -22,8 +22,12 @@ const MarkdownContainer = styled('div')({
   padding: '16px',
   '& table': {
     width: '100%',
+    maxWidth: '100%',
     borderCollapse: 'collapse',
     marginBottom: '16px',
+    overflowX: 'auto',
+    display: 'block',
+    margin: '0 auto',
   },
   '& th, & td': {
     padding: '12px',
@@ -32,31 +36,6 @@ const MarkdownContainer = styled('div')({
   },
   '& th': {
     backgroundColor: '#f2f2f2',
-  },
-  '@media (max-width: 600px)': {
-    '& table, & th, & td': {
-      display: 'block',
-      width: '100%',
-    },
-    '& th': {
-      position: 'absolute',
-      top: '-9999px',
-      left: '-9999px',
-    },
-    '& td': {
-      position: 'relative',
-      paddingLeft: '50%',
-      textAlign: 'right',
-    },
-    '& td::before': {
-      content: 'attr(data-label)',
-      position: 'absolute',
-      left: '0',
-      width: '50%',
-      paddingLeft: '15px',
-      fontWeight: 'bold',
-      textAlign: 'left',
-    },
   },
   '& blockquote': {
     borderLeft: '4px solid #ddd',
@@ -83,18 +62,22 @@ const Title = styled(Typography)({
   color: '#00508C',
   marginBottom: '16px',
   fontWeight: 'bold',
+  textAlign: 'center', // Center the title
 });
 
 const MetaData = styled('div')({
   marginBottom: '16px',
   color: '#666',
+  textAlign: 'center', // Center the metadata
 });
 
 const MarkdownOptions = {
   overrides: {
     table: {
       component: ({ children, ...props }) => (
-        <table {...props}>{children}</table>
+        <div style={{ overflowX: 'auto' }}>
+          <table {...props}>{children}</table>
+        </div>
       ),
     },
     th: {
@@ -110,13 +93,12 @@ const MarkdownOptions = {
     code: {
       component: ({ className, children, ...props }) => {
         const language = className?.replace('lang-', '') || 'javascript';
-        const code = children.trim();
         return (
           <pre className={`language-${language}`}>
             <code
               className={`language-${language}`}
               dangerouslySetInnerHTML={{
-                __html: Prism.highlight(code, Prism.languages[language], language),
+                __html: Prism.highlight(children, Prism.languages[language], language),
               }}
             />
           </pre>
@@ -136,16 +118,15 @@ const MarkdownOptions = {
   },
 };
 
-const MarkdownPage = ({ posts, loading }) => {
+const MarkdownPage = ({ posts, loading, needsExternal, filepath }) => {
   const { title } = useParams();
-  const navigate = useNavigate();
   const [markdownContent, setMarkdownContent] = useState('');
   const [postLoading, setPostLoading] = useState(true);
   const [post, setPost] = useState(null);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    const fetchMarkdown = async () => {
+    const fetchMarkdownExternal = async () => {
       try {
         const asciiTitle = removeDashes(convertToAscii(title));
         const foundPost = posts.find((p) => removeDashes(convertToAscii(p.titulo.toLowerCase())).replace(/[^a-z0-9]+/g, '') === asciiTitle);
@@ -167,10 +148,27 @@ const MarkdownPage = ({ posts, loading }) => {
       }
     };
 
-    if (!loading && posts && posts.length > 0) {
-      fetchMarkdown();
+    const fetchMarkdownInternal = async () => {
+      try {
+        const response = await fetch(filepath);
+        const text = await response.text();
+        setMarkdownContent(text);
+      } catch (error) {
+        console.error('Error fetching markdown file:', error);
+        setMarkdownContent('# Erro ao carregar o arquivo Markdown');
+      } finally {
+        setPostLoading(false);
+      }
+    };
+
+    if (!loading) {
+      if (needsExternal && posts && posts.length > 0) {
+        fetchMarkdownExternal();
+      } else if (!needsExternal) {
+        fetchMarkdownInternal();
+      }
     }
-  }, [title, posts, navigate, loading]);
+  }, [title, posts, loading, needsExternal, filepath]);
 
   if (loading || postLoading) {
     return <Loading />;
@@ -186,13 +184,15 @@ const MarkdownPage = ({ posts, loading }) => {
 
   return (
     <Root>
-      <Title variant="h4">
-        {post.titulo}
-      </Title>
-      <MetaData>
-        <Typography variant="subtitle1">By {post.autor}</Typography>
-        <Typography variant="subtitle2">{new Date(post['dia-mes-ano']).toLocaleDateString()}</Typography>
-      </MetaData>
+      {needsExternal && post && (
+        <>
+          <Title variant="h4">{post.titulo}</Title>
+          <MetaData>
+            <Typography variant="subtitle1">By {post.autor}</Typography>
+            <Typography variant="subtitle2">{new Date(post['dia-mes-ano']).toLocaleDateString()}</Typography>
+          </MetaData>
+        </>
+      )}
       <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent}</Markdown>
       </MarkdownContainer>

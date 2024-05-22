@@ -36,8 +36,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home posts={posts} loading={loading}/>} />
-        <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} />} />
-        <Route path="/teste" element={<MarkdownPage />} />
+        <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true}/>} />
+        <Route path="/teste" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'}/>} />
         <Route path="/estrutura" element={<MarkdownPage />} />
         {/* Add other routes here */}
       </Routes>
