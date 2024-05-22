@@ -79,9 +79,9 @@ const SubMenu = styled.div`
 `;
 
 const JoinButton = styled(Link)`
-  background: #28a745; /* Verde */
-  color: white; /* Letras brancas */
-  font-weight: bold; /* Negrito */
+  background: #28a745;
+  color: white;
+  font-weight: bold;
   padding: 0.5rem 1rem;
   margin-left: 1rem;
   border-radius: 5px;
@@ -90,7 +90,7 @@ const JoinButton = styled(Link)`
   transition: background 0.3s;
 
   &:hover {
-    background: #218838; /* Verde mais escuro para hover */
+    background: #218838;
   }
 `;
 
@@ -102,6 +102,7 @@ const MobileIcon = styled.div`
     color: white;
     font-size: 1.8rem;
     cursor: pointer;
+    z-index: 11; /* Ensure it is above the mobile menu */
   }
 `;
 
@@ -118,6 +119,7 @@ const MobileMenu = styled.div`
     width: 100%;
     background: #00508C;
     padding: 1rem 0;
+    z-index: 9;
   }
 `;
 
@@ -126,7 +128,7 @@ const MobileSubMenu = styled.div`
   text-align: center;
 `;
 
-const MobileLink = styled.div`
+const MobileLink = styled(Link)`
   color: white;
   font-weight: 500;
   font-size: 1.2rem;
@@ -297,6 +299,7 @@ const Navbar = () => {
             </>
           )}
         </MobileSubMenu>
+        <MobileLink to="/noticias" onClick={toggleMobileMenu}>Notícias</MobileLink>
         <MobileSubMenu>
           <MobileLink onClick={() => toggleSubMenu('membrosMobile')}>
             Membros
@@ -309,7 +312,6 @@ const Navbar = () => {
             </>
           )}
         </MobileSubMenu>
-        <MobileLink to="/noticias" onClick={toggleMobileMenu}>Notícias</MobileLink>
         <MobileLink to="/filie-se" onClick={toggleMobileMenu}>FILIE-SE</MobileLink>
       </MobileMenu>
     </Nav>
