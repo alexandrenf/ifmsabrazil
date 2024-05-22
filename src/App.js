@@ -5,6 +5,7 @@ import Home from './components/Home.js';
 import GlobalStyles from './styles/GlobalStyles.js';
 import './styles/Fonts.js';
 import MarkdownPage from './components/MarkdownPage.js';
+import GeradorLink from './components/GeradorLink.js';
 import Footer from './components/Footer.js';
 import { CssBaseline } from '@material-ui/core';
 import fetchSpreadsheet from './components/fetchSpreadsheet.js'; // Import fetchSpreadsheet
@@ -37,6 +38,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home posts={posts} loading={loading}/>} />
         <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true}/>} />
+        <Route path="/gerarlink" element={<GeradorLink/>} />
         <Route path="/teste" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'}/>} />
         <Route path="/estrutura" element={<MarkdownPage />} />
         {/* Add other routes here */}
