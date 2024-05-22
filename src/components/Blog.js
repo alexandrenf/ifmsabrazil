@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import fetchSpreadsheet from './fetchSpreadsheet.js'; // Adjust the path as needed
 import BlogPost from './BlogPost.js';
 import styled from 'styled-components';
 import { Container, Grid, Typography } from '@mui/material';
@@ -21,18 +20,7 @@ const Title = styled.h2`
   margin-bottom: 20px;
 `;
 
-const Blog = () => {
-  const [posts, setPosts] = useState([]);
-  const googleSheetsUrl = 'https://docs.google.com/spreadsheets/d/14lmnc_GTJzWvLatvU9QQIBO9_Xg1fKjBEMYU12FsZuk/export?gid=0&format=csv';
-
-  useEffect(() => {
-    const loadData = async () => {
-      const spreadsheetData = await fetchSpreadsheet(googleSheetsUrl);
-      setPosts(spreadsheetData.slice(0, 4)); // Get the first 4 posts
-    };
-
-    loadData();
-  }, [googleSheetsUrl]);
+const Blog = ({ posts }) => {
 
   return (
     <BlogSection>
