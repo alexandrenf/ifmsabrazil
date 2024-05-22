@@ -19,6 +19,18 @@ const StyledCard = styled(Card)`
   }
 `;
 
+const StyledCardMedia = styled(CardMedia)`
+  width: 100%;
+  height: auto;
+
+  @media (min-width: 600px) {
+    width: 160px !important;
+    height: auto;
+    object-fit: cover;
+    margin-left: auto;
+  }
+`;
+
 const BlogPost = ({ post }) => {
   return (
     <StyledCard>
@@ -30,15 +42,14 @@ const BlogPost = ({ post }) => {
           {post.autor}
         </Typography>
         <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-          {post['dia-mes-ano'] ? post['dia-mes-ano'].toLocaleDateString() : ''}
+          {post['dia-mes-ano'] ? new Date(post['dia-mes-ano']).toLocaleDateString() : ''}
         </Typography>
         <Typography variant="body1" paragraph>
           {post.resumo}
         </Typography>
       </CardContent>
-      <CardMedia
+      <StyledCardMedia
         component="img"
-        style={{ width: 160, height: 'auto', marginLeft: 'auto' }}
         image={post['imagem-link']}
         alt="Blog image"
       />
