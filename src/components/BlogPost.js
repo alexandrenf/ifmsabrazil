@@ -1,0 +1,49 @@
+import React from 'react';
+import styled from 'styled-components';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+
+const StyledCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  border-radius: 10px;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+`;
+
+const BlogPost = ({ post }) => {
+  return (
+    <StyledCard>
+      <CardContent style={{ flex: 1 }}>
+        <Typography component="h2" variant="h5" gutterBottom>
+          {post.titulo}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary">
+          {post.autor}
+        </Typography>
+        <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+          {post['dia-mes-ano'] ? post['dia-mes-ano'].toLocaleDateString() : ''}
+        </Typography>
+        <Typography variant="body1" paragraph>
+          {post.resumo}
+        </Typography>
+      </CardContent>
+      <CardMedia
+        component="img"
+        style={{ width: 160, height: 'auto', marginLeft: 'auto' }}
+        image={post['imagem-link']}
+        alt="Blog image"
+      />
+    </StyledCard>
+  );
+};
+
+export default BlogPost;

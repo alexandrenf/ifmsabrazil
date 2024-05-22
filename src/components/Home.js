@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import backgroundImage from '../assets/background-image.png'; // Adjust the path as needed
 import OndeEstamos from './OndeEstamos.js';
 import AreasOfIFMSABrazil from './AreasOfIFMSABrazil.js';
+import Blog from './Blog.js'; // Adjust the path as needed
+
 
 const HomeContainer = styled.div`
   display: flex;
@@ -153,6 +155,7 @@ const Home = () => {
       </ContentSection>
       <OndeEstamos />
       <AreasOfIFMSABrazil />
+      <Blog />
     </HomeContainer>
   );
 };
