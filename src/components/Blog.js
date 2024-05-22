@@ -28,12 +28,32 @@ const Blog = ({ posts, loading }) => {
     return <Loading />;
   }
 
+  const sortPostsByDate = (posts) => {
+    return posts.sort((a, b) => b['dia-mes-ano'] - a['dia-mes-ano']);
+  };
+
+  const prioritizePosts = (posts, maxPosts = 4) => {
+    const sortedPosts = sortPostsByDate(posts);
+    const forcedPosts = sortedPosts.filter(post => post['forcar-pagina-inicial']);
+
+    if (forcedPosts.length >= maxPosts) {
+      return forcedPosts;
+    }
+
+    const additionalPosts = sortedPosts.filter(post => !post['forcar-pagina-inicial']);
+    const finalPosts = forcedPosts.concat(additionalPosts.slice(0, maxPosts - forcedPosts.length));
+
+    return finalPosts;
+  };
+
+  const shownPosts = prioritizePosts(posts);
+
   return (
     <BlogSection>
       <Title>Últimas Notícias</Title>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
-          {posts.map((post, index) => (
+          {shownPosts.map((post, index) => (
             <Grid item key={index} xs={12} sm={6}>
               <Link to={`/post/${generateUrlFriendlyTitle(post.titulo)}`}>
                 <BlogPost post={post} />

@@ -197,7 +197,7 @@ const MarkdownPage = ({ posts, loading, needsExternal, filepath }) => {
         <>
           <Title variant="h4">{post.titulo}</Title>
           <MetaData>
-            <Typography variant="subtitle1">By {post.autor}</Typography>
+            <Typography variant="subtitle1">Escrito por: {post.autor}</Typography>
             <Typography variant="subtitle2">{new Date(post['dia-mes-ano']).toLocaleDateString()}</Typography>
           </MetaData>
         </>

@@ -2,7 +2,7 @@
 
 Nesse arquivo, vou ensinar você a escrever do zero um artigo para ser publicado no site da IFMSA Brazil. Vamos ensinar duas versões. A primeira, acredito que seja a mais fácil.
 
-# Versão 1 - Usando sites de Markdown
+## Versão 1 - Usando sites de Markdown
 
 ## Um gria Prático para o Site StackEdit
 
@@ -61,7 +61,7 @@ Você pode criar tabelas usando pipes e hifens para separar colunas e linhas de 
 
 Após acabar com sua nova postagem, coloque o arquivo na pasta própria da publicação, mencionada acima. Após isso, [Clique aqui](/gerarlink), cole o link e copie o novo link gerado. Esse é o link do seu arquivo! Coloque as informações do arquivo na planilha providenciada de postagens e veja o seu conteúdo aparecer no site automaticamente.
 
-# Versão 2 - Guia Completo de Markdown
+## Versão 2 - Guia Completo de Markdown
 
 Markdown é uma linguagem de marcação simples e fácil de usar que permite formatar texto usando uma sintaxe leve e intuitiva. Aqui estão algumas das principais características e como usá-las:
 
@@ -161,7 +161,7 @@ Para criar links, coloque o texto do link entre colchetes (\`[]\`) e a URL entre
 Para adicionar imagens, use a mesma sintaxe dos links, mas adicione um ponto de exclamação (\`!\`) no início.
 
 ```
-![Descrição da Imagem](https://via.placeholder.com/150)
+![Descrição da Imagem](https://maxipx.com/wp-content/uploads/2023/09/HD-Wallpapers-For-Large-Screens-2048x1280.jpg)
 ```
 
 ![Descrição da Imagem](https://maxipx.com/wp-content/uploads/2023/09/HD-Wallpapers-For-Large-Screens-2048x1280.jpg)

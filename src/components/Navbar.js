@@ -36,9 +36,14 @@ const NavLink = styled.div`
   margin: 0 1rem;
   cursor: pointer;
   transition: color 0.3s;
+  white-space: nowrap;
 
   &:hover {
     color: #FAC800;
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 1rem;
   }
 `;
 
@@ -210,6 +215,11 @@ const Navbar = () => {
             <Link to="/declaracoes">Declarações de Política</Link>
           </SubMenu>
         </NavLink>
+        <NavLink>
+          <Link to="/noticias" style={{ color: 'white', textDecoration: 'none' }}>
+            Notícias
+          </Link>
+        </NavLink>
         <NavLink
           onMouseEnter={() => setActiveSubMenu('membros')}
           onMouseLeave={() => setActiveSubMenu('')}
@@ -282,6 +292,7 @@ const Navbar = () => {
           <MobileLink onClick={() => toggleSubMenu('membrosMobile')}>
             Membros
           </MobileLink>
+          <MobileLink to="/noticias" onClick={toggleMobileMenu}>Notícias</MobileLink>
           {activeSubMenu === 'membrosMobile' && (
             <>
               <MobileSubLink to="/solar" onClick={toggleMobileMenu}>SOLAR</MobileSubLink>

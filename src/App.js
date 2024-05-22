@@ -6,6 +6,7 @@ import GlobalStyles from './styles/GlobalStyles.js';
 import './styles/Fonts.js';
 import MarkdownPage from './components/MarkdownPage.js';
 import GeradorLink from './components/GeradorLink.js';
+import Noticias from './components/Noticias.js';
 import Footer from './components/Footer.js';
 import { CssBaseline } from '@material-ui/core';
 import fetchSpreadsheet from './components/fetchSpreadsheet.js'; // Import fetchSpreadsheet
@@ -19,7 +20,7 @@ const App = () => {
     const loadData = async () => {
       try {
       const spreadsheetData = await fetchSpreadsheet(googleSheetsUrl);
-      setPosts(spreadsheetData.slice(0, 4)); // Get the first 4 posts
+      setPosts(spreadsheetData); // Get the first 4 posts
       } catch {
         console.error(error);
       } finally {
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/" element={<Home posts={posts} loading={loading}/>} />
         <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true}/>} />
         <Route path="/gerarlink" element={<GeradorLink/>} />
+        <Route path="/noticias" element={<Noticias posts={posts} loading={loading}/>} />
         <Route path="/tutorial" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'}/>} />
         <Route path="/estrutura" element={<MarkdownPage />} />
         {/* Add other routes here */}
