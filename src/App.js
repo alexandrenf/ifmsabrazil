@@ -11,12 +11,19 @@ import fetchSpreadsheet from './components/fetchSpreadsheet.js'; // Import fetch
 
 const App = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const googleSheetsUrl = 'https://docs.google.com/spreadsheets/d/14lmnc_GTJzWvLatvU9QQIBO9_Xg1fKjBEMYU12FsZuk/export?gid=0&format=csv';
 
   useEffect(() => {
     const loadData = async () => {
+      try {
       const spreadsheetData = await fetchSpreadsheet(googleSheetsUrl);
       setPosts(spreadsheetData.slice(0, 4)); // Get the first 4 posts
+      } catch {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadData();
@@ -29,7 +36,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
-        <Route path="/post/:title" element={<MarkdownPage posts={posts} />} />
+        <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} />} />
         <Route path="/teste" element={<MarkdownPage />} />
         <Route path="/estrutura" element={<MarkdownPage />} />
         {/* Add other routes here */}

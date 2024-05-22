@@ -24,3 +24,11 @@ const characterMap = {
     return str.split('').map(char => characterMap[char] || char).join('');
   };
   
+  export const generateUrlFriendlyTitle = (str) => {
+    return convertToAscii(str).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  };
+  
+  export const removeDashes = (str) => {
+    return str.replace(/-/g, '');
+  };
+  

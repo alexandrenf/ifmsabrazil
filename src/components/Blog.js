@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Container, Grid, Typography } from '@mui/material';
 import BlogPost from './BlogPost.js';
 import { Link } from 'react-router-dom';
-import { convertToAscii } from './characterConversion.js'; // Import the conversion function
+import { generateUrlFriendlyTitle } from './characterConversion.js';
+import Loading from './Loading.js';
 
 const BlogSection = styled.section`
   display: flex;
@@ -14,7 +15,7 @@ const BlogSection = styled.section`
   background-color: #FFFFFF;
 `;
 
-const Title = styled.h2`
+const Title = styled(Typography)`
   font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   color: #333;
@@ -22,11 +23,10 @@ const Title = styled.h2`
   margin-bottom: 20px;
 `;
 
-const Blog = ({ posts }) => {
-  const generateLink = (title) => {
-    const asciiTitle = convertToAscii(title);
-    return asciiTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  };
+const Blog = ({ posts, loading }) => {
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <BlogSection>
@@ -35,7 +35,7 @@ const Blog = ({ posts }) => {
         <Grid container spacing={4}>
           {posts.map((post, index) => (
             <Grid item key={index} xs={12} sm={6}>
-              <Link to={`/post/${generateLink(post.titulo)}`}>
+              <Link to={`/post/${generateUrlFriendlyTitle(post.titulo)}`}>
                 <BlogPost post={post} />
               </Link>
             </Grid>
