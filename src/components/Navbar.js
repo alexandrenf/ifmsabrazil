@@ -45,6 +45,16 @@ const NavLink = styled.div`
   @media screen and (max-width: 1200px) {
     font-size: 1rem;
   }
+
+  & > a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #FAC800;
+    }
+  }
 `;
 
 const SubMenu = styled.div`
@@ -216,8 +226,8 @@ const Navbar = () => {
           </SubMenu>
         </NavLink>
         <NavLink>
-          <Link to="/noticias" style={{ color: 'white', textDecoration: 'none' }}>
-            <span style={{ transition: 'color 0.3s' }}>Notícias</span>
+          <Link to="/noticias">
+            Notícias
           </Link>
         </NavLink>
         <NavLink
