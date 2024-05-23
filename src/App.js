@@ -9,6 +9,7 @@ import GeradorLink from './components/GeradorLink.js';
 import Noticias from './components/Noticias.js';
 import Footer from './components/Footer.js';
 import { CssBaseline } from '@material-ui/core';
+import Estrutura from './paginas/Estrutura.js';
 import fetchSpreadsheet from './components/fetchSpreadsheet.js'; // Import fetchSpreadsheet
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/" element={<Home posts={posts} loading={loading}/>} />
         <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true}/>} />
         <Route path="/gerarlink" element={<GeradorLink/>} />
+        <Route path="/estrutura" element={<Estrutura/>} />
         <Route path="/noticias" element={<Noticias posts={posts} loading={loading}/>} />
         <Route path="/tutorial" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'}/>} />
         <Route path="/estrutura" element={<MarkdownPage />} />
