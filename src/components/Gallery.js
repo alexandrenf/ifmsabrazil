@@ -5,7 +5,7 @@ import Papa from 'papaparse';
 import axios from 'axios';
 import Slider from "react-slick";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import Loading from './Loading'; // Ensure the path is correct
+import Loading from './Loading.js'; // Ensure the path is correct
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -48,32 +48,7 @@ const MemberEmail = styled(Typography)({
   color: '#333',
 });
 
-// Custom Arrow Components
-const NextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <IconButton
-      className={className}
-      style={{ ...style, display: 'block', right: '10px', top: '50%', transform: 'translateY(-50%)', zIndex: 10, backgroundColor: '#fff', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
-      onClick={onClick}
-    >
-      <FaArrowRight />
-    </IconButton>
-  );
-};
 
-const PrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <IconButton
-      className={className}
-      style={{ ...style, display: 'block', left: '10px', top: '50%', transform: 'translateY(-50%)', zIndex: 10, backgroundColor: '#fff', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}
-      onClick={onClick}
-    >
-      <FaArrowLeft />
-    </IconButton>
-  );
-};
 
 const Gallery = ({ csvUrl }) => {
   const [members, setMembers] = useState([]);
@@ -108,8 +83,6 @@ const Gallery = ({ csvUrl }) => {
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: '0',
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
   };
 
   return (
