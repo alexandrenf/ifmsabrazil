@@ -31,6 +31,49 @@ const GlobalStyles = createGlobalStyle`
   background: none;
 }
 
+/* Add this to your main CSS file or a new CSS file */
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1000px; /* Adjust the max width as needed */
+  margin: 0 auto;
+  padding: 0;
+}
+
+.map-legend {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.map-legend-color {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .map-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-legend {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+
+
 `;
 
 export default GlobalStyles;

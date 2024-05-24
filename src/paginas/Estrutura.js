@@ -5,6 +5,7 @@ import Markdown from 'markdown-to-jsx';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading.js';
 import Gallery from '../components/Gallery.js'
+import BrazilMap from '../components/BrazilMap.js'
 import 'prismjs/components/prism-jsx.js';
 import '../components/codeStyles.css'; // Your custom styles
 
@@ -141,7 +142,9 @@ const markdownContent2 = `
 Os Coordenadores Regionais prestam assistência à Diretoria Executiva em tarefas a nível regional; desenvolve competência de nossos eixos de atuação em Escolas Médicas de cada região; promove oportunidades, como Assembleias Regionais, espaços de representatividade de nossos coordenadores locais.
 
 As Regionais da IFMSA Brazil são: Norte 1 (AC, RO, AM, RR), Norte 2 (PA, AP), Nordeste 1 (MA, PI, CE), Nordeste 2 (RN, PB, PE), Nordeste 3 (AL, SE, BA), Leste (MG, ES, RJ), Oeste (TO, GO, MT, MS), Paulista (SP), Sul (PR, SC, RS).
+`;
 
+const markdownContent3 = `
 ## Times Nacionais
 
 Os Times Nacionais da IFMSA Brazil são divisões de suporte ao trabalho dos Diretores Nacionais e dos Coordenadores Regionais, tendo sua organização interna e funções específicas definidas caso a caso pelo Diretor Nacional responsável e também regionalizadas de acordo com as demandas dos comitês locais.
@@ -172,6 +175,10 @@ Os alumni são médicos filiados à IFMSA Brazil que foram Coordenadores Locais 
         <Gallery csvUrl={csvUrl} />
         <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent2}</Markdown>
+        </MarkdownContainer>
+        <BrazilMap />
+        <MarkdownContainer>
+        <Markdown options={MarkdownOptions}>{markdownContent3}</Markdown>
         </MarkdownContainer>
      
     </Root>
