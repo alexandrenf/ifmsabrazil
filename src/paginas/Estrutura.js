@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import Markdown from 'markdown-to-jsx';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading.js';
+import Gallery from '../components/Gallery.js'
 import 'prismjs/components/prism-jsx.js';
 import '../components/codeStyles.css'; // Your custom styles
 
@@ -167,11 +168,12 @@ Os alumni são médicos filiados à IFMSA Brazil que foram Coordenadores Locais 
       <Title variant="h4">{'Estrutura da IFMSA Brazil'}</Title>
       <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent1}</Markdown>
+        </MarkdownContainer>
+        <Gallery csvUrl={csvUrl} />
         <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent2}</Markdown>
         </MarkdownContainer>
-      </MarkdownContainer>
-      <Gallery csvUrl={csvUrl} />
+     
     </Root>
   );
 };

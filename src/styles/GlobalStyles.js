@@ -21,6 +21,16 @@ const GlobalStyles = createGlobalStyle`
   button {
     outline: none;
   }
+
+.carousel-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carousel .slide {
+  background: none;
+}
+
 `;
 
 export default GlobalStyles;

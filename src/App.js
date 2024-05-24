@@ -20,9 +20,9 @@ const App = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-      const spreadsheetData = await fetchSpreadsheet(googleSheetsUrl);
-      setPosts(spreadsheetData); // Get the first 4 posts
-      } catch {
+        const spreadsheetData = await fetchSpreadsheet(googleSheetsUrl);
+        setPosts(spreadsheetData); // Get the first 4 posts
+      } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
@@ -38,13 +38,12 @@ const App = () => {
       <CssBaseline />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home posts={posts} loading={loading}/>} />
-        <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true}/>} />
-        <Route path="/gerarlink" element={<GeradorLink/>} />
-        <Route path="/estrutura" element={<Estrutura/>} />
-        <Route path="/noticias" element={<Noticias posts={posts} loading={loading}/>} />
-        <Route path="/tutorial" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'}/>} />
-        <Route path="/estrutura" element={<MarkdownPage />} />
+        <Route path="/" element={<Home posts={posts} loading={loading} />} />
+        <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true} />} />
+        <Route path="/gerarlink" element={<GeradorLink />} />
+        <Route path="/estrutura" element={<Estrutura />} />
+        <Route path="/noticias" element={<Noticias posts={posts} loading={loading} />} />
+        <Route path="/tutorial" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'} />} />
         {/* Add other routes here */}
       </Routes>
       <Footer />
