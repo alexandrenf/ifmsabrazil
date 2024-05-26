@@ -57,7 +57,7 @@ const NavLink = styled.div`
 `;
 
 const SubMenu = styled.div`
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
   top: 100%;
   left: 0;
@@ -110,7 +110,7 @@ const MobileMenu = styled.div`
   display: none;
 
   @media screen and (max-width: 768px) {
-    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+    display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
     position: absolute;
@@ -190,7 +190,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('quemSomosMobile')}
         >
           Quem Somos
-          <SubMenu isOpen={activeSubMenu === 'quemSomos' || activeSubMenu === 'quemSomosMobile'}>
+          <SubMenu $isOpen={activeSubMenu === 'quemSomos' || activeSubMenu === 'quemSomosMobile'}>
             <Link to="/institucional">Institucional</Link>
             <Link to="/estrutura">Estrutura</Link>
             <Link to="/filiacao">Filiação</Link>
@@ -203,7 +203,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('oQueFazemosMobile')}
         >
           O Que Fazemos
-          <SubMenu isOpen={activeSubMenu === 'oQueFazemos' || activeSubMenu === 'oQueFazemosMobile'}>
+          <SubMenu $isOpen={activeSubMenu === 'oQueFazemos' || activeSubMenu === 'oQueFazemosMobile'}>
             <Link to="/eixos">Eixos de Atuação</Link>
             <Link to="/acoes">Ações e Temáticas</Link>
             <Link to="/eventos">Eventos e Workshops</Link>
@@ -215,7 +215,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('mobilidadeMobile')}
         >
           Mobilidade Estudantil
-          <SubMenu isOpen={activeSubMenu === 'mobilidade' || activeSubMenu === 'mobilidadeMobile'}>
+          <SubMenu $isOpen={activeSubMenu === 'mobilidade' || activeSubMenu === 'mobilidadeMobile'}>
             <Link to="/nacionais">Intercâmbios Nacionais</Link>
             <Link to="/internacionais">Intercâmbios Internacionais</Link>
             <Link to="/outras-modalidades">Outras Modalidades de Intercâmbio</Link>
@@ -228,7 +228,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('midiasMobile')}
         >
           Mídias e Documentos
-          <SubMenu isOpen={activeSubMenu === 'midias' || activeSubMenu === 'midiasMobile'}>
+          <SubMenu $isOpen={activeSubMenu === 'midias' || activeSubMenu === 'midiasMobile'}>
             <Link to="/ressonancia">Ressonância Poética</Link>
             <Link to="/informa-susi">Informa SUSi</Link>
             <Link to="/brazilian-medical-students">Brazilian Medical Students</Link>
@@ -248,7 +248,7 @@ const Navbar = () => {
           onClick={() => toggleSubMenu('membrosMobile')}
         >
           Membros
-          <SubMenu isOpen={activeSubMenu === 'membros' || activeSubMenu === 'membrosMobile'}>
+          <SubMenu $isOpen={activeSubMenu === 'membros' || activeSubMenu === 'membrosMobile'}>
             <a href="https://solar.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">SOLAR</a>
             <a href="https://database.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">DATABASE</a>
             <a href="https://exchange.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">EXCHANGE</a>
@@ -256,7 +256,7 @@ const Navbar = () => {
         </NavLink>
         <JoinButton to="/filie-se">FILIE-SE</JoinButton>
       </NavLinks>
-      <MobileMenu isOpen={isOpen}>
+      <MobileMenu $isOpen={isOpen}>
         <MobileSubMenu>
           <MobileLink onClick={() => toggleSubMenu('quemSomosMobile')}>
             Quem Somos

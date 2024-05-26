@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import Markdown from 'markdown-to-jsx';
@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading.jsx';
 import Gallery from '../components/Gallery.jsx'
 import BrazilMap from '../components/BrazilMap.jsx'
-import 'prismjs/components/prism-jsx.js';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-jsx.min';
 import '../components/codeStyles.css'; // Your custom styles
 
 const Root = styled(Container)({
@@ -108,11 +109,26 @@ const MarkdownOptions = {
         <img {...props} style={{ maxWidth: '100%', height: 'auto' }} />
       ),
     },
+    code: {
+      component: ({ children, ...props }) => {
+        const language = props.className?.replace('language-', '') || 'javascript';
+        useEffect(() => {
+          Prism.highlightAll();
+        }, [children]);
+
+        return (
+          <pre className={`language-${language}`}>
+            <code className={`language-${language}`}>
+              {children}
+            </code>
+          </pre>
+        );
+      },
+    },
   },
 };
 
 const MarkdownPage = () => {
-
   const csvUrl = 'https://docs.google.com/spreadsheets/d/170s7A5MI7ui-y9-eZhbw0f5pFUITySzzLcyDZsT0UC0/export?gid=0&format=csv';
 
   const markdownContent1 = `
@@ -171,16 +187,15 @@ Os alumni são médicos filiados à IFMSA Brazil que foram Coordenadores Locais 
       <Title variant="h4">{'Estrutura da IFMSA Brazil'}</Title>
       <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent1}</Markdown>
-        </MarkdownContainer>
-        <Gallery csvUrl={csvUrl} />
-        <MarkdownContainer>
+      </MarkdownContainer>
+      <Gallery csvUrl={csvUrl} />
+      <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent2}</Markdown>
-        </MarkdownContainer>
-        <BrazilMap />
-        <MarkdownContainer>
+      </MarkdownContainer>
+      <BrazilMap />
+      <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent3}</Markdown>
-        </MarkdownContainer>
-     
+      </MarkdownContainer>
     </Root>
   );
 };

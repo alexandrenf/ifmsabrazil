@@ -22,7 +22,6 @@ const BrazilMap = () => {
         const fetchTopoJson = async () => {
             try {
                 const response = await axios.get('https://cdn.jsdelivr.net/gh/alexandrenf/ifmsabrazil/src/assets/brazilstates.json');
-                console.log('TopoJSON data fetched:', response.data);
                 setTopoJsonData(response.data);
             } catch (error) {
                 console.error('Error fetching TopoJSON data:', error);
