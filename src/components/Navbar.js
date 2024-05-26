@@ -152,6 +152,17 @@ const MobileSubLink = styled(Link)`
   }
 `;
 
+const MobileExternalSubLink = styled.div`
+  display: block;
+  color: white;
+  margin: 0.5rem 0;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #FAC800;
+  }
+`;
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState('');
@@ -238,9 +249,9 @@ const Navbar = () => {
         >
           Membros
           <SubMenu isOpen={activeSubMenu === 'membros' || activeSubMenu === 'membrosMobile'}>
-            <Link to="/solar">SOLAR</Link>
-            <Link to="/database">DATABASE</Link>
-            <Link to="/exchange">EXCHANGE</Link>
+            <a href="https://solar.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">SOLAR</a>
+            <a href="https://database.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">DATABASE</a>
+            <a href="https://exchange.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">EXCHANGE</a>
           </SubMenu>
         </NavLink>
         <JoinButton to="/filie-se">FILIE-SE</JoinButton>
@@ -306,9 +317,9 @@ const Navbar = () => {
           </MobileLink>
           {activeSubMenu === 'membrosMobile' && (
             <>
-              <MobileSubLink to="/solar" onClick={toggleMobileMenu}>SOLAR</MobileSubLink>
-              <MobileSubLink to="/database" onClick={toggleMobileMenu}>DATABASE</MobileSubLink>
-              <MobileSubLink to="/exchange" onClick={toggleMobileMenu}>EXCHANGE</MobileSubLink>
+              <MobileExternalSubLink onClick={toggleMobileMenu}><a href="https://solar.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">SOLAR</a></MobileExternalSubLink>
+              <MobileExternalSubLink onClick={toggleMobileMenu}><a href="https://database.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">DATABASE</a></MobileExternalSubLink>
+              <MobileExternalSubLink onClick={toggleMobileMenu}><a href="https://exchange.ifmsabrazil.org" target="_blank" rel="noopener noreferrer">EXCHANGE</a></MobileExternalSubLink>
             </>
           )}
         </MobileSubMenu>

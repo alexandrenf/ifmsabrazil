@@ -20,7 +20,7 @@ const Loading = () => (
   <Root>
     <CircularProgress />
     <Text variant="h6">
-      Loading...
+      Carregando...
     </Text>
   </Root>
 );

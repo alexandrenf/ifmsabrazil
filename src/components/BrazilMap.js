@@ -13,72 +13,72 @@ const groupData = [
     { name: "Oeste", states: ["Tocantins", "Goiás", "Mato Grosso", "Mato Grosso do Sul"], color: "#d62728" }, // Red
     { name: "Paulista", states: ["São Paulo"], color: "#9467bd" }, // Purple
     { name: "Sul", states: ["Paraná", "Santa Catarina", "Rio Grande do Sul"], color: "#8c564b" }, // Brown
-  ];
+];
 
 const BrazilMap = () => {
-  const [topoJsonData, setTopoJsonData] = useState(null);
+    const [topoJsonData, setTopoJsonData] = useState(null);
 
-  useEffect(() => {
-    const fetchTopoJson = async () => {
-      try {
-        const response = await axios.get('https://cdn.jsdelivr.net/gh/alexandrenf/ifmsabrazil/src/assets/brazilstates.json');
-        console.log('TopoJSON data fetched:', response.data);
-        setTopoJsonData(response.data);
-      } catch (error) {
-        console.error('Error fetching TopoJSON data:', error);
-      }
-    };
+    useEffect(() => {
+        const fetchTopoJson = async () => {
+            try {
+                const response = await axios.get('https://cdn.jsdelivr.net/gh/alexandrenf/ifmsabrazil/src/assets/brazilstates.json');
+                console.log('TopoJSON data fetched:', response.data);
+                setTopoJsonData(response.data);
+            } catch (error) {
+                console.error('Error fetching TopoJSON data:', error);
+            }
+        };
 
-    fetchTopoJson();
-  }, []);
+        fetchTopoJson();
+    }, []);
 
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', width: '100%', margin: 0, padding: 0 }}>
-      {topoJsonData ? (
-        <>
-          <div style={{ flex: 1, minWidth: '300px', maxWidth: '600px' }}>
-            <ComposableMap
-              projection="geoMercator"
-              projectionConfig={{ scale: 600, center: [-52, -15] }}
-              style={{ width: '100%', height: 'auto' }}
-            >
-              <Geographies geography={topoJsonData}>
-                {({ geographies }) =>
-                  geographies.map(geo => {
-                    const stateName = geo.properties.nome;
-                    const group = groupData.find(g => g.states.includes(stateName));
-                    const fillColor = group ? group.color : "#EEE";
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={fillColor}
-                        style={{
-                          default: { outline: "none" },
-                          hover: { outline: "none" },
-                          pressed: { outline: "none" },
-                        }}
-                      />
-                    );
-                  })
-                }
-              </Geographies>
-            </ComposableMap>
-          </div>
-          <div style={{ marginLeft: '20px', display: 'flex', flexDirection: 'column' }}>
-            {groupData.map((group, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                <div style={{ width: '20px', height: '20px', backgroundColor: group.color, marginRight: '10px' }}></div>
-                <span>{group.name}</span>
-              </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <Loading />
-      )}
-    </div>
-  );
+    return (
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', width: '100%', margin: 0, padding: '20px' }}>
+            {topoJsonData ? (
+                <>
+                    <div className="map-container" style={{ flex: 1, minWidth: '300px', maxWidth: '600px' }}>
+                        <ComposableMap
+                            projection="geoMercator"
+                            projectionConfig={{ scale: 750, center: [-54, -15] }} // Adjusted scale and center to crop the map
+                            style={{ width: '100%', height: 'auto' }}
+                        >
+                            <Geographies geography={topoJsonData}>
+                                {({ geographies }) =>
+                                    geographies.map(geo => {
+                                        const stateName = geo.properties.nome;
+                                        const group = groupData.find(g => g.states.includes(stateName));
+                                        const fillColor = group ? group.color : "#EEE";
+                                        return (
+                                            <Geography
+                                                key={geo.rsmKey}
+                                                geography={geo}
+                                                fill={fillColor}
+                                                style={{
+                                                    default: { outline: "none" },
+                                                    hover: { outline: "none" },
+                                                    pressed: { outline: "none" },
+                                                }}
+                                            />
+                                        );
+                                    })
+                                }
+                            </Geographies>
+                        </ComposableMap>
+                    </div>
+                    <div className="legend-container" style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px' }}>
+                        {groupData.map((group, index) => (
+                            <div key={index} className="legend-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                <div style={{ width: '20px', height: '20px', backgroundColor: group.color, marginRight: '10px' }}></div>
+                                <span>{group.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            ) : (
+                <Loading />
+            )}
+        </div>
+    );
 };
 
 export default BrazilMap;

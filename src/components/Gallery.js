@@ -10,7 +10,10 @@ import Loading from './Loading.js'; // Ensure the path is correct
 const RMCarousel = Carousel.default ? Carousel.default : Carousel;
 
 const Root = styled(Container)({
-  padding: '24px',
+  paddingLeft: '48px',
+  paddingRight: '48px',
+  paddingTop: '24px',
+  paddingBottom:'24px',
   backgroundColor: '#FFFFFF',
   color: '#333',
   position: 'relative',
@@ -31,16 +34,16 @@ const MemberCard = styled(Box)({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '350px',
+  height: '300px', // Reduced height to minimize empty space
   overflow: 'hidden',
-  whiteSpace: 'nowrap',
+  whiteSpace: 'normal', // Allows text to wrap
 });
 
 const MemberAvatar = styled(Avatar)({
-  width: '100px',
-  height: '100px',
+  width: '140px', // Increased size
+  height: '140px', // Increased size
   marginBottom: '16px',
-  borderRadius: '50%',
+  borderRadius: '12px', // Rounded corners for square images
   boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
 });
 
@@ -50,7 +53,7 @@ const MemberName = styled(Typography)({
   marginBottom: '8px',
   textOverflow: 'ellipsis',
   overflow: 'hidden',
-  whiteSpace: 'nowrap',
+  whiteSpace: 'normal', // Allows text to wrap
 });
 
 const MemberRole = styled(Typography)({
@@ -58,14 +61,14 @@ const MemberRole = styled(Typography)({
   marginBottom: '8px',
   textOverflow: 'ellipsis',
   overflow: 'hidden',
-  whiteSpace: 'nowrap',
+  whiteSpace: 'normal', // Allows text to wrap
 });
 
 const MemberEmail = styled(Typography)({
   color: '#333',
   textOverflow: 'ellipsis',
   overflow: 'hidden',
-  whiteSpace: 'nowrap',
+  whiteSpace: 'normal', // Allows text to wrap
 });
 
 const Gallery = ({ csvUrl }) => {
