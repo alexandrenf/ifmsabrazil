@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, Typography, Box, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
 import Papa from 'papaparse';
@@ -47,22 +47,60 @@ const MemberAvatar = styled(Avatar)({
   boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
 });
 
-const MemberName = styled(Typography)({
-  fontWeight: 'bold',
-  color: '#00508C',
-  marginBottom: '8px',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden',
-  whiteSpace: 'normal', // Allows text to wrap
-});
+const useDynamicFontSize = (ref, defaultFontSize = '1rem') => {
+  const [fontSize, setFontSize] = useState(defaultFontSize);
 
-const MemberRole = styled(Typography)({
-  color: '#1976d2',
-  marginBottom: '8px',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden',
-  whiteSpace: 'normal', // Allows text to wrap
-});
+  useEffect(() => {
+    const resizeFont = () => {
+      if (ref.current) {
+        const parentWidth = ref.current.parentNode.clientWidth;
+        const childWidth = ref.current.scrollWidth;
+        if (childWidth > parentWidth) {
+          const newSize = (parentWidth / childWidth) * parseFloat(window.getComputedStyle(ref.current).fontSize);
+          setFontSize(`${newSize}px`);
+        } else {
+          setFontSize(defaultFontSize);
+        }
+      }
+    };
+
+    resizeFont();
+    window.addEventListener('resize', resizeFont);
+    return () => window.removeEventListener('resize', resizeFont);
+  }, [ref, defaultFontSize]);
+
+  return fontSize;
+};
+
+const DynamicTypography = ({ children, variant, defaultFontSize }) => {
+  const ref = useRef(null);
+  const fontSize = useDynamicFontSize(ref, defaultFontSize);
+
+  return (
+    <Typography
+      ref={ref}
+      style={{ fontSize, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'normal' }}
+      variant={variant}
+    >
+      {children}
+    </Typography>
+  );
+};
+
+const MemberRole = ({ children }) => {
+  const ref = useRef(null);
+  const fontSize = useDynamicFontSize(ref, '0.875rem'); // Default font size for roles
+
+  return (
+    <Typography
+      ref={ref}
+      style={{ fontSize, color: '#1976d2', marginBottom: '8px', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'normal' }}
+      variant="body1"
+    >
+      {children}
+    </Typography>
+  );
+};
 
 const MemberEmail = styled(Typography)({
   color: '#333',
@@ -132,8 +170,8 @@ const Gallery = ({ csvUrl }) => {
         {members.map((member, index) => (
           <MemberCard key={index}>
             <MemberAvatar src={member['link-foto']} alt={member.nome} />
-            <MemberName variant="h6">{member.nome}</MemberName>
-            <MemberRole variant="body1">{member.cargo} ({member.sigla})</MemberRole>
+            <DynamicTypography variant="h6" defaultFontSize="1rem">{member.nome}</DynamicTypography>
+            <MemberRole>{member.cargo} ({member.sigla})</MemberRole>
             <MemberEmail variant="body2">{member.email}</MemberEmail>
           </MemberCard>
         ))}

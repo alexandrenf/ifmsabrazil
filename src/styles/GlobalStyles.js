@@ -31,47 +31,63 @@ const GlobalStyles = createGlobalStyle`
   background: none;
 }
 
-/* Add this to your main CSS file or a new CSS file */
+/* CSS for BrazilMap component */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 .map-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1000px; /* Adjust the max width as needed */
-  margin: 0 auto;
-  padding: 0;
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    margin: 0 20px; /* Medium margin on the left and right sides */
 }
 
-.map-legend {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-}
-
-.map-legend-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.map-legend-color {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
-@media (max-width: 600px) {
-  .map-container {
+.legend-container {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-
-  .map-legend {
-    margin-left: 0;
-    margin-top: 20px;
-  }
+    margin-left: 20px;
 }
 
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .map-container {
+        margin: 0; /* Remove margins on mobile */
+    }
+    .legend-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: 20px; /* Space between map and legend */
+    }
+    .legend-item {
+        margin: 5px; /* Adjust margin for horizontal layout */
+    }
+}
 
 
 `;

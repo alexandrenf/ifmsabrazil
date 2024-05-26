@@ -33,10 +33,10 @@ const BrazilMap = () => {
     }, []);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', width: '100%', margin: 0, padding: '20px' }}>
+        <div className="container">
             {topoJsonData ? (
                 <>
-                    <div className="map-container" style={{ flex: 1, minWidth: '300px', maxWidth: '600px' }}>
+                    <div className="map-container">
                         <ComposableMap
                             projection="geoMercator"
                             projectionConfig={{ scale: 750, center: [-54, -15] }} // Adjusted scale and center to crop the map
@@ -65,10 +65,10 @@ const BrazilMap = () => {
                             </Geographies>
                         </ComposableMap>
                     </div>
-                    <div className="legend-container" style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px' }}>
+                    <div className="legend-container">
                         {groupData.map((group, index) => (
-                            <div key={index} className="legend-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                                <div style={{ width: '20px', height: '20px', backgroundColor: group.color, marginRight: '10px' }}></div>
+                            <div key={index} className="legend-item">
+                                <div className="color-box" style={{ backgroundColor: group.color }}></div>
                                 <span>{group.name}</span>
                             </div>
                         ))}
