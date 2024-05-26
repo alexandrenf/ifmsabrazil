@@ -1,5 +1,4 @@
 import axios from 'axios';
-import * as XLSX from 'xlsx';
 
 // Function to parse date strings in the format "dd MM yyyy"
 const parseDateString = (dateString) => {
@@ -7,14 +6,48 @@ const parseDateString = (dateString) => {
   return new Date(year, month - 1, day);
 };
 
+// Function to parse CSV data with handling for quoted commas and escaped double quotes
+const parseCSV = (data) => {
+  const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove empty lines
+  const headers = lines[0].split(',').map(header => header.trim());
+  const rows = lines.slice(1);
+
+  return rows.map((line) => {
+    const values = [];
+    let insideQuotes = false;
+    let value = '';
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+
+      if (char === '"' && insideQuotes && line[i + 1] === '"') {
+        value += '"';
+        i++; // Skip the next quote
+      } else if (char === '"' && !insideQuotes) {
+        insideQuotes = true;
+      } else if (char === '"' && insideQuotes) {
+        insideQuotes = false;
+      } else if (char === ',' && !insideQuotes) {
+        values.push(value.trim());
+        value = '';
+      } else {
+        value += char;
+      }
+    }
+    values.push(value.trim()); // Add the last value
+
+    return headers.reduce((object, header, index) => {
+      object[header] = values[index];
+      return object;
+    }, {});
+  });
+};
+
 const fetchSpreadsheet = async (url) => {
   try {
     const response = await axios.get(url, { responseType: 'arraybuffer', responseEncoding: 'utf-8' });
-    const data = new Uint8Array(response.data);
-    const workbook = XLSX.read(data, { type: 'array' });
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
-    const jsonData = XLSX.utils.sheet_to_json(worksheet, { raw: false });
+    const data = new TextDecoder('utf-8').decode(new Uint8Array(response.data));
+    const jsonData = parseCSV(data);
 
     // Convert date strings in 'dia-mes-ano' column to JS Date objects and ensure proper encoding
     jsonData.forEach(row => {
@@ -23,7 +56,13 @@ const fetchSpreadsheet = async (url) => {
       }
       Object.keys(row).forEach(key => {
         if (typeof row[key] === 'string') {
-          row[key] = decodeURIComponent(escape(row[key]));
+          // Normalize Unicode characters
+          try {
+            row[key] = row[key].normalize('NFC'); // Normalize to NFC (Normalization Form C)
+          } catch (e) {
+            console.warn(`Error normalizing value for key ${key}: ${row[key]}. Keeping the original value.`, e);
+            row[key] = row[key]; // Leave it as is if normalization fails
+          }
         }
       });
     });
