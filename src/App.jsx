@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
-import Home from './components/Home.jsx';
 import GlobalStyles from './styles/GlobalStyles.jsx';
 import './styles/Fonts.jsx';
-import MarkdownPage from './components/MarkdownPage.jsx';
-import GeradorLink from './components/GeradorLink.jsx';
-import Noticias from './components/Noticias.jsx';
 import Footer from './components/Footer.jsx';
 import { CssBaseline } from '@material-ui/core';
-import Estrutura from './paginas/Estrutura.jsx';
 import fetchSpreadsheet from './components/fetchSpreadsheet.jsx';
+import Loading from './components/Loading.jsx';
+import Home from './components/Home.jsx';
+
+// Lazy load components for code-splitting
+const MarkdownPage = lazy(() => import('./components/MarkdownPage.jsx'));
+const GeradorLink = lazy(() => import('./components/GeradorLink.jsx'));
+const Noticias = lazy(() => import('./components/Noticias.jsx'));
+const Estrutura = lazy(() => import('./paginas/Estrutura.jsx'));
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -37,15 +40,17 @@ const App = () => {
       <GlobalStyles />
       <CssBaseline />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home posts={posts} loading={loading} />} />
-        <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true} />} />
-        <Route path="/gerarlink" element={<GeradorLink />} />
-        <Route path="/estrutura" element={<Estrutura />} />
-        <Route path="/noticias" element={<Noticias posts={posts} loading={loading} />} />
-        <Route path="/tutorial" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'} />} />
-        {/* Add other routes here */}
-      </Routes>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<Home posts={posts} loading={loading} />} />
+          <Route path="/post/:title" element={<MarkdownPage posts={posts} loading={loading} needsExternal={true} />} />
+          <Route path="/gerarlink" element={<GeradorLink />} />
+          <Route path="/estrutura" element={<Estrutura />} />
+          <Route path="/noticias" element={<Noticias posts={posts} loading={loading} />} />
+          <Route path="/tutorial" element={<MarkdownPage needsExternal={false} filepath={'/markdown/pagina.md'} />} />
+          {/* Add other routes here */}
+        </Routes>
+      </Suspense>
       <Footer />
     </Router>
   );
