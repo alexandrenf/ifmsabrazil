@@ -1,131 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import Markdown from "markdown-to-jsx";
 import Loading from "../components/Loading.jsx";
 import ComiteLists from "../components/ComiteLists.jsx";
 import axios from "axios";
 import Papa from "papaparse";
-import Prism from "prismjs";
-import "prismjs/components/prism-jsx.min";
-import "../components/codeStyles.css"; // Your custom styles
+import MarkdownContent from "../components/MarkdownContent.jsx";
 
-const Root = styled(Container)({
+const Root = styled(Container)(({ theme }) => ({
   padding: "24px",
   backgroundColor: "#FFFFFF",
   color: "#333",
-});
+  [theme.breakpoints.down("sm")]: {
+    padding: "16px",
+  },
+}));
 
-const MarkdownContainer = styled("div")({
-  maxWidth: "800px",
-  margin: "0 auto",
-  padding: "16px",
-  "& table": {
-    width: "100%",
-    maxWidth: "100%",
-    borderCollapse: "collapse",
-    marginBottom: "16px",
-    overflowX: "auto",
-    display: "block",
-    margin: "0 auto",
-  },
-  "& th, & td": {
-    padding: "12px",
-    textAlign: "left",
-    border: "1px solid #ddd",
-  },
-  "& th": {
-    backgroundColor: "#f2f2f2",
-  },
-  "& blockquote": {
-    borderLeft: "4px solid #ddd",
-    paddingLeft: "16px",
-    color: "#666",
-    margin: "16px 0",
-    fontStyle: "italic",
-    "& blockquote": {
-      borderLeft: "4px solid #bbb",
-      margin: "16px 0 0",
-      paddingLeft: "16px",
-    },
-  },
-  "& a": {
-    color: "#00508C",
-    textDecoration: "none",
-    "&:hover": {
-      textDecoration: "underline",
-    },
-  },
-  "& img": {
-    maxWidth: "100%",
-    height: "auto",
-  },
-});
-
-const Title = styled(Typography)({
+const Title = styled(Typography)(({ theme }) => ({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
   textAlign: "center", // Center the title
-});
-
-const MetaData = styled("div")({
-  marginBottom: "16px",
-  color: "#666",
-  textAlign: "center", // Center the metadata
-});
-
-const MarkdownOptions = {
-  overrides: {
-    table: {
-      component: ({ children, ...props }) => (
-        <div style={{ overflowX: "auto" }}>
-          <table {...props}>{children}</table>
-        </div>
-      ),
-    },
-    th: {
-      component: ({ children, ...props }) => <th {...props}>{children}</th>,
-    },
-    td: {
-      component: ({ children, ...props }) => (
-        <td {...props} data-label={props["data-label"]}>
-          {children}
-        </td>
-      ),
-    },
-    blockquote: {
-      component: ({ children, ...props }) => (
-        <blockquote {...props}>{children}</blockquote>
-      ),
-    },
-    a: {
-      component: ({ children, ...props }) => <a {...props}>{children}</a>,
-    },
-    img: {
-      component: ({ children, ...props }) => (
-        <img {...props} style={{ maxWidth: "100%", height: "auto" }} />
-      ),
-    },
-    code: {
-      component: ({ children, ...props }) => {
-        const language =
-          props.className?.replace("language-", "") || "javascript";
-        useEffect(() => {
-          Prism.highlightAll();
-        }, [children]);
-
-        return (
-          <pre className={`language-${language}`}>
-            <code className={`language-${language}`}>{children}</code>
-          </pre>
-        );
-      },
-    },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "1.5rem",
   },
-};
+}));
 
-const MarkdownPage = () => {
+const Filiacao = () => {
   const csvUrl =
     "https://docs.google.com/spreadsheets/d/1PF7Lqb0jq1ULQBmHzFxOif5UvGwsVLqM2LESq7JVh6c/export?gid=1583477648&format=csv";
   const [members, setMembers] = useState([]);
@@ -138,7 +39,6 @@ const MarkdownPage = () => {
         const parsedData = Papa.parse(response.data, { header: true });
         const realData = parsedData.data;
         setMembers(realData);
-        console.log(realData);
       } catch (error) {
         console.error("Error fetching spreadsheet:", error);
       } finally {
@@ -175,12 +75,10 @@ A Diretoria Executiva é composta por 21 cargos a nível nacional, responsável 
   return (
     <Root>
       <Title variant="h4">{"Comitês Filiados"}</Title>
-      <MarkdownContainer>
-        <Markdown options={MarkdownOptions}>{markdownContent1}</Markdown>
-      </MarkdownContainer>
+      <MarkdownContent content={markdownContent1} />
       <ComiteLists members={members} />
     </Root>
   );
 };
 
-export default MarkdownPage;
+export default Filiacao;

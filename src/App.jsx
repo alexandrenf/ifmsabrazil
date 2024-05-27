@@ -7,7 +7,7 @@ import Footer from "./components/Footer.jsx";
 import { CssBaseline } from "@mui/material";
 import fetchSpreadsheet from "./components/fetchSpreadsheet.jsx";
 import Loading from "./components/Loading.jsx";
-import Home from "./components/Home.jsx";
+import Home from "./paginas/Home.jsx";
 
 // Lazy load components for code-splitting
 const MarkdownPage = lazy(() => import("./components/MarkdownPage.jsx"));

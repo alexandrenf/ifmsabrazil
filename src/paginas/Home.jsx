@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import backgroundImage from '../assets/background-image.png'; // Adjust the path as needed
-import OndeEstamos from './OndeEstamos.jsx';
-import AreasOfIFMSABrazil from './AreasOfIFMSABrazil.jsx';
-import Blog from './Blog.jsx'; // Adjust the path as needed
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import OndeEstamos from "../components/OndeEstamos.jsx";
+import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil.jsx";
+import Blog from "../components/Blog.jsx"; // Adjust the path as needed
 
 const HomeContainer = styled.div`
   display: flex;
@@ -16,7 +15,7 @@ const HomeContainer = styled.div`
 const HeroSection = styled.div`
   width: 100%;
   height: 100vh;
-  background-image: url('https://s6.imgcdn.dev/3hHLD.png');
+  background-image: url("https://s6.imgcdn.dev/3hHLD.png");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -45,8 +44,8 @@ const JoinButton = styled.button`
   padding: 12px 24px;
   font-size: 1rem;
   font-weight: bold;
-  color: #00508C;
-  background-color: #FAC800;
+  color: #00508c;
+  background-color: #fac800;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -68,7 +67,7 @@ const ScrollButton = styled.button`
   background-color: white;
   border: none;
   cursor: pointer;
-  display: ${({ show }) => (show ? 'flex' : 'none')};
+  display: ${({ show }) => (show ? "flex" : "none")};
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease-in-out;
@@ -85,7 +84,7 @@ const ScrollButton = styled.button`
   svg {
     width: 24px;
     height: 24px;
-    fill: #00508C;
+    fill: #00508c;
   }
 `;
 
@@ -108,7 +107,7 @@ const ContentSection = styled.div`
   }
 `;
 
-const Home = ({ posts, loading}) => {
+const Home = ({ posts, loading }) => {
   const [showScrollButton, setShowScrollButton] = useState(true);
 
   const handleScroll = () => {
@@ -126,14 +125,14 @@ const Home = ({ posts, loading}) => {
   const scrollToContent = () => {
     window.scrollTo({
       top: window.innerHeight,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -144,17 +143,22 @@ const Home = ({ posts, loading}) => {
         <JoinButton>Faça parte</JoinButton>
         <ScrollButton show={showScrollButton} onClick={scrollToContent}>
           <svg viewBox="0 0 24 24">
-            <path d="M12 16.5l-7-7 1.41-1.41L12 13.67l5.59-5.58L19 9.5l-7 7z"/>
+            <path d="M12 16.5l-7-7 1.41-1.41L12 13.67l5.59-5.58L19 9.5l-7 7z" />
           </svg>
         </ScrollButton>
       </HeroSection>
       <ContentSection>
         <h2>Breve Introdução</h2>
-        <p>Fundada em 1991 como primeira Associação vinculada à International Federation of Medical Students’ Association da América Latina (IFMSA), a IFMSA Brazil interliga estudantes de medicina de todo o país para fazer a diferença na sociedade e na formação médica.</p>
+        <p>
+          Fundada em 1991 como primeira Associação vinculada à International
+          Federation of Medical Students’ Association da América Latina (IFMSA),
+          a IFMSA Brazil interliga estudantes de medicina de todo o país para
+          fazer a diferença na sociedade e na formação médica.
+        </p>
       </ContentSection>
       <OndeEstamos />
       <AreasOfIFMSABrazil />
-      <Blog posts={posts} loading={loading}/>
+      <Blog posts={posts} loading={loading} />
     </HomeContainer>
   );
 };

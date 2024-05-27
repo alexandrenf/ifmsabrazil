@@ -1,7 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faGraduationCap, faHandsHelping, faHeartbeat, faHospital, faUniversity, faSearch } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBook,
+  faGraduationCap,
+  faHandsHelping,
+  faHeartbeat,
+  faHospital,
+  faUniversity,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+// Add only the icons you need to the library
+library.add(
+  faBook,
+  faGraduationCap,
+  faHandsHelping,
+  faHeartbeat,
+  faHospital,
+  faUniversity,
+  faSearch
+);
 
 const AreasSection = styled.section`
   display: flex;
@@ -9,12 +29,12 @@ const AreasSection = styled.section`
   position: relative;
   width: 100%;
   padding: 30px 20px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   text-align: center;
 `;
 
 const Title = styled.h2`
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 2rem;
   color: #333;
   text-align: center;
@@ -45,13 +65,13 @@ const AreaCard = styled.div`
   align-items: center;
   padding: 20px;
   background-color: ${(props) => props.bgColor};
-  color: ${(props) => props.color || 'rgba(255, 255, 255, 1)'};
+  color: ${(props) => props.color || "rgba(255, 255, 255, 1)"};
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-align: center;
-  border: ${(props) => props.border || 'none'};
+  border: ${(props) => props.border || "none"};
 
   &:hover {
     transform: translateY(-10px);
@@ -65,13 +85,50 @@ const AreaText = styled.div`
 
 export default function AreasOfIFMSABrazil() {
   const areasData = [
-    { id: 1, bgColor: 'rgba(182, 120, 38, 1)', text: 'Representatividade estudantil', icon: faGraduationCap },
-    { id: 2, bgColor: 'rgba(0, 0, 0, 1)', text: 'Capacity Building', icon: faBook },
-    { id: 3, bgColor: '#FFFFFF', text: 'Educação Médica', icon: faHospital, color: '#000', border: '2px solid #000' },
-    { id: 4, bgColor: 'rgba(220, 0, 0, 1)', text: 'Promoção de Saúde', icon: faHeartbeat },
-    { id: 5, bgColor: 'rgba(0, 150, 60, 1)', text: 'Humanização', icon: faHandsHelping },
-    { id: 6, bgColor: 'rgba(0, 80, 140, 1)', text: 'Mobilidade Estudantil', icon: faUniversity },
-    { id: 7, bgColor: 'rgba(128, 128, 128, 1)', text: 'Pesquisa e Extensão', icon: faSearch },
+    {
+      id: 1,
+      bgColor: "rgba(182, 120, 38, 1)",
+      text: "Representatividade estudantil",
+      icon: faGraduationCap,
+    },
+    {
+      id: 2,
+      bgColor: "rgba(0, 0, 0, 1)",
+      text: "Capacity Building",
+      icon: faBook,
+    },
+    {
+      id: 3,
+      bgColor: "#FFFFFF",
+      text: "Educação Médica",
+      icon: faHospital,
+      color: "#000",
+      border: "2px solid #000",
+    },
+    {
+      id: 4,
+      bgColor: "rgba(220, 0, 0, 1)",
+      text: "Promoção de Saúde",
+      icon: faHeartbeat,
+    },
+    {
+      id: 5,
+      bgColor: "rgba(0, 150, 60, 1)",
+      text: "Humanização",
+      icon: faHandsHelping,
+    },
+    {
+      id: 6,
+      bgColor: "rgba(0, 80, 140, 1)",
+      text: "Mobilidade Estudantil",
+      icon: faUniversity,
+    },
+    {
+      id: 7,
+      bgColor: "rgba(128, 128, 128, 1)",
+      text: "Pesquisa e Extensão",
+      icon: faSearch,
+    },
   ];
 
   return (
@@ -79,8 +136,13 @@ export default function AreasOfIFMSABrazil() {
       <Title>Nossos eixos de atuação</Title>
       <AreasGrid>
         {areasData.map((area) => (
-          <AreaCard key={area.id} bgColor={area.bgColor} color={area.color} border={area.border}>
-            <FontAwesomeIcon icon={area.icon} size='3x' />
+          <AreaCard
+            key={area.id}
+            bgColor={area.bgColor}
+            color={area.color}
+            border={area.border}
+          >
+            <FontAwesomeIcon icon={area.icon} size="3x" />
             <AreaText>{area.text}</AreaText>
           </AreaCard>
         ))}

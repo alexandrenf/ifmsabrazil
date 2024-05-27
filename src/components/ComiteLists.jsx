@@ -52,6 +52,12 @@ const FilterContainer = styled(Box)`
   margin-bottom: 20px;
   width: 100%;
   max-width: 1200px;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const StyledTableHead = styled(TableHead)`
@@ -61,6 +67,15 @@ const StyledTableHead = styled(TableHead)`
     font-weight: bold;
     white-space: nowrap;
   }
+`;
+
+const StyledTableContainer = styled(TableContainer)`
+  width: 100%;
+  overflow-x: auto;
+`;
+
+const StyledTableCell = styled(TableCell)`
+  min-width: 150px;
 `;
 
 const ComiteLists = ({ members }) => {
@@ -135,12 +150,12 @@ const ComiteLists = ({ members }) => {
           variant="outlined"
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ marginRight: "20px", flexGrow: 1 }}
+          style={{ marginBottom: "20px", flexGrow: 1 }}
         />
         {["Regional", "Cidade", "UF", "Status"].map((filter) => (
           <FormControl
             variant="outlined"
-            style={{ minWidth: 200, marginLeft: "20px" }}
+            style={{ minWidth: 200, marginBottom: "20px" }}
             key={filter}
           >
             <InputLabel>{filter}</InputLabel>
@@ -163,32 +178,32 @@ const ComiteLists = ({ members }) => {
           </FormControl>
         ))}
       </FilterContainer>
-      <TableContainer component={Paper}>
+      <StyledTableContainer component={Paper}>
         <Table>
           <StyledTableHead>
             <TableRow>
-              <TableCell>Comitê Local</TableCell>
-              <TableCell>Nome da EM</TableCell>
-              <TableCell>Regional</TableCell>
-              <TableCell>Cidade</TableCell>
-              <TableCell>UF</TableCell>
-              <TableCell>Status</TableCell>
+              <StyledTableCell>Comitê Local</StyledTableCell>
+              <StyledTableCell>Nome da EM</StyledTableCell>
+              <StyledTableCell>Regional</StyledTableCell>
+              <StyledTableCell>Cidade</StyledTableCell>
+              <StyledTableCell>UF</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
             </TableRow>
           </StyledTableHead>
           <TableBody>
             {displayedMembers.map((member, index) => (
               <TableRow key={index}>
-                <TableCell>{member["Comitê Local"]}</TableCell>
-                <TableCell>{member["Nome da EM"]}</TableCell>
-                <TableCell>{member.Regional}</TableCell>
-                <TableCell>{member.Cidade}</TableCell>
-                <TableCell>{member.UF}</TableCell>
-                <TableCell>{member.Status}</TableCell>
+                <StyledTableCell>{member["Comitê Local"]}</StyledTableCell>
+                <StyledTableCell>{member["Nome da EM"]}</StyledTableCell>
+                <StyledTableCell>{member.Regional}</StyledTableCell>
+                <StyledTableCell>{member.Cidade}</StyledTableCell>
+                <StyledTableCell>{member.UF}</StyledTableCell>
+                <StyledTableCell>{member.Status}</StyledTableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </StyledTableContainer>
       <TablePagination
         component="div"
         count={filteredMembers.length}
