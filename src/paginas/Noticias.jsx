@@ -1,10 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Container, Typography, Button, ButtonGroup, Box, Divider, TextField, Checkbox, FormControl, InputLabel, Select, MenuItem, ListItemText, OutlinedInput } from '@mui/material';
-import { Link } from 'react-router-dom';
-import BlogPostListItem from './BlogPostListItem.jsx';
-import Loading from './Loading.jsx';
-import { generateUrlFriendlyTitle } from './characterConversion.jsx';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import {
+  Container,
+  Typography,
+  Button,
+  ButtonGroup,
+  Box,
+  Divider,
+  TextField,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  ListItemText,
+  OutlinedInput,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import BlogPostListItem from "../components/BlogPostListItem.jsx";
+import Loading from "../components/Loading.jsx";
+import { generateUrlFriendlyTitle } from "../components/characterConversion.jsx";
 
 const BlogSection = styled.section`
   display: flex;
@@ -16,7 +31,7 @@ const BlogSection = styled.section`
 `;
 
 const Title = styled.h2`
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 2.5rem;
   color: #333;
   text-align: center;
@@ -52,8 +67,8 @@ const FilterContainer = styled(Box)`
 `;
 
 const Noticias = ({ posts, loading }) => {
-  const [sortOrder, setSortOrder] = useState('dateDesc');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState("dateDesc");
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
 
@@ -63,29 +78,36 @@ const Noticias = ({ posts, loading }) => {
 
   const sortPosts = (posts, order) => {
     const sortedPosts = [...posts];
-    if (order === 'dateAsc') {
-      sortedPosts.sort((a, b) => new Date(a['dia-mes-ano']) - new Date(b['dia-mes-ano']));
-    } else if (order === 'dateDesc') {
-      sortedPosts.sort((a, b) => new Date(b['dia-mes-ano']) - new Date(a['dia-mes-ano']));
-    } else if (order === 'titleAsc') {
+    if (order === "dateAsc") {
+      sortedPosts.sort(
+        (a, b) => new Date(a["dia-mes-ano"]) - new Date(b["dia-mes-ano"])
+      );
+    } else if (order === "dateDesc") {
+      sortedPosts.sort(
+        (a, b) => new Date(b["dia-mes-ano"]) - new Date(a["dia-mes-ano"])
+      );
+    } else if (order === "titleAsc") {
       sortedPosts.sort((a, b) => a.titulo.localeCompare(b.titulo));
-    } else if (order === 'titleDesc') {
+    } else if (order === "titleDesc") {
       sortedPosts.sort((a, b) => b.titulo.localeCompare(a.titulo));
     }
     return sortedPosts;
   };
 
   const filterPosts = (posts) => {
-    return posts.filter(post => {
-      const matchesSearchTerm = post.titulo.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesAuthor = selectedAuthors.length === 0 || selectedAuthors.includes(post.autor);
+    return posts.filter((post) => {
+      const matchesSearchTerm = post.titulo
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesAuthor =
+        selectedAuthors.length === 0 || selectedAuthors.includes(post.autor);
       return matchesSearchTerm && matchesAuthor;
     });
   };
 
   const prioritizePosts = (posts) => {
-    const forcedPosts = posts.filter(post => post['forcar-pagina-inicial']);
-    const regularPosts = posts.filter(post => !post['forcar-pagina-inicial']);
+    const forcedPosts = posts.filter((post) => post["forcar-pagina-inicial"]);
+    const regularPosts = posts.filter((post) => !post["forcar-pagina-inicial"]);
     const sortedPosts = sortPosts(regularPosts, sortOrder);
     const filteredPosts = filterPosts([...forcedPosts, ...sortedPosts]);
     return filteredPosts;
@@ -95,7 +117,7 @@ const Noticias = ({ posts, loading }) => {
     return <Loading />;
   }
 
-  const uniqueAuthors = [...new Set(posts.map(post => post.autor))];
+  const uniqueAuthors = [...new Set(posts.map((post) => post.autor))];
 
   return (
     <BlogSection>
@@ -106,7 +128,7 @@ const Noticias = ({ posts, loading }) => {
           variant="outlined"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ marginRight: '20px', flexGrow: 1 }}
+          style={{ marginRight: "20px", flexGrow: 1 }}
         />
         <FormControl variant="outlined" style={{ minWidth: 200 }}>
           <InputLabel>Filtrar por Autor</InputLabel>
@@ -115,7 +137,7 @@ const Noticias = ({ posts, loading }) => {
             value={selectedAuthors}
             onChange={(e) => setSelectedAuthors(e.target.value)}
             input={<OutlinedInput label="Filtrar por Autor" />}
-            renderValue={(selected) => selected.join(', ')}
+            renderValue={(selected) => selected.join(", ")}
           >
             {uniqueAuthors.map((author) => (
               <MenuItem key={author} value={author}>
@@ -128,16 +150,26 @@ const Noticias = ({ posts, loading }) => {
       </FilterContainer>
       <ButtonContainer>
         <ButtonGroup variant="outlined" color="primary">
-          <Button onClick={() => setSortOrder('dateDesc')}>Data (mais recentes)</Button>
-          <Button onClick={() => setSortOrder('dateAsc')}>Data (mais antigas)</Button>
+          <Button onClick={() => setSortOrder("dateDesc")}>
+            Data (mais recentes)
+          </Button>
+          <Button onClick={() => setSortOrder("dateAsc")}>
+            Data (mais antigas)
+          </Button>
           <DividerStyled orientation="vertical" flexItem />
-          <Button onClick={() => setSortOrder('titleAsc')}>Título (A-Z)</Button>
-          <Button onClick={() => setSortOrder('titleDesc')}>Título (Z-A)</Button>
+          <Button onClick={() => setSortOrder("titleAsc")}>Título (A-Z)</Button>
+          <Button onClick={() => setSortOrder("titleDesc")}>
+            Título (Z-A)
+          </Button>
         </ButtonGroup>
       </ButtonContainer>
       <ListContainer>
         {filteredPosts.map((post, index) => (
-          <Link to={`/post/${generateUrlFriendlyTitle(post.titulo)}`} style={{ textDecoration: 'none' }} key={index}>
+          <Link
+            to={`/post/${generateUrlFriendlyTitle(post.titulo)}`}
+            style={{ textDecoration: "none" }}
+            key={index}
+          >
             <BlogPostListItem post={post} />
           </Link>
         ))}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import Markdown from 'markdown-to-jsx';
-import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading.jsx';
 import Gallery from '../components/Gallery.jsx'
 import BrazilMap from '../components/BrazilMap.jsx'
