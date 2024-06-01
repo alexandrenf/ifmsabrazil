@@ -21,7 +21,7 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const googleSheetsUrl =
-    "https://docs.google.com/spreadsheets/d/14lmnc_GTJzWvLatvU9QQIBO9_Xg1fKjBEMYU12FsZuk/export?gid=0&format=csv";
+    "https://cdn.statically.io/gh/alexandrenf/dataifmsabrazil/main/noticias.csv";
 
   useEffect(() => {
     const loadData = async () => {
