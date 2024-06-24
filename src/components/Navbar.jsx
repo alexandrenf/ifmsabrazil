@@ -182,7 +182,7 @@ const Navbar = () => {
   return (
     <Nav>
       <Link to="/">
-        <NavLogo src="https://s6.imgcdn.dev/3hEUy.png" alt="Logo" />
+        <NavLogo src="https://i.ibb.co/2W0Y2ZK/logo-fundo-azul.png" alt="Logo" />
       </Link>
       <MobileIcon onClick={toggleMobileMenu}>
         <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
