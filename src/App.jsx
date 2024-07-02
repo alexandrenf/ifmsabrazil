@@ -1,3 +1,5 @@
+"use client"; // Add this directive for client-side rendering
+
 import React, { useEffect, useState, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
@@ -5,7 +7,6 @@ import GlobalStyles from "./styles/GlobalStyles.jsx";
 import "./styles/Fonts.jsx";
 import Footer from "./components/Footer.jsx";
 import { CssBaseline } from "@mui/material";
-import fetchSpreadsheet from "./components/fetchSpreadsheet.jsx";
 import Loading from "./components/Loading.jsx";
 import Home from "./paginas/Home.jsx";
 
@@ -18,26 +19,6 @@ const Filiacao = lazy(() => import("./paginas/Filiacao.jsx"));
 const NotFound = lazy(() => import("./components/NotFound.jsx")); // Import the NotFound component
 
 const App = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const googleSheetsUrl =
-    "https://docs.google.com/spreadsheets/d/14lmnc_GTJzWvLatvU9QQIBO9_Xg1fKjBEMYU12FsZuk/export?gid=0&format=csv";
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const spreadsheetData = await fetchSpreadsheet(googleSheetsUrl);
-        setPosts(spreadsheetData);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, [googleSheetsUrl]);
-
   return (
     <Router>
       <GlobalStyles />
@@ -45,24 +26,20 @@ const App = () => {
       <Navbar />
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/" element={<Home posts={posts} loading={loading} />} />
+          <Route path="/" element={<Home />} />
           <Route
-            path="/post/:title"
+            path="/post/:id/:title"
             element={
               <MarkdownPage
-                posts={posts}
-                loading={loading}
                 needsExternal={true}
+                id={null} // Placeholder, we'll set this properly in MarkdownPage later
               />
             }
           />
           <Route path="/gerarlink" element={<GeradorLink />} />
           <Route path="/estrutura" element={<Estrutura />} />
           <Route path="/filiacao" element={<Filiacao />} />
-          <Route
-            path="/noticias"
-            element={<Noticias posts={posts} loading={loading} />}
-          />
+          <Route path="/noticias" element={<Noticias />} />
           <Route
             path="/tutorial"
             element={

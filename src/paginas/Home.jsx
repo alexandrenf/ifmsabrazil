@@ -4,6 +4,7 @@ import OndeEstamos from "../components/OndeEstamos.jsx";
 import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil.jsx";
 import Blog from "../components/Blog.jsx"; // Adjust the path as needed
 import backgroundImage from "../assets/background-image.png";
+import axios from "axios";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -108,8 +109,36 @@ const ContentSection = styled.div`
   }
 `;
 
-const Home = ({ posts, loading }) => {
+const Home = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showScrollButton, setShowScrollButton] = useState(true);
+
+  const apiEndpoint = "https://api.ifmsabrazil.org/api/blogs/recent"; // Update this to your actual API endpoint
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(apiEndpoint);
+        const data = response.data;
+
+        // Ensure data is an array. If it's not, try accessing the posts array
+        const postsArray = Array.isArray(data) ? data : data.posts;
+
+        if (!Array.isArray(postsArray)) {
+          throw new Error("Posts data is not an array");
+        }
+
+        setPosts(postsArray);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;

@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import BlogPostListItem from "../components/BlogPostListItem.jsx";
 import Loading from "../components/Loading.jsx";
 import { generateUrlFriendlyTitle } from "../components/characterConversion.jsx";
+import axios from "axios";
 
 const BlogSection = styled.section`
   display: flex;
@@ -66,11 +67,36 @@ const FilterContainer = styled(Box)`
   max-width: 1200px;
 `;
 
-const Noticias = ({ posts, loading }) => {
+const Noticias = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState("dateDesc");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
+
+  const apiEndpoint = "https://api.ifmsabrazil.org/api/blogs/recent"; // Update this to your actual API endpoint
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(apiEndpoint);
+        const data = response.data;
+
+        if (!Array.isArray(data)) {
+          throw new Error("Posts data is not an array");
+        }
+
+        setPosts(data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   useEffect(() => {
     setFilteredPosts(prioritizePosts(posts));
@@ -79,35 +105,31 @@ const Noticias = ({ posts, loading }) => {
   const sortPosts = (posts, order) => {
     const sortedPosts = [...posts];
     if (order === "dateAsc") {
-      sortedPosts.sort(
-        (a, b) => new Date(a["dia-mes-ano"]) - new Date(b["dia-mes-ano"])
-      );
+      sortedPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
     } else if (order === "dateDesc") {
-      sortedPosts.sort(
-        (a, b) => new Date(b["dia-mes-ano"]) - new Date(a["dia-mes-ano"])
-      );
+      sortedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
     } else if (order === "titleAsc") {
-      sortedPosts.sort((a, b) => a.titulo.localeCompare(b.titulo));
+      sortedPosts.sort((a, b) => a.title.localeCompare(b.title));
     } else if (order === "titleDesc") {
-      sortedPosts.sort((a, b) => b.titulo.localeCompare(a.titulo));
+      sortedPosts.sort((a, b) => b.title.localeCompare(a.title));
     }
     return sortedPosts;
   };
 
   const filterPosts = (posts) => {
     return posts.filter((post) => {
-      const matchesSearchTerm = post.titulo
+      const matchesSearchTerm = post.title
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
       const matchesAuthor =
-        selectedAuthors.length === 0 || selectedAuthors.includes(post.autor);
+        selectedAuthors.length === 0 || selectedAuthors.includes(post.author);
       return matchesSearchTerm && matchesAuthor;
     });
   };
 
   const prioritizePosts = (posts) => {
-    const forcedPosts = posts.filter((post) => post["forcar-pagina-inicial"]);
-    const regularPosts = posts.filter((post) => !post["forcar-pagina-inicial"]);
+    const forcedPosts = posts.filter((post) => post.forceHomePage);
+    const regularPosts = posts.filter((post) => !post.forceHomePage);
     const sortedPosts = sortPosts(regularPosts, sortOrder);
     const filteredPosts = filterPosts([...forcedPosts, ...sortedPosts]);
     return filteredPosts;
@@ -117,7 +139,7 @@ const Noticias = ({ posts, loading }) => {
     return <Loading />;
   }
 
-  const uniqueAuthors = [...new Set(posts.map((post) => post.autor))];
+  const uniqueAuthors = [...new Set(posts.map((post) => post.author))];
 
   return (
     <BlogSection>
@@ -166,9 +188,9 @@ const Noticias = ({ posts, loading }) => {
       <ListContainer>
         {filteredPosts.map((post, index) => (
           <Link
-            to={`/post/${generateUrlFriendlyTitle(post.titulo)}`}
-            style={{ textDecoration: "none" }}
+            to={`/post/${post.id}/${generateUrlFriendlyTitle(post.title)}`}
             key={index}
+            style={{ textDecoration: "none" }}
           >
             <BlogPostListItem post={post} />
           </Link>

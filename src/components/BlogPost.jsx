@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import React from "react";
+import styled from "styled-components";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 const StyledCard = styled(Card)`
   display: flex;
@@ -36,21 +36,21 @@ const BlogPost = ({ post }) => {
     <StyledCard>
       <CardContent style={{ flex: 1 }}>
         <Typography component="h2" variant="h5" gutterBottom>
-          {post.titulo}
+          {post.title}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          {post.autor}
+          {post.author}
         </Typography>
         <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-          {post['dia-mes-ano'] ? new Date(post['dia-mes-ano']).toLocaleDateString() : ''}
+          {post.date ? new Date(post.date).toLocaleDateString() : ""}
         </Typography>
         <Typography variant="body1" paragraph>
-          {post.resumo}
+          {post.summary}
         </Typography>
       </CardContent>
       <StyledCardMedia
         component="img"
-        image={post['imagem-link']}
+        image={post.imageLink}
         alt="Blog image"
       />
     </StyledCard>
