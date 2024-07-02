@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import logoFundoAzul from "../assets/logo-fundo-azul.png";
 
 // Add only the icons you need to the library
 library.add(faBars, faTimes);
@@ -182,7 +183,7 @@ const Navbar = () => {
   return (
     <Nav>
       <Link to="/">
-        <NavLogo src="https://i.ibb.co/2W0Y2ZK/logo-fundo-azul.png" alt="Logo" />
+        <NavLogo src={logoFundoAzul} alt="Logo" />
       </Link>
       <MobileIcon onClick={toggleMobileMenu}>
         <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />

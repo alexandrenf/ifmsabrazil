@@ -1,5 +1,6 @@
 {
   "name": "ifmsabrazil",
+  "homepage": "https://teste.ifmsabrazil.org",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import OndeEstamos from "../components/OndeEstamos.jsx";
 import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil.jsx";
 import Blog from "../components/Blog.jsx"; // Adjust the path as needed
+import backgroundImage from "../assets/background-image.png";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const HomeContainer = styled.div`
 const HeroSection = styled.div`
   width: 100%;
   height: 100vh;
-  background-image: url("https://s6.imgcdn.dev/3hHLD.png");
+  background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
   display: flex;
