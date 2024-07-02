@@ -29,12 +29,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route
             path="/post/:id/:title"
-            element={
-              <MarkdownPage
-                needsExternal={true}
-                id={null} // Placeholder, we'll set this properly in MarkdownPage later
-              />
-            }
+            element={<MarkdownPage needsExternal={true} />}
           />
           <Route path="/gerarlink" element={<GeradorLink />} />
           <Route path="/estrutura" element={<Estrutura />} />
