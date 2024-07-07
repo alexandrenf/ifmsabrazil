@@ -20,9 +20,6 @@ const Title = styled(Typography)({
 });
 
 const Estrutura = () => {
-  const csvUrl =
-    "https://docs.google.com/spreadsheets/d/170s7A5MI7ui-y9-eZhbw0f5pFUITySzzLcyDZsT0UC0/export?gid=0&format=csv";
-
   const markdownContent1 = `
 A estrutura da IFMSA Brazil é composta por Diretoria Executiva, Coordenadores Regionais, Times Nacionais, Coordenadores Nacionais de Programas, Comitês Locais (escolas médicas filiadas), Coordenadores Locais (estudantes de medicina filiados), Alumni, Conselho Supervisor e Comissão de Reforma e Elaboração de Documentos.
 
@@ -78,7 +75,7 @@ Os alumni são médicos filiados à IFMSA Brazil que foram Coordenadores Locais 
     <Root>
       <Title variant="h4">{"Estrutura da IFMSA Brazil"}</Title>
       <MarkdownContent content={markdownContent1} />
-      <Gallery csvUrl={csvUrl} />
+      <Gallery />
       <MarkdownContent content={markdownContent2} />
       <BrazilMap />
       <MarkdownContent content={markdownContent3} />
