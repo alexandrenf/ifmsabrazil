@@ -53,7 +53,11 @@ const BlogPostListItem = ({ post }) => {
           gutterBottom
           style={{ fontSize: "0.875rem" }}
         >
-          {post.date ? new Date(post.date).toLocaleDateString() : ""}
+          {post.date
+            ? new Date(post.date).toLocaleDateString("en-GB", {
+                timeZone: "UTC",
+              })
+            : ""}
         </Typography>
         <Typography variant="body2" paragraph style={{ fontSize: "0.875rem" }}>
           {post.summary}

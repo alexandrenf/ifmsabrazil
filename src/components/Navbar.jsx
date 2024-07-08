@@ -255,14 +255,16 @@ const Navbar = () => {
               activeSubMenu === "midias" || activeSubMenu === "midiasMobile"
             }
           >
-            <Link to="/ressonancia">Ressonância Poética</Link>
-            <Link to="/informa-susi">Informa SUSi</Link>
-            <Link to="/brazilian-medical-students">
-              Brazilian Medical Students
+            <Link to="/arquivos/rp">Ressonância Poética</Link>
+            <Link to="/arquivos/susi">Informa SUSi</Link>
+            <Link to="/arquivos/bms">Brazilian Medical Students</Link>
+            <Link to="/arquivos/relatorios">Relatórios</Link>
+            <Link to="/arquivos/notas">Notas de Posicionamento</Link>
+            <Link to="/arquivos/dps">Declarações de Política</Link>
+            <Link to="/arquivos/intercambio_nac">Intercâmbio Nacional</Link>
+            <Link to="/arquivos/intercambio_inter">
+              Intercâmbio Internacional
             </Link>
-            <Link to="/relatorios">Relatórios</Link>
-            <Link to="/notas">Notas de Posicionamento</Link>
-            <Link to="/declaracoes">Declarações de Política</Link>
           </SubMenu>
         </NavLink>
         <NavLink>
@@ -374,26 +376,38 @@ const Navbar = () => {
           </MobileLink>
           {activeSubMenu === "midiasMobile" && (
             <>
-              <MobileSubLink to="/ressonancia" onClick={toggleMobileMenu}>
+              <MobileSubLink to="/arquivos/rp" onClick={toggleMobileMenu}>
                 Ressonância Poética
               </MobileSubLink>
-              <MobileSubLink to="/informa-susi" onClick={toggleMobileMenu}>
+              <MobileSubLink to="/arquivos/susi" onClick={toggleMobileMenu}>
                 Informa SUSi
               </MobileSubLink>
-              <MobileSubLink
-                to="/brazilian-medical-students"
-                onClick={toggleMobileMenu}
-              >
+              <MobileSubLink to="/arquivos/bms" onClick={toggleMobileMenu}>
                 Brazilian Medical Students
               </MobileSubLink>
-              <MobileSubLink to="/relatorios" onClick={toggleMobileMenu}>
+              <MobileSubLink
+                to="/arquivos/relatorios"
+                onClick={toggleMobileMenu}
+              >
                 Relatórios
               </MobileSubLink>
-              <MobileSubLink to="/notas" onClick={toggleMobileMenu}>
+              <MobileSubLink to="/arquivos/notas" onClick={toggleMobileMenu}>
                 Notas de Posicionamento
               </MobileSubLink>
-              <MobileSubLink to="/declaracoes" onClick={toggleMobileMenu}>
+              <MobileSubLink to="/arquivos/dps" onClick={toggleMobileMenu}>
                 Declarações de Política
+              </MobileSubLink>
+              <MobileSubLink
+                to="/arquivos/intercambio_nac"
+                onClick={toggleMobileMenu}
+              >
+                Intercâmbio Nacional
+              </MobileSubLink>
+              <MobileSubLink
+                to="/arquivos/intercambio_inter"
+                onClick={toggleMobileMenu}
+              >
+                Intercâmbio Internacional
               </MobileSubLink>
             </>
           )}
