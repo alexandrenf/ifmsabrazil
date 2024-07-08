@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Typography, Box, Avatar } from "@mui/material";
 import { styled } from "@mui/system";
 import axios from "axios";
@@ -9,8 +9,8 @@ import Loading from "./Loading.jsx"; // Ensure the path is correct
 const RMCarousel = Carousel.default ? Carousel.default : Carousel;
 
 const Root = styled(Container)({
-  paddingLeft: "48px",
-  paddingRight: "48px",
+  paddingLeft: "24px",
+  paddingRight: "24px",
   paddingTop: "24px",
   paddingBottom: "24px",
   backgroundColor: "#FFFFFF",
@@ -33,93 +33,47 @@ const MemberCard = styled(Box)({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  height: "300px", // Reduced height to minimize empty space
+  height: "auto", // Allow height to adjust based on content
+  minHeight: "300px", // Ensure minimum height for visual consistency
   overflow: "hidden",
-  whiteSpace: "normal", // Allows text to wrap
 });
 
 const MemberAvatar = styled(Avatar)({
-  width: "140px", // Increased size
-  height: "140px", // Increased size
+  width: "120px", // Adjusted size for better appearance
+  height: "120px", // Adjusted size for better appearance
   marginBottom: "16px",
   borderRadius: "12px", // Rounded corners for square images
   boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
 });
 
-const useDynamicFontSize = (ref, defaultFontSize = "1rem") => {
-  const [fontSize, setFontSize] = useState(defaultFontSize);
+const DynamicTypography = styled(Typography)({
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  whiteSpace: "normal", // Allows text to wrap
+  wordWrap: "break-word", // Ensures long words break to the next line
+  width: "100%", // Ensures it uses full available width
+  display: "block", // Makes sure the element behaves like a block element
+});
 
-  useEffect(() => {
-    const resizeFont = () => {
-      if (ref.current) {
-        const parentWidth = ref.current.parentNode.clientWidth;
-        const childWidth = ref.current.scrollWidth;
-        if (childWidth > parentWidth) {
-          const newSize =
-            (parentWidth / childWidth) *
-            parseFloat(window.getComputedStyle(ref.current).fontSize);
-          setFontSize(`${newSize}px`);
-        } else {
-          setFontSize(defaultFontSize);
-        }
-      }
-    };
-
-    resizeFont();
-    window.addEventListener("resize", resizeFont);
-    return () => window.removeEventListener("resize", resizeFont);
-  }, [ref, defaultFontSize]);
-
-  return fontSize;
-};
-
-const DynamicTypography = ({ children, variant, defaultFontSize }) => {
-  const ref = useRef(null);
-  const fontSize = useDynamicFontSize(ref, defaultFontSize);
-
-  return (
-    <Typography
-      ref={ref}
-      style={{
-        fontSize,
-        textOverflow: "ellipsis",
-        overflow: "hidden",
-        whiteSpace: "normal",
-      }}
-      variant={variant}
-    >
-      {children}
-    </Typography>
-  );
-};
-
-const MemberRole = ({ children }) => {
-  const ref = useRef(null);
-  const fontSize = useDynamicFontSize(ref, "0.875rem"); // Default font size for roles
-
-  return (
-    <Typography
-      ref={ref}
-      style={{
-        fontSize,
-        color: "#1976d2",
-        marginBottom: "8px",
-        textOverflow: "ellipsis",
-        overflow: "hidden",
-        whiteSpace: "normal",
-      }}
-      variant="body1"
-    >
-      {children}
-    </Typography>
-  );
-};
+const MemberRole = styled(Typography)({
+  color: "#1976d2",
+  marginBottom: "8px",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  whiteSpace: "normal", // Allows text to wrap
+  wordWrap: "break-word", // Ensures long words break to the next line
+  width: "100%", // Ensures it uses full available width
+  display: "block", // Makes sure the element behaves like a block element
+});
 
 const MemberEmail = styled(Typography)({
   color: "#333",
   textOverflow: "ellipsis",
   overflow: "hidden",
   whiteSpace: "normal", // Allows text to wrap
+  wordWrap: "break-word", // Ensures long words break to the next line
+  width: "100%", // Ensures it uses full available width
+  display: "block", // Makes sure the element behaves like a block element
 });
 
 const Gallery = () => {
@@ -181,10 +135,8 @@ const Gallery = () => {
         {members.map((member, index) => (
           <MemberCard key={index}>
             <MemberAvatar src={member.imageLink} alt={member.name} />
-            <DynamicTypography variant="h6" defaultFontSize="1rem">
-              {member.name}
-            </DynamicTypography>
-            <MemberRole>
+            <DynamicTypography variant="h6">{member.name}</DynamicTypography>
+            <MemberRole variant="body1">
               {member.role} ({member.acronym})
             </MemberRole>
             <MemberEmail variant="body2">{member.email}</MemberEmail>

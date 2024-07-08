@@ -35,8 +35,8 @@ const MessageText = styled.p`
 `;
 
 const CloseButton = styled.button`
-  background-color: transparent;
-  color: white;
+  background-color: white;
+  color: #003366;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -47,8 +47,8 @@ const CloseButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: white;
-    color: #003366;
+    background-color: transparent;
+    color: white;
   }
 `;
 

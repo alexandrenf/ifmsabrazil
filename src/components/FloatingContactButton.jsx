@@ -46,8 +46,8 @@ const FloatingButton = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
   }
 `;
 
@@ -67,8 +67,8 @@ const ExpandedMenu = styled.div`
   animation: ${(props) => (props.isOpen ? fadeIn : fadeOut)} 0.2s forwards;
 
   @media (max-width: 768px) {
-    bottom: 70px;
-    right: 10px;
+    bottom: 76px;
+    right: 16px;
   }
 `;
 
