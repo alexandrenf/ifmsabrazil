@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import OndeEstamos from "../components/OndeEstamos.jsx";
-import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil.jsx";
-import Blog from "../components/Blog.jsx"; // Adjust the path as needed
-import backgroundImage from "../assets/background-image.png";
 import axios from "axios";
+import FloatingContactButton from "../components/FloatingContactButton"; // Adjust the path as needed
+import OndeEstamos from "../components/OndeEstamos";
+import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil";
+import Blog from "../components/Blog";
+import backgroundImage from "../assets/background-image.png";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -180,15 +181,16 @@ const Home = () => {
       <ContentSection>
         <h2>Breve Introdução</h2>
         <p>
-          Fundada em 1991 como primeira Associação vinculada à International
-          Federation of Medical Students’ Association da América Latina (IFMSA),
-          a IFMSA Brazil interliga estudantes de medicina de todo o país para
+          Fundada em 1991 como primeira associação da América Latina vinculada à
+          International Federation of Medical Students’ Association (IFMSA), a
+          IFMSA Brazil interliga estudantes de medicina de todo o país para
           fazer a diferença na sociedade e na formação médica.
         </p>
       </ContentSection>
       <OndeEstamos />
       <AreasOfIFMSABrazil />
       <Blog posts={posts} loading={loading} />
+      <FloatingContactButton />
     </HomeContainer>
   );
 };

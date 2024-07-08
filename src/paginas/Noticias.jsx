@@ -188,7 +188,7 @@ const Noticias = () => {
       <ListContainer>
         {filteredPosts.map((post, index) => (
           <Link
-            to={`/post/${post.id}/${generateUrlFriendlyTitle(post.title)}`}
+            to={`/arquivo/${post.id}/${generateUrlFriendlyTitle(post.title)}`}
             key={index}
             style={{ textDecoration: "none" }}
           >

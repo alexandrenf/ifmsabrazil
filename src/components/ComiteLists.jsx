@@ -9,16 +9,8 @@ import {
   ListItemText,
   OutlinedInput,
   Box,
-  Typography,
-  TablePagination,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
 } from "@mui/material";
+import TableComponent from "./ComiteListsTable";
 
 const ListaTitulo = styled.h1`
   font-family: "Poppins", sans-serif;
@@ -37,14 +29,6 @@ const Section = styled.section`
   background-color: #fafafa;
 `;
 
-const Title = styled.h2`
-  font-family: "Poppins", sans-serif;
-  font-size: 2.5rem;
-  color: #333;
-  text-align: center;
-  margin-bottom: 30px;
-`;
-
 const FilterContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
@@ -60,24 +44,6 @@ const FilterContainer = styled(Box)`
   }
 `;
 
-const StyledTableHead = styled(TableHead)`
-  background-color: #00508c;
-  & th {
-    color: #fff;
-    font-weight: bold;
-    white-space: nowrap;
-  }
-`;
-
-const StyledTableContainer = styled(TableContainer)`
-  width: 100%;
-  overflow-x: auto;
-`;
-
-const StyledTableCell = styled(TableCell)`
-  min-width: 150px;
-`;
-
 const ComiteLists = ({ members }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
@@ -89,6 +55,23 @@ const ComiteLists = ({ members }) => {
   const [filteredMembers, setFilteredMembers] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [showPrompt, setShowPrompt] = useState(false);
+
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isMobileDevice = window.innerWidth <= 768;
+      const isVerticalMode = window.innerHeight > window.innerWidth;
+
+      setShowPrompt(isMobileDevice && isVerticalMode);
+    };
+
+    window.addEventListener("resize", checkOrientation);
+    checkOrientation();
+
+    return () => {
+      window.removeEventListener("resize", checkOrientation);
+    };
+  }, []);
 
   useEffect(() => {
     setFilteredMembers(filterAndSortMembers(members));
@@ -178,47 +161,15 @@ const ComiteLists = ({ members }) => {
           </FormControl>
         ))}
       </FilterContainer>
-      <StyledTableContainer component={Paper}>
-        <Table>
-          <StyledTableHead>
-            <TableRow>
-              <StyledTableCell>Comitê Local</StyledTableCell>
-              <StyledTableCell>Nome da EM</StyledTableCell>
-              <StyledTableCell>Regional</StyledTableCell>
-              <StyledTableCell>Cidade</StyledTableCell>
-              <StyledTableCell>UF</StyledTableCell>
-              <StyledTableCell>Status</StyledTableCell>
-            </TableRow>
-          </StyledTableHead>
-          <TableBody>
-            {displayedMembers.map((member, index) => (
-              <TableRow key={index}>
-                <StyledTableCell>{member["Comitê Local"]}</StyledTableCell>
-                <StyledTableCell>{member["Nome da EM"]}</StyledTableCell>
-                <StyledTableCell>{member.Regional}</StyledTableCell>
-                <StyledTableCell>{member.Cidade}</StyledTableCell>
-                <StyledTableCell>{member.UF}</StyledTableCell>
-                <StyledTableCell>{member.Status}</StyledTableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </StyledTableContainer>
-      <TablePagination
-        component="div"
-        count={filteredMembers.length}
+      <TableComponent
+        displayedMembers={displayedMembers}
+        filteredMembersLength={filteredMembers.length}
         page={page}
-        onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        rowsPerPageOptions={[
-          10,
-          25,
-          50,
-          100,
-          { label: "Todos", value: filteredMembers.length },
-        ]}
-        labelRowsPerPage="Itens por página"
+        handleChangePage={handleChangePage}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
+        showPrompt={showPrompt}
+        onClosePrompt={() => setShowPrompt(false)}
       />
     </Section>
   );

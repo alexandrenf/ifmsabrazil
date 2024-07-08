@@ -21,7 +21,20 @@ const Title = styled(Typography)({
 
 const Estrutura = () => {
   const markdownContent1 = `
-A estrutura da IFMSA Brazil é composta por Diretoria Executiva, Coordenadores Regionais, Times Nacionais, Coordenadores Nacionais de Programas, Comitês Locais (escolas médicas filiadas), Coordenadores Locais (estudantes de medicina filiados), Alumni, Conselho Supervisor e Comissão de Reforma e Elaboração de Documentos.
+
+  ## Nossa Composição
+
+A estrutura da IFMSA Brazil é composta por:
+
+- Diretoria Executiva (EB);
+- Coordenadores Regionais (CRs);
+- Times Nacionais;
+- Coordenadores Nacionais de Programas (CNPs);
+- Comitês Locais (LCs) → escolas médicas filiadas;
+- Coordenadores Locais (CLs) → estudantes de medicina filiados;
+- Alumni;
+- Conselho Supervisor (SupCo);
+- Comissão de Reforma e Elaboração de Documentos (CRED).
 
 ## Diretoria Executiva Nacional
 
