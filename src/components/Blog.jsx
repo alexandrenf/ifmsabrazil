@@ -62,7 +62,9 @@ const Blog = ({ posts, loading }) => {
           {shownPosts.map((post, index) => (
             <Grid item key={index} xs={12} sm={6}>
               <Link
-                to={`/post/${post.id}/${generateUrlFriendlyTitle(post.title)}`}
+                to={`/arquivo/${post.id}/${generateUrlFriendlyTitle(
+                  post.title
+                )}`}
               >
                 <BlogPost post={post} />
               </Link>
