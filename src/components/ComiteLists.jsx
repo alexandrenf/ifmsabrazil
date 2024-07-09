@@ -126,7 +126,7 @@ const ComiteLists = ({ members }) => {
 
   return (
     <Section>
-      <ListaTitulo>Lista de Comitês Locais</ListaTitulo>
+      <ListaTitulo>Lista de Comitês Locais Filiados</ListaTitulo>
       <FilterContainer>
         <TextField
           label="Buscar"

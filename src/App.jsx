@@ -18,6 +18,8 @@ const Estrutura = lazy(() => import("./paginas/Estrutura.jsx"));
 const Filiacao = lazy(() => import("./paginas/Filiacao.jsx"));
 const NotFound = lazy(() => import("./components/NotFound.jsx")); // Import the NotFound component
 const Noticias = lazy(() => import("./paginas/Noticias.jsx")); // Import the Noticias component
+const Institucional = lazy(() => import("./paginas/Institucional.jsx")); // Import the Institucional component
+const AcoesETematicas = lazy(() => import("./paginas/AcoesETematicas.jsx")); // Import the AcoesETematicas component
 
 const App = () => {
   return (
@@ -36,6 +38,8 @@ const App = () => {
           <Route path="/estrutura" element={<Estrutura />} />
           <Route path="/filiacao" element={<Filiacao />} />
           <Route path="/noticias" element={<Noticias />} />
+          <Route path="/institucional" element={<Institucional />} />
+          <Route path="/acoes" element={<AcoesETematicas />} />
           <Route path="/arquivos/:type" element={<Arquivos />} />
           <Route
             path="/tutorial"

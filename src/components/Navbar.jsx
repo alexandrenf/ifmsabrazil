@@ -236,8 +236,10 @@ const Navbar = () => {
               activeSubMenu === "mobilidadeMobile"
             }
           >
-            <Link to="/nacionais">Intercâmbios Nacionais</Link>
-            <Link to="/internacionais">Intercâmbios Internacionais</Link>
+            <Link to="/intercambio_nacional">Intercâmbios Nacionais</Link>
+            <Link to="/intercambio_internacional">
+              Intercâmbios Internacionais
+            </Link>
             <Link to="/outras-modalidades">
               Outras Modalidades de Intercâmbio
             </Link>
@@ -352,10 +354,16 @@ const Navbar = () => {
           </MobileLink>
           {activeSubMenu === "mobilidadeMobile" && (
             <>
-              <MobileSubLink to="/nacionais" onClick={toggleMobileMenu}>
+              <MobileSubLink
+                to="/intercambio_nacional"
+                onClick={toggleMobileMenu}
+              >
                 Intercâmbios Nacionais
               </MobileSubLink>
-              <MobileSubLink to="/internacionais" onClick={toggleMobileMenu}>
+              <MobileSubLink
+                to="/intercambio_internacional"
+                onClick={toggleMobileMenu}
+              >
                 Intercâmbios Internacionais
               </MobileSubLink>
               <MobileSubLink
