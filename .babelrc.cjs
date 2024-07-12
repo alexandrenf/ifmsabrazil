@@ -1,4 +1,3 @@
-// .babelrc.js
 const plugins = [
   [
     "babel-plugin-import",

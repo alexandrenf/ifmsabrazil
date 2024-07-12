@@ -20,6 +20,9 @@ const NotFound = lazy(() => import("./components/NotFound.jsx")); // Import the 
 const Noticias = lazy(() => import("./paginas/Noticias.jsx")); // Import the Noticias component
 const Institucional = lazy(() => import("./paginas/Institucional.jsx")); // Import the Institucional component
 const AcoesETematicas = lazy(() => import("./paginas/AcoesETematicas.jsx")); // Import the AcoesETematicas component
+const SocialPrograms = lazy(() => import("./paginas/SocialPrograms.jsx")); // Import the SocialPrograms component
+const Eixos = lazy(() => import("./paginas/Eixos.jsx")); // Import the Eixos component
+const Eventos = lazy(() => import("./paginas/Eventos.jsx")); // Import the Eventos component
 
 const App = () => {
   return (
@@ -41,6 +44,9 @@ const App = () => {
           <Route path="/institucional" element={<Institucional />} />
           <Route path="/acoes" element={<AcoesETematicas />} />
           <Route path="/arquivos/:type" element={<Arquivos />} />
+          <Route path="/social-programs" element={<SocialPrograms />} />
+          <Route path="/eixos" element={<Eixos />} />
+          <Route path="/eventos" element={<Eventos />} />
           <Route
             path="/tutorial"
             element={

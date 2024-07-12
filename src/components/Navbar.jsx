@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import logoFundoAzul from "../assets/logo-fundo-azul.png";
 
@@ -173,6 +174,7 @@ const Navbar = () => {
   const [activeSubMenu, setActiveSubMenu] = useState("");
 
   const toggleMobileMenu = () => {
+    isOpen == true ? setActiveSubMenu("") : null;
     setIsOpen(!isOpen);
   };
 

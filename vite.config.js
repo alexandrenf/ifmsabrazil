@@ -4,6 +4,7 @@ import markdown from "vite-plugin-md";
 import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression";
 import { splitVendorChunkPlugin } from "vite";
+import { babel } from "@rollup/plugin-babel";
 
 export default defineConfig({
   plugins: [
@@ -15,6 +16,10 @@ export default defineConfig({
     }),
     viteCompression({ algorithm: "brotliCompress" }), // Add compression plugin
     splitVendorChunkPlugin(), // Vite plugin to split vendor code into separate chunks
+    babel({
+      babelHelpers: "bundled",
+      extensions: [".js", ".jsx", ".ts", ".tsx"], // Add your necessary file extensions
+    }),
   ],
   server: {
     open: true,

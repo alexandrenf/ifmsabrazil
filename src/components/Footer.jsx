@@ -1,12 +1,11 @@
 import React from "react";
 import { Container, Grid, Typography, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import {
-  faMapMarkerAlt,
-  faEnvelope,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons/faTwitter";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import { faPhone } from "@fortawesome/free-solid-svg-icons/faPhone";
 import { styled } from "@mui/system";
 
 // Import FontAwesome core

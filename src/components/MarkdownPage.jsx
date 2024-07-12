@@ -56,8 +56,13 @@ const MarkdownContainer = styled("div")({
     },
   },
   "& img": {
-    maxWidth: "100%",
-    height: "auto",
+    minWidth: "50%",
+    maxWidth: "75%",
+    minHeight: "auto",
+    maxHeight: "50%",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 });
 
@@ -122,7 +127,7 @@ const MarkdownOptions = {
     },
     img: {
       component: ({ children, ...props }) => (
-        <img {...props} style={{ maxWidth: "100%", height: "auto" }} />
+        <img {...props} style={{ height: "auto" }} />
       ),
     },
   },

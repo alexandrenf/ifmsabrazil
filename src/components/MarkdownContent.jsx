@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import Markdown from "markdown-to-jsx";
 import { Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import {
+  display,
+  margin,
+  maxHeight,
+  maxWidth,
+  minHeight,
+  minWidth,
+  styled,
+  width,
+} from "@mui/system";
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx.min";
 import "../components/codeStyles.css"; // Your custom styles
@@ -47,8 +56,14 @@ const MarkdownContainer = styled("div")({
     },
   },
   "& img": {
-    maxWidth: "100%",
+    minWidth: "50%",
+    maxWidth: "75%",
+    minHeight: "auto",
+    maxHeight: "50%",
     height: "auto",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 });
 

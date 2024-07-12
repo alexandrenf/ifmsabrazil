@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBook,
-  faGraduationCap,
-  faHandsHelping,
-  faHeartbeat,
-  faHospital,
-  faUniversity,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBook } from "@fortawesome/free-solid-svg-icons/faBook";
+import { faGraduationCap } from "@fortawesome/free-solid-svg-icons/faGraduationCap";
+import { faHandsHelping } from "@fortawesome/free-solid-svg-icons/faHandsHelping";
+import { faHeartbeat } from "@fortawesome/free-solid-svg-icons/faHeartbeat";
+import { faHospital } from "@fortawesome/free-solid-svg-icons/faHospital";
+import { faUniversity } from "@fortawesome/free-solid-svg-icons/faUniversity";
+import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 // Add only the icons you need to the library
