@@ -22,7 +22,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: build
+          local-dir: /
           server-dir: / # Change this to your server's deployment directory
           dangerous-clean-slate: true # Deletes all files/folders in the server-dir before upload
           exclude: |
