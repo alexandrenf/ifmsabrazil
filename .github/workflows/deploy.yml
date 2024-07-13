@@ -26,4 +26,3 @@ jobs:
           server-dir: / # Change this to your server's deployment directory
           dangerous-clean-slate: true # Deletes all files/folders in the server-dir before upload
           exclude: |
-            .htaccess
