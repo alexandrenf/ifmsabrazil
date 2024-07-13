@@ -1,0 +1,32 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches:
+      - main # Change this to your desired branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Unzip build.zip
+        run: unzip build.zip -d build
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: build
+          server-dir: / # Change this to your server's deployment directory
+          dangerous-clean-slate: true # Deletes all files/folders in the server-dir before upload
+          exclude: |
+            assets
+            markdown
+            index.html
+            index.html.br

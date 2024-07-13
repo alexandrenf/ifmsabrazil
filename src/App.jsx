@@ -23,6 +23,9 @@ const AcoesETematicas = lazy(() => import("./paginas/AcoesETematicas.jsx")); // 
 const SocialPrograms = lazy(() => import("./paginas/SocialPrograms.jsx")); // Import the SocialPrograms component
 const Eixos = lazy(() => import("./paginas/Eixos.jsx")); // Import the Eixos component
 const Eventos = lazy(() => import("./paginas/Eventos.jsx")); // Import the Eventos component
+const IntercambioNacional = lazy(() =>
+  import("./paginas/IntercambioNacional.jsx")
+); // Import the IntercambioNacional component
 
 const App = () => {
   return (
@@ -47,6 +50,10 @@ const App = () => {
           <Route path="/social-programs" element={<SocialPrograms />} />
           <Route path="/eixos" element={<Eixos />} />
           <Route path="/eventos" element={<Eventos />} />
+          <Route
+            path="/intercambio_nacional"
+            element={<IntercambioNacional />}
+          />
           <Route
             path="/tutorial"
             element={

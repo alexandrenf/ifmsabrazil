@@ -5,7 +5,7 @@ import FloatingContactButton from "../components/FloatingContactButton"; // Adju
 import OndeEstamos from "../components/OndeEstamos";
 import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil";
 import Blog from "../components/Blog";
-import backgroundImage from "../assets/background-image.png";
+import backgroundImage from "../assets/background-image.webp";
 
 const HomeContainer = styled.div`
   display: flex;

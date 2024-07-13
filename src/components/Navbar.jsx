@@ -206,7 +206,7 @@ const Navbar = () => {
             <Link to="/institucional">Institucional</Link>
             <Link to="/estrutura">Estrutura</Link>
             <Link to="/filiacao">Filiação</Link>
-            <Link to="/estatuto">Estatuto Social</Link>
+            <Link to="/memoria">Memória Institucional</Link>
           </SubMenu>
         </NavLink>
         <NavLink
@@ -326,8 +326,8 @@ const Navbar = () => {
               <MobileSubLink to="/filiacao" onClick={toggleMobileMenu}>
                 Filiação
               </MobileSubLink>
-              <MobileSubLink to="/estatuto" onClick={toggleMobileMenu}>
-                Estatuto Social
+              <MobileSubLink to="/memoria" onClick={toggleMobileMenu}>
+                Memória Institucional
               </MobileSubLink>
             </>
           )}
