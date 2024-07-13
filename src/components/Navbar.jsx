@@ -231,7 +231,7 @@ const Navbar = () => {
           onMouseLeave={() => setActiveSubMenu("")}
           onClick={() => toggleSubMenu("mobilidadeMobile")}
         >
-          Mobilidade Estudantil
+          Intercâmbios
           <SubMenu
             $isOpen={
               activeSubMenu === "mobilidade" ||
@@ -242,6 +242,7 @@ const Navbar = () => {
             <Link to="/intercambio_internacional">
               Intercâmbios Internacionais
             </Link>
+            <Link to="/regulamento">Regulamento de Intercâmbios</Link>
             <Link to="/outras-modalidades">
               Outras Modalidades de Intercâmbio
             </Link>
@@ -352,7 +353,7 @@ const Navbar = () => {
         </MobileSubMenu>
         <MobileSubMenu>
           <MobileLink onClick={() => toggleSubMenu("mobilidadeMobile")}>
-            Mobilidade Estudantil
+            Intercâmbios
           </MobileLink>
           {activeSubMenu === "mobilidadeMobile" && (
             <>
@@ -367,6 +368,9 @@ const Navbar = () => {
                 onClick={toggleMobileMenu}
               >
                 Intercâmbios Internacionais
+              </MobileSubLink>
+              <MobileSubLink to="/regulamento" onClick={toggleMobileMenu}>
+                Regulamento de Intercâmbios
               </MobileSubLink>
               <MobileSubLink
                 to="/outras-modalidades"
