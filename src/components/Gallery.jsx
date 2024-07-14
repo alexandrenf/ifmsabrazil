@@ -76,14 +76,14 @@ const MemberEmail = styled(Typography)({
   display: "block", // Makes sure the element behaves like a block element
 });
 
-const Gallery = () => {
+const Gallery = ({ url, nameOnPage }) => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://api.ifmsabrazil.org/api/ebs");
+        const response = await axios.get(url);
         setMembers(response.data);
       } catch (error) {
         console.error("Error fetching EB members:", error);
@@ -121,7 +121,7 @@ const Gallery = () => {
   return (
     <Root>
       <Typography variant="h4" align="center" gutterBottom>
-        Diretoria Executiva
+        {nameOnPage}
       </Typography>
       <RMCarousel
         responsive={responsive}

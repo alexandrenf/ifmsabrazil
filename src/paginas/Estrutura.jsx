@@ -88,9 +88,16 @@ Os alumni são médicos filiados à IFMSA Brazil que foram Coordenadores Locais 
     <Root>
       <Title variant="h4">{"Estrutura da IFMSA Brazil"}</Title>
       <MarkdownContent content={markdownContent1} />
-      <Gallery />
+      <Gallery
+        url="https://api.ifmsabrazil.org/api/ebs"
+        nameOnPage="Diretoria Executiva"
+      />
       <MarkdownContent content={markdownContent2} />
       <BrazilMap />
+      <Gallery
+        url="https://api.ifmsabrazil.org/api/crs"
+        nameOnPage="Coordenadores Regionais"
+      />
       <MarkdownContent content={markdownContent3} />
     </Root>
   );
