@@ -65,6 +65,13 @@ const MarkdownContainer = styled("div")({
     marginLeft: "auto",
     marginRight: "auto",
   },
+  "& ul, & ol": {
+    paddingLeft: "40px", // Indentation for list items
+  },
+  "& ul + *, & ol + *": {
+    marginTop: "16px", // Margin to reset indentation for elements following lists
+    paddingLeft: "0", // Reset padding for elements following lists
+  },
 });
 
 const MarkdownOptions = {
