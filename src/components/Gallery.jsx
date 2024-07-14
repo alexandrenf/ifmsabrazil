@@ -137,7 +137,7 @@ const Gallery = ({ url, nameOnPage }) => {
             <MemberAvatar src={member.imageLink} alt={member.name} />
             <DynamicTypography variant="h6">{member.name}</DynamicTypography>
             <MemberRole variant="body1">
-              {member.role} ({member.acronym})
+              {member.role} {member.acronym ? "(" + member.acronym + ")" : null}
             </MemberRole>
             <MemberEmail variant="body2">{member.email}</MemberEmail>
           </MemberCard>
