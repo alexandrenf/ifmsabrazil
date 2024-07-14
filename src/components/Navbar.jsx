@@ -270,6 +270,7 @@ const Navbar = () => {
             <Link to="/arquivos/intercambio_inter">
               Intercâmbio Internacional
             </Link>
+            <Link to="/arquivos/regulamento">Regulamento de Intercâmbios</Link>
           </SubMenu>
         </NavLink>
         <NavLink>
@@ -422,6 +423,12 @@ const Navbar = () => {
                 onClick={toggleMobileMenu}
               >
                 Intercâmbio Internacional
+              </MobileSubLink>
+              <MobileSubLink
+                to="/arquivos/regulamento"
+                onClick={toggleMobileMenu}
+              >
+                Regulamento
               </MobileSubLink>
             </>
           )}

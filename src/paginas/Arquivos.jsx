@@ -35,6 +35,7 @@ const allowedTypes = [
   { href: "dps", label: "Arquivos de Declarações de Política", file: "6" },
   { href: "intercambio_nac", label: "Intercâmbio Nacional", file: "" },
   { href: "intercambio_inter", label: "Intercâmbio Internacional", file: "" },
+  { href: "regulamento", label: "Regulamento de Intercâmbios", file: "" },
 ];
 
 const returnProperty = (fileNumber) => {

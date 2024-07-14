@@ -33,6 +33,8 @@ Nessa página, vamos explicar sobre como funciona o regulamento e cada um dos co
 
   O Regulamento Oficial de Intercâmbios é um documento que determina as regras e critérios dos Período de Intercâmbio Nacional (PIN) e Período de Intercâmbio Internacional (PI) vigentes os quais são os processos de intercâmbio em si. A leitura do regulamento deve ser feita por todos os interessados em se tornar intercambistas pela IFMSA Brazil, pois é nele que estarão as informações necessárias sobre inscrição, hospedagem, taxas, prazos e certificação.
   
+**Links para o regulamento podem ser encontrados em Mídias e Documentos, [clicando aqui](/arquivos/regulamento).**
+
   ## Sobre os comitês permanentes de intercâmbio
 
   ### Comitê Permanente em Intercâmbio Internacional Clínico Cirúrgico (SCOPE)

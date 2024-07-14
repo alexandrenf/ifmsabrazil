@@ -84,7 +84,7 @@ O edital de vulnerabilidade faz parte da Política de Inclusão do Coordenador L
 
 Para obter mais informações sobre os intercâmbios nacionais, os estudantes podem:
 
-- Acessar o regulamento de intercâmbios no site. Lá constam todas as informações necessárias sobre o PIN e outros programas.
+- Acessar o regulamento de intercâmbios no site, [clicando aqui](/arquivos/regulamento). Lá constam todas as informações necessárias sobre o PIN e outros programas.
 - Enviar um e-mail para: [none@ifmsabrazil.org](mailto:none@ifmsabrazil.org) ou [tin.scone@ifmsabrazil.org](mailto:tin.scone@ifmsabrazil.org)
 - Entrar em contato com o seu comitê local
 - Acompanhar o Instagram do intercâmbio nacional ([@ifmsabrazilintercambios](https://www.instagram.com/ifmsabrazilintercambios/))
