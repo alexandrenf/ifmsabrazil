@@ -25,17 +25,53 @@ const Revista = lazy(() => import("./Revista.jsx"));
 const Ressonancia = lazy(() => import("./Ressonancia.jsx"));
 const Declaracoes = lazy(() => import("./Declaracoes.jsx"));
 const Notas = lazy(() => import("./Notas.jsx"));
+const NotFound = lazy(() => import("../components/NotFound.jsx")); // Import the NotFound component
 
 const allowedTypes = [
-  { href: "notas", label: "Arquivos de Nota de Posicionamento", file: "1" },
-  { href: "susi", label: "Informa SUSi", file: "" },
-  { href: "rp", label: "Edições da Ressonância Poética", file: "3" },
-  { href: "bms", label: "Edições de Brazilian Medical Students", file: "4" },
-  { href: "relatorios", label: "Relatórios", file: "" },
-  { href: "dps", label: "Arquivos de Declarações de Política", file: "6" },
-  { href: "intercambio_nac", label: "Intercâmbio Nacional", file: "" },
-  { href: "intercambio_inter", label: "Intercâmbio Internacional", file: "" },
-  { href: "regulamento", label: "Regulamento de Intercâmbios", file: "" },
+  {
+    href: "notas",
+    label: "Arquivos de Nota de Posicionamento",
+    file: "1",
+    ref: "notas-de-posicionamento",
+  },
+  { href: "susi", label: "Informa SUSi", file: "", ref: "informa-susi" },
+  {
+    href: "rp",
+    label: "Edições da Ressonância Poética",
+    file: "3",
+    ref: "ressonancia-poetica",
+  },
+  {
+    href: "bms",
+    label: "Edições de Brazilian Medical Students",
+    file: "4",
+    ref: "bms",
+  },
+  { href: "relatorios", label: "Relatórios", file: "", ref: "relatorios" },
+  {
+    href: "dps",
+    label: "Arquivos de Declarações de Política",
+    file: "6",
+    ref: "declaracoes-de-politica",
+  },
+  {
+    href: "intercambio_nac",
+    label: "Intercâmbio Nacional",
+    file: "",
+    ref: "intercambio-nacional",
+  },
+  {
+    href: "intercambio_inter",
+    label: "Intercâmbio Internacional",
+    file: "",
+    ref: "intercambio-internacional",
+  },
+  {
+    href: "regulamento",
+    label: "Regulamento de Intercâmbios",
+    file: "",
+    ref: "regulamento-intercambios",
+  },
 ];
 
 const returnProperty = (fileNumber) => {
@@ -107,10 +143,14 @@ const Arquivos = () => {
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [filteredArquivos, setFilteredArquivos] = useState([]);
 
-  const apiEndpoint = `https://api.ifmsabrazil.org/api/arquivos/${type}`;
+  const typeObject = allowedTypes.find((t) => t.ref === type);
+  console.log(typeObject);
+  if (!typeObject) {
+    return <NotFound />;
+  }
 
-  // Find the label from allowedTypes based on the type in the URL
-  const typeObject = allowedTypes.find((t) => t.href === type);
+  const apiEndpoint = `https://api.ifmsabrazil.org/api/arquivos/${typeObject.href}`;
+
   const label = typeObject ? typeObject.label : "Publicações";
 
   useEffect(() => {
