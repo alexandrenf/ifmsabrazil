@@ -260,14 +260,20 @@ const Navbar = () => {
               activeSubMenu === "midias" || activeSubMenu === "midiasMobile"
             }
           >
-            <Link to="/arquivos/rp">Ressonância Poética</Link>
-            <Link to="/arquivos/susi">Informa SUSi</Link>
+            <Link to="/arquivos/ressonancia-poetica">Ressonância Poética</Link>
+            <Link to="/arquivos/informa-susi">Informa SUSi</Link>
             <Link to="/arquivos/bms">Brazilian Medical Students</Link>
             <Link to="/arquivos/relatorios">Relatórios</Link>
-            <Link to="/arquivos/notas">Notas de Posicionamento</Link>
-            <Link to="/arquivos/dps">Declarações de Política</Link>
-            <Link to="/arquivos/intercambio_nac">Intercâmbio Nacional</Link>
-            <Link to="/arquivos/intercambio_inter">
+            <Link to="/arquivos/notas-de-posicionamento">
+              Notas de Posicionamento
+            </Link>
+            <Link to="/arquivos/declaracoes-de-politica">
+              Declarações de Política
+            </Link>
+            <Link to="/arquivos/intercambio-nacional">
+              Intercâmbio Nacional
+            </Link>
+            <Link to="/arquivos/intercambio-internacional">
               Intercâmbio Internacional
             </Link>
             <Link to="/arquivos/regulamento">Regulamento de Intercâmbios</Link>
@@ -391,10 +397,16 @@ const Navbar = () => {
           </MobileLink>
           {activeSubMenu === "midiasMobile" && (
             <>
-              <MobileSubLink to="/arquivos/rp" onClick={toggleMobileMenu}>
+              <MobileSubLink
+                to="/arquivos/ressonancia-poetica"
+                onClick={toggleMobileMenu}
+              >
                 Ressonância Poética
               </MobileSubLink>
-              <MobileSubLink to="/arquivos/susi" onClick={toggleMobileMenu}>
+              <MobileSubLink
+                to="/arquivos/informa-susi"
+                onClick={toggleMobileMenu}
+              >
                 Informa SUSi
               </MobileSubLink>
               <MobileSubLink to="/arquivos/bms" onClick={toggleMobileMenu}>
@@ -406,26 +418,32 @@ const Navbar = () => {
               >
                 Relatórios
               </MobileSubLink>
-              <MobileSubLink to="/arquivos/notas" onClick={toggleMobileMenu}>
+              <MobileSubLink
+                to="/arquivos/notas-de-posicionamento"
+                onClick={toggleMobileMenu}
+              >
                 Notas de Posicionamento
               </MobileSubLink>
-              <MobileSubLink to="/arquivos/dps" onClick={toggleMobileMenu}>
+              <MobileSubLink
+                to="/arquivos/declaracoes-de-politica"
+                onClick={toggleMobileMenu}
+              >
                 Declarações de Política
               </MobileSubLink>
               <MobileSubLink
-                to="/arquivos/intercambio_nac"
+                to="/arquivos/intercambio-nacional"
                 onClick={toggleMobileMenu}
               >
                 Intercâmbio Nacional
               </MobileSubLink>
               <MobileSubLink
-                to="/arquivos/intercambio_inter"
+                to="/arquivos/intercambio-internacional"
                 onClick={toggleMobileMenu}
               >
                 Intercâmbio Internacional
               </MobileSubLink>
               <MobileSubLink
-                to="/arquivos/regulamento"
+                to="/arquivos/regulamento-intercambios"
                 onClick={toggleMobileMenu}
               >
                 Regulamento
