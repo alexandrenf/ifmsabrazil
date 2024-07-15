@@ -56,6 +56,7 @@ const ComiteLists = ({ members }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [askedToCloseRotate, setAskedToCloseRotate] = useState(false);
 
   useEffect(() => {
     const checkOrientation = () => {
@@ -65,13 +66,15 @@ const ComiteLists = ({ members }) => {
       setShowPrompt(isMobileDevice && isVerticalMode);
     };
 
-    window.addEventListener("resize", checkOrientation);
-    checkOrientation();
+    if (!askedToCloseRotate) {
+      window.addEventListener("resize", checkOrientation);
+      checkOrientation();
+    }
 
     return () => {
       window.removeEventListener("resize", checkOrientation);
     };
-  }, []);
+  }, [askedToCloseRotate]);
 
   useEffect(() => {
     setFilteredMembers(filterAndSortMembers(members));
@@ -79,6 +82,11 @@ const ComiteLists = ({ members }) => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleCloseRotatePrompt = () => {
+    setAskedToCloseRotate(true);
+    setShowPrompt(false);
   };
 
   const handleFilterChange = (e) => {
@@ -169,7 +177,7 @@ const ComiteLists = ({ members }) => {
         handleChangePage={handleChangePage}
         handleChangeRowsPerPage={handleChangeRowsPerPage}
         showPrompt={showPrompt}
-        onClosePrompt={() => setShowPrompt(false)}
+        onClosePrompt={() => handleCloseRotatePrompt()}
       />
     </Section>
   );

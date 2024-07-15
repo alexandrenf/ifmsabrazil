@@ -28,7 +28,7 @@ const NavLinks = styled.div`
   display: flex;
   align-items: center;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1040px) {
     display: none;
   }
 `;
@@ -103,7 +103,7 @@ const JoinButton = styled(Link)`
 const MobileIcon = styled.div`
   display: none;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1040px) {
     display: block;
     color: white;
     font-size: 1.8rem;
@@ -115,7 +115,7 @@ const MobileIcon = styled.div`
 const MobileMenu = styled.div`
   display: none;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1040px) {
     display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
     flex-direction: column;
     align-items: center;

@@ -58,7 +58,7 @@ const RotatePrompt = ({ onClose }) => {
       <RotateMessage>
         <ArrowIcon />
         <MessageText>
-          Por favor, gire seu dispositivo para o modo paisagem
+          Por favor, gire seu dispositivo para o modo horizontal
         </MessageText>
         <CloseButton onClick={onClose}>
           <FiX size={24} />
