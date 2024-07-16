@@ -19,9 +19,13 @@ const Title = styled(Typography)({
 const Revista = () => {
   const markdownContent1 = `
 
-A Brazilian Medical Students (BMS) é o periódico científico (ISSN: 2675-1542) da IFMSA Brazil. A Revista é composta por Editor in chief, Editores Associados, Corpo Editorial, Editor de Conteúdo e de Design, sendo esse grupo composto por acadêmicos de medicina e professores de diversas áreas. Seu objetivo principal é disseminar as produções acadêmicas dos estudantes de medicina e profissionais filiados ou não à IFMSA Brazil. O periódico aceita artigos na modalidade editorial, artigos originais, revisões, relatos de experiência tendo seu escopo constituído pelas seguintes temáticas: Saúde Coletiva, Educação, conhecimentos e mobilidade acadêmica, cuidados gerais com pacientes. Dessa forma, a revista preza pelos princípios da ciência aberta, da evidência científica e visando a responsabilidade social em pesquisa. 
+A Brazilian Medical Students Journal (BMS), é um periódico científico eletrônico com e-ISSN 2675-1542, de acesso aberto tipo diamante, fundado pela IFMSA Brazil. Gratuito e de fluxo contínuo, o periódico possui uma edição por ano, e é editado por um conselho editorial composto por estudantes e professores da área da saúde, refletindo a visão e os objetivos da comunidade estudantil. A BMS reafirma o seu compromisso com a promoção da Ciência Aberta, e está empenhada em fomentar ativamente a disseminação de resultados de pesquisa, incentivando a prática da transparência científica.
 
-**Email:** [bms@ifmsabrazil.org](mailto:bms@ifmsabrazil.org)
+A BMS se concentra em publicações na área da medicina, com ênfase em pesquisas originais e revisões de literatura em Saúde Pública e Global. Os manuscritos submetidos são avaliados quanto à sua relevância, rigor científico e contribuição para o campo da medicina. O público-alvo da BMS inclui estudantes da saúde, profissionais de saúde, pesquisadores e qualquer pessoa interessada em atualizações e discussões no campo da saúde.
+
+A BMS é indexada em várias bases de dados e diretórios acadêmicos, garantindo ampla visibilidade e acessibilidade de seus artigos publicados. Como: Google Scholar, Diadorin, Latindex, LivRe, PKP, ResearchBib, Scite, Colorado Aliance, CiteFactor, Dimensions, BASE e Scientific Indexing Services.
+
+ **Email:** [bms@ifmsabrazil.org](mailto:bms@ifmsabrazil.org)
 
 **Instagram:** [@bmsjournal](https://www.instagram.com/bmsjournal/)
 
