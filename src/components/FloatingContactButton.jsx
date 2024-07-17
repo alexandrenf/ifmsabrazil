@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { FiMail, FiInstagram, FiX } from "react-icons/fi";
+import { FiMail, FiInstagram, FiX, FiBell } from "react-icons/fi";
 
 const fadeIn = keyframes`
   from {
@@ -51,6 +51,22 @@ const FloatingButton = styled.div`
   }
 `;
 
+const NotificationBubble = styled.div`
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  background-color: #00963c;
+  font-weight: bold;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+`;
+
 const ExpandedMenu = styled.div`
   position: fixed;
   bottom: 80px;
@@ -77,6 +93,7 @@ const MenuItem = styled.a`
   text-decoration: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
   padding: 8px 0;
   width: 100%;
   transition: all 0.2s ease-in-out;
@@ -90,8 +107,13 @@ const MenuItem = styled.a`
   }
 `;
 
-const FloatingContactButton = () => {
+const FloatingContactButton = ({ showNotification, onAlertReopen }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const alertReopen = () => {
+    onAlertReopen();
+    toggleMenu();
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -101,6 +123,9 @@ const FloatingContactButton = () => {
     <>
       <FloatingButton onClick={toggleMenu}>
         {isOpen ? <FiX size={24} /> : <FiMail size={24} />}
+        {showNotification && !isOpen && (
+          <NotificationBubble>1</NotificationBubble>
+        )}
       </FloatingButton>
       {isOpen && (
         <ExpandedMenu isOpen={isOpen}>
@@ -112,6 +137,12 @@ const FloatingContactButton = () => {
             <FiInstagram size={20} />
             @ifmsabrazil
           </MenuItem>
+          {showNotification && (
+            <MenuItem onClick={alertReopen}>
+              <FiBell size={20} />
+              Ver aviso novamente
+            </MenuItem>
+          )}
         </ExpandedMenu>
       )}
     </>

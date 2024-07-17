@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import FloatingContactButton from "../components/FloatingContactButton"; // Adjust the path as needed
@@ -7,8 +7,7 @@ import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil";
 import Blog from "../components/Blog";
 import backgroundImage from "../assets/background-image.webp";
 import { isWithinInterval, parseISO } from "date-fns";
-
-const Alert = lazy(() => import("../components/Alert"));
+import Alert from "../components/Alert";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -116,8 +115,11 @@ const ContentSection = styled.div`
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [alert, setAlert] = useState(null);
+  const [originalAlert, setOriginalAlert] = useState(null); // Store the original alert data
   const [loading, setLoading] = useState(true);
   const [showScrollButton, setShowScrollButton] = useState(true);
+  const [showNotification, setShowNotification] = useState(false);
+  const [forceReopen, setForceReopen] = useState(false);
 
   const apiEndpoint = "https://api.ifmsabrazil.org/api/blogs/recent"; // Update this to your actual API endpoint
 
@@ -139,6 +141,7 @@ const Home = () => {
             })
           ) {
             setAlert(alert);
+            setOriginalAlert(alert); // Store the original alert data
           }
         }
       } catch (error) {
@@ -177,6 +180,18 @@ const Home = () => {
     };
   }, []);
 
+  const handleAlertClose = () => {
+    setShowNotification(true);
+    setAlert(null);
+    setForceReopen(false);
+  };
+
+  const handleAlertReopen = () => {
+    setShowNotification(false);
+    setAlert(originalAlert); // Use the original alert data
+    setForceReopen(true);
+  };
+
   return (
     <HomeContainer>
       {alert && (
@@ -187,6 +202,8 @@ const Home = () => {
           buttonText={alert.buttonText}
           buttonUrl={alert.buttonUrl}
           title={alert.title}
+          forceOpen={forceReopen}
+          onClose={handleAlertClose}
         />
       )}
       <HeroSection>
@@ -210,7 +227,10 @@ const Home = () => {
       <OndeEstamos />
       <AreasOfIFMSABrazil />
       <Blog posts={posts} loading={loading} />
-      <FloatingContactButton />
+      <FloatingContactButton
+        showNotification={showNotification}
+        onAlertReopen={handleAlertReopen}
+      />
     </HomeContainer>
   );
 };

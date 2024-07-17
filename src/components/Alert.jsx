@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Alert({
   message,
@@ -9,15 +9,50 @@ export default function Alert({
   buttonText,
   toggleButton,
   toggleMessage,
+  onClose,
+  forceOpen,
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const hashAlertData = () => {
+    const data = `${message}${title}${buttonUrl}${buttonText}${toggleButton}${toggleMessage}`;
+    let hash = 0;
+    for (let i = 0; i < data.length; i++) {
+      const char = data.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash.toString();
+  };
 
-  if (!isOpen) return null;
+  const alertHash = hashAlertData();
+  const storedHash = localStorage.getItem("alertHash");
+  const [isOpen, setIsOpen] = useState(
+    forceOpen || !storedHash || storedHash !== alertHash
+  );
+
+  useEffect(() => {
+    if (!isOpen && !forceOpen) {
+      localStorage.setItem("alertHash", alertHash);
+      if (onClose) onClose();
+    }
+  }, [isOpen, alertHash, onClose, forceOpen]);
+
+  useEffect(() => {
+    if (forceOpen) {
+      setIsOpen(true);
+    }
+  }, [forceOpen]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    if (onClose) onClose();
+  };
+
+  if (!isOpen && !forceOpen) return null;
 
   return (
     <Overlay>
       <Container>
-        <CloseButton onClick={() => setIsOpen(false)}>
+        <CloseButton onClick={handleClose}>
           <XIcon />
           <span className="sr-only">Close</span>
         </CloseButton>
@@ -25,7 +60,9 @@ export default function Alert({
           <Heading>{title}</Heading>
           {toggleMessage ? <Paragraph>{message}</Paragraph> : null}
           {toggleButton ? (
-            <StyledLink to={buttonUrl}>{buttonText}</StyledLink>
+            <Link to={buttonUrl} target="_blank" rel="noopener noreferrer">
+              <StyledLink>{buttonText}</StyledLink>
+            </Link>
           ) : null}
         </Content>
       </Container>
