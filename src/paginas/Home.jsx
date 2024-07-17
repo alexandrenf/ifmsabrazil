@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import FloatingContactButton from "../components/FloatingContactButton"; // Adjust the path as needed
@@ -6,6 +6,9 @@ import OndeEstamos from "../components/OndeEstamos";
 import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil";
 import Blog from "../components/Blog";
 import backgroundImage from "../assets/background-image.webp";
+import { isWithinInterval, parseISO } from "date-fns";
+
+const Alert = lazy(() => import("../components/Alert"));
 
 const HomeContainer = styled.div`
   display: flex;
@@ -112,6 +115,7 @@ const ContentSection = styled.div`
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [alert, setAlert] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showScrollButton, setShowScrollButton] = useState(true);
 
@@ -121,16 +125,22 @@ const Home = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(apiEndpoint);
-        const data = response.data;
+        const { recentBlogs, alert } = response.data;
 
-        // Ensure data is an array. If it's not, try accessing the posts array
-        const postsArray = Array.isArray(data) ? data : data.posts;
+        setPosts(recentBlogs);
 
-        if (!Array.isArray(postsArray)) {
-          throw new Error("Posts data is not an array");
+        // Check alert conditions
+        if (alert && alert.toggleDate) {
+          const today = new Date();
+          if (
+            isWithinInterval(today, {
+              start: parseISO(alert.dateStart),
+              end: parseISO(alert.dateEnd),
+            })
+          ) {
+            setAlert(alert);
+          }
         }
-
-        setPosts(postsArray);
       } catch (error) {
         console.error("Error fetching posts:", error);
       } finally {
@@ -169,6 +179,16 @@ const Home = () => {
 
   return (
     <HomeContainer>
+      {alert && (
+        <Alert
+          toggleMessage={alert.toggleMessage}
+          message={alert.message}
+          toggleButton={alert.toggleButton}
+          buttonText={alert.buttonText}
+          buttonUrl={alert.buttonUrl}
+          title={alert.title}
+        />
+      )}
       <HeroSection>
         <HeroText>Estudantes de medicina que fazem a diferença</HeroText>
         <JoinButton>Faça parte</JoinButton>

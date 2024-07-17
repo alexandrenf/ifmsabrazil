@@ -4,7 +4,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import GlobalStyles from "./styles/GlobalStyles.jsx";
-import "./styles/Fonts.jsx";
+import "./styles/Fonts.js"; // Ensure this file is imported to load the fonts
 import Footer from "./components/Footer.jsx";
 import { CssBaseline } from "@mui/material";
 import Loading from "./components/Loading.jsx";
