@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import Cookies from "js-cookie";
 import FloatingContactButton from "../components/FloatingContactButton"; // Adjust the path as needed
 import OndeEstamos from "../components/OndeEstamos";
 import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil";
@@ -116,6 +117,9 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [alert, setAlert] = useState(null);
   const [originalAlert, setOriginalAlert] = useState(null); // Store the original alert data
+  const [alertIsOpen, setAlertIsOpen] = useState(false);
+  const [alertHash, setAlertHash] = useState(null);
+  const storedHash = Cookies.get("alertHash");
   const [loading, setLoading] = useState(true);
   const [showScrollButton, setShowScrollButton] = useState(true);
   const [showNotification, setShowNotification] = useState(false);
@@ -124,6 +128,24 @@ const Home = () => {
   const apiEndpoint = "https://api.ifmsabrazil.org/api/blogs/recent"; // Update this to your actual API endpoint
 
   useEffect(() => {
+    const hashAlertData = (
+      message,
+      title,
+      buttonUrl,
+      buttonText,
+      toggleButton,
+      toggleMessage
+    ) => {
+      const data = `${message}${title}${buttonUrl}${buttonText}${toggleButton}${toggleMessage}`;
+      let hash = 0;
+      for (let i = 0; i < data.length; i++) {
+        const char = data.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash |= 0; // Convert to 32bit integer
+      }
+      return hash.toString();
+    };
+
     const fetchPosts = async () => {
       try {
         const response = await axios.get(apiEndpoint);
@@ -140,8 +162,27 @@ const Home = () => {
               end: parseISO(alert.dateEnd),
             })
           ) {
+            const hash = hashAlertData(
+              alert.message,
+              alert.title,
+              alert.buttonUrl,
+              alert.buttonText,
+              alert.toggleButton,
+              alert.toggleMessage
+            );
+
+            storedHash === hash ? setAlertIsOpen(false) : setAlertIsOpen(true);
+            storedHash === hash
+              ? setShowNotification(true)
+              : setShowNotification(false);
+
             setAlert(alert);
+            setAlertHash(hash);
             setOriginalAlert(alert); // Store the original alert data
+
+            if (!storedHash || storedHash !== hash) {
+              setAlertIsOpen(true);
+            }
           }
         }
       } catch (error) {
@@ -153,6 +194,12 @@ const Home = () => {
 
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    if (!alertIsOpen && alertHash && !forceReopen) {
+      Cookies.set("alertHash", alertHash, { expires: 7 }); // Set cookie to expire in 7 days
+    }
+  }, [alertIsOpen, alertHash, forceReopen]);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
@@ -182,12 +229,13 @@ const Home = () => {
 
   const handleAlertClose = () => {
     setShowNotification(true);
-    setAlert(null);
+    setAlertIsOpen(false);
     setForceReopen(false);
   };
 
   const handleAlertReopen = () => {
     setShowNotification(false);
+    setAlertIsOpen(true);
     setAlert(originalAlert); // Use the original alert data
     setForceReopen(true);
   };
@@ -204,6 +252,8 @@ const Home = () => {
           title={alert.title}
           forceOpen={forceReopen}
           onClose={handleAlertClose}
+          isOpen={alertIsOpen}
+          setIsOpen={setAlertIsOpen}
         />
       )}
       <HeroSection>

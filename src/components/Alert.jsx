@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Alert({
   message,
@@ -11,31 +11,9 @@ export default function Alert({
   toggleMessage,
   onClose,
   forceOpen,
+  isOpen,
+  setIsOpen,
 }) {
-  const hashAlertData = () => {
-    const data = `${message}${title}${buttonUrl}${buttonText}${toggleButton}${toggleMessage}`;
-    let hash = 0;
-    for (let i = 0; i < data.length; i++) {
-      const char = data.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash |= 0; // Convert to 32bit integer
-    }
-    return hash.toString();
-  };
-
-  const alertHash = hashAlertData();
-  const storedHash = localStorage.getItem("alertHash");
-  const [isOpen, setIsOpen] = useState(
-    forceOpen || !storedHash || storedHash !== alertHash
-  );
-
-  useEffect(() => {
-    if (!isOpen && !forceOpen) {
-      localStorage.setItem("alertHash", alertHash);
-      if (onClose) onClose();
-    }
-  }, [isOpen, alertHash, onClose, forceOpen]);
-
   useEffect(() => {
     if (forceOpen) {
       setIsOpen(true);
@@ -43,7 +21,6 @@ export default function Alert({
   }, [forceOpen]);
 
   const handleClose = () => {
-    setIsOpen(false);
     if (onClose) onClose();
   };
 
