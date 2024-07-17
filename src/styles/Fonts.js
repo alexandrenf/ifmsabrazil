@@ -1,8 +1,12 @@
 // src/styles/Fonts.js
-import WebFont from "webfontloader";
+import { createGlobalStyle } from "styled-components";
 
-WebFont.load({
-  google: {
-    families: ["Poppins:300,400,500,700", "sans-serif"],
-  },
-});
+const FontStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+`;
+
+export default FontStyles;

@@ -8,6 +8,7 @@ const GlobalStyles = () => (
 
       html,
       body,
+      body1,
       #root,
       #__next {
         margin: 0;
@@ -36,6 +37,7 @@ const GlobalStyles = () => (
       }
 
       h1,
+      h6,
       h2 {
         margin: 0;
       }

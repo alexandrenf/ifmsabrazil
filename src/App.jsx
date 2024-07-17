@@ -7,8 +7,10 @@ import GlobalStyles from "./styles/GlobalStyles.jsx";
 import "./styles/Fonts.js"; // Ensure this file is imported to load the fonts
 import Footer from "./components/Footer.jsx";
 import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import Loading from "./components/Loading.jsx";
 import Home from "./paginas/Home.jsx";
+import theme from "./styles/theme.js";
 
 // Lazy load components for code-splitting
 const MarkdownPage = lazy(() => import("./components/MarkdownPage.jsx"));
@@ -30,48 +32,50 @@ const IntercambioNacional = lazy(() =>
 
 const App = () => {
   return (
-    <Router>
-      <GlobalStyles />
-      <CssBaseline />
-      <Navbar />
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/arquivo/:id/:title"
-            element={<MarkdownPage needsExternal={true} />}
-          />
-          <Route path="/gerarlink" element={<GeradorLink />} />
-          <Route path="/estrutura" element={<Estrutura />} />
-          <Route path="/filiacao" element={<Filiacao />} />
-          <Route path="/noticias" element={<Noticias />} />
-          <Route path="/institucional" element={<Institucional />} />
-          <Route path="/acoes" element={<AcoesETematicas />} />
-          <Route path="/arquivos/:type" element={<Arquivos />} />
-          <Route path="/social-programs" element={<SocialPrograms />} />
-          <Route path="/eixos" element={<Eixos />} />
-          <Route path="/eventos" element={<Eventos />} />
-          <Route path="/regulamento" element={<Regulamento />} />
-          <Route
-            path="/intercambio_nacional"
-            element={<IntercambioNacional />}
-          />
-          <Route
-            path="/tutorial"
-            element={
-              <MarkdownPage
-                needsExternal={false}
-                filepath={"/markdown/pagina.md"}
-              />
-            }
-          />
-          {/* Add other routes here */}
-          <Route path="*" element={<NotFound />} />{" "}
-          {/* Catch-all route for 404 */}
-        </Routes>
-      </Suspense>
-      <Footer />
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <GlobalStyles />
+        <CssBaseline />
+        <Navbar />
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/arquivo/:id/:title"
+              element={<MarkdownPage needsExternal={true} />}
+            />
+            <Route path="/gerarlink" element={<GeradorLink />} />
+            <Route path="/estrutura" element={<Estrutura />} />
+            <Route path="/filiacao" element={<Filiacao />} />
+            <Route path="/noticias" element={<Noticias />} />
+            <Route path="/institucional" element={<Institucional />} />
+            <Route path="/acoes" element={<AcoesETematicas />} />
+            <Route path="/arquivos/:type" element={<Arquivos />} />
+            <Route path="/social-programs" element={<SocialPrograms />} />
+            <Route path="/eixos" element={<Eixos />} />
+            <Route path="/eventos" element={<Eventos />} />
+            <Route path="/regulamento" element={<Regulamento />} />
+            <Route
+              path="/intercambio_nacional"
+              element={<IntercambioNacional />}
+            />
+            <Route
+              path="/tutorial"
+              element={
+                <MarkdownPage
+                  needsExternal={false}
+                  filepath={"/markdown/pagina.md"}
+                />
+              }
+            />
+            {/* Add other routes here */}
+            <Route path="*" element={<NotFound />} />{" "}
+            {/* Catch-all route for 404 */}
+          </Routes>
+        </Suspense>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   );
 };
 
