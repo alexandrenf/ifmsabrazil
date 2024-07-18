@@ -36,7 +36,7 @@ const BlogPostListItem = ({ post }) => {
           component="h2"
           variant="h6"
           gutterBottom
-          style={{ fontWeight: "bold", marginBottom: "0em" }}
+          style={{ fontWeight: "500", marginBottom: "0em" }}
         >
           {post.title}
         </Typography>
