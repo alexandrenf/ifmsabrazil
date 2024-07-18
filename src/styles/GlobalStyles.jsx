@@ -17,7 +17,7 @@ const GlobalStyles = () => (
         width: 100%;
         box-sizing: border-box;
         font-family: "Poppins", sans-serif !important;
-        background-color: #f0f0f0;
+        background-color: #ffffff;
         color: rgba(0, 0, 0, 0.87);
         font-weight: 400;
         font-size: 1rem;
