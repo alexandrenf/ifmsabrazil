@@ -25,6 +25,9 @@ const AcoesETematicas = lazy(() => import("./paginas/AcoesETematicas.jsx")); // 
 const SocialPrograms = lazy(() => import("./paginas/SocialPrograms.jsx")); // Import the SocialPrograms component
 const Eixos = lazy(() => import("./paginas/Eixos.jsx")); // Import the Eixos component
 const Eventos = lazy(() => import("./paginas/Eventos.jsx")); // Import the Eventos component
+const MemoriaInstitucional = lazy(() =>
+  import("./paginas/MemoriaInstitucional.jsx")
+); // Import the MemoriaInstitucional component
 const Regulamento = lazy(() => import("./paginas/Regulamento.jsx")); // Import the Regulamento component
 const OutrosIntercambios = lazy(() =>
   import("./paginas/OutrosIntercambios.jsx")
@@ -66,6 +69,7 @@ const App = () => {
               path="/outras-modalidades"
               element={<OutrosIntercambios />}
             />
+            <Route path="/memoria" element={<MemoriaInstitucional />} />
             <Route
               path="/intercambio_nacional"
               element={<IntercambioNacional />}

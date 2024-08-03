@@ -25,7 +25,7 @@ const Eventos = () => {
 2. [Assembleias Regionais](#assembleias-regionais)
 3. [Workshops](#workshops)
 
-São considerados eventos oficiais da IFMSA Brazil as Assembleias Gerais, Assembleias Regionais, Workshops e o Congresso Brasileiro de Habilidades Médicas.
+São considerados eventos oficiais da IFMSA Brazil as Assembleias Gerais, Assembleias Regionais e Workshops.
 
 ## Assembleias Gerais
 
