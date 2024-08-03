@@ -26,7 +26,7 @@ A IFMSA é a maior organização estudantil do planeta. Com mais de 1 milhão de
 
 ## O que é a IFMSA Brazil?
 
-A IFMSA Brazil (International Federation of Medical Students’ Association of Brazil, traduzida para Federação Internacional das Associações de Estudantes de Medicina do Brasil) foi fundada em 1991 na Universidade Estadual de Londrina. Atualmente, estamos presentes em mais de 190 escolas médicas em todas as regiões brasileiras e atuamos em diversos eixos incluindo humanização, ciência e produção científica, promoção de saúde, educação médica, intercâmbios, representatividade estudantil, treinamentos e vários outros.
+A IFMSA Brazil (International Federation of Medical Students’ Association of Brazil, traduzida para Federação Internacional das Associações de Estudantes de Medicina do Brasil) foi fundada em 1991 na Universidade Estadual de Londrina. Atualmente, estamos presentes em mais de 200 escolas médicas em todas as regiões brasileiras e atuamos em diversos eixos incluindo humanização, ciência e produção científica, promoção de saúde, educação médica, intercâmbios, representatividade estudantil, treinamentos e vários outros.
 
 
 ## Missão, Visão e Valores

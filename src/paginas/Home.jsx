@@ -258,7 +258,9 @@ const Home = () => {
       )}
       <HeroSection>
         <HeroText>Estudantes de medicina que fazem a diferença</HeroText>
-        <JoinButton>Faça parte</JoinButton>
+        <JoinButton onClick={() => (window.location.href = "/filie-se")}>
+          Faça parte
+        </JoinButton>
         <ScrollButton show={showScrollButton} onClick={scrollToContent}>
           <svg viewBox="0 0 24 24">
             <path d="M12 16.5l-7-7 1.41-1.41L12 13.67l5.59-5.58L19 9.5l-7 7z" />

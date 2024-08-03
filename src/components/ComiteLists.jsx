@@ -58,6 +58,8 @@ const ComiteLists = ({ members }) => {
   const [showPrompt, setShowPrompt] = useState(false);
   const [askedToCloseRotate, setAskedToCloseRotate] = useState(false);
 
+  const normalizedMembers = normalizeMembers(members);
+
   useEffect(() => {
     const checkOrientation = () => {
       const isMobileDevice = window.innerWidth <= 768;
@@ -77,8 +79,8 @@ const ComiteLists = ({ members }) => {
   }, [askedToCloseRotate]);
 
   useEffect(() => {
-    setFilteredMembers(filterAndSortMembers(members));
-  }, [members, searchTerm, filters]);
+    setFilteredMembers(filterAndSortMembers(normalizedMembers));
+  }, [normalizedMembers, searchTerm, filters]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -109,11 +111,12 @@ const ComiteLists = ({ members }) => {
   const filterAndSortMembers = (members) => {
     return members
       .filter((member) => {
+        const comiteLocal = member["Comitê Local"] || ""; // Use normalized property
+        const nomeDaEM = member["Nome da EM"] || ""; // Default to an empty string if undefined
+
         const matchesSearchTerm =
-          member["Comitê Local"]
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
-          member["Nome da EM"].toLowerCase().includes(searchTerm.toLowerCase());
+          comiteLocal.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          nomeDaEM.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesFilters =
           (!filters.regional || member.Regional === filters.regional) &&
           (!filters.cidade || member.Cidade === filters.cidade) &&
@@ -121,7 +124,11 @@ const ComiteLists = ({ members }) => {
           (!filters.status || member.Status === filters.status);
         return matchesSearchTerm && matchesFilters;
       })
-      .sort((a, b) => a["Comitê Local"].localeCompare(b["Comitê Local"]));
+      .sort((a, b) => {
+        const comiteLocalA = a["Comitê Local"] || "";
+        const comiteLocalB = b["Comitê Local"] || "";
+        return comiteLocalA.localeCompare(comiteLocalB);
+      });
   };
 
   const uniqueValues = (key) =>
@@ -141,12 +148,17 @@ const ComiteLists = ({ members }) => {
           variant="outlined"
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ marginBottom: "20px", flexGrow: 1 }}
+          style={{
+            mimWidth: 250,
+            marginBottom: "20px",
+            flexGrow: 1,
+            marginRight: "10px",
+          }}
         />
         {["Regional", "Cidade", "UF", "Status"].map((filter) => (
           <FormControl
             variant="outlined"
-            style={{ minWidth: 200, marginBottom: "20px" }}
+            style={{ minWidth: 175, marginBottom: "20px", marginRight: "10px" }}
             key={filter}
           >
             <InputLabel>{filter}</InputLabel>
@@ -184,3 +196,14 @@ const ComiteLists = ({ members }) => {
 };
 
 export default ComiteLists;
+
+// Helper function to normalize the members array
+const normalizeMembers = (members) => {
+  return members.map((member) => {
+    if (member["Comitê Local "]) {
+      member["Comitê Local"] = member["Comitê Local "].trim();
+      delete member["Comitê Local "];
+    }
+    return member;
+  });
+};

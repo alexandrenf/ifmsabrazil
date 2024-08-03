@@ -33,6 +33,7 @@ A estrutura da IFMSA Brazil é composta por:
 - Comitês Locais (LCs) → escolas médicas filiadas;
 - Coordenadores Locais (CLs) → estudantes de medicina filiados;
 - Alumni;
+- Conselho Alumni; 
 - Conselho Supervisor (SupCo);
 - Comissão de Reforma e Elaboração de Documentos (CRED).
 
@@ -40,9 +41,9 @@ A estrutura da IFMSA Brazil é composta por:
 
 A Diretoria Executiva é composta por 21 cargos a nível nacional, responsável por:
 
+- Administrar, desenvolver e apoiar os Comitês Locais;
 - Captar recursos e finanças;
 - Gerir o marketing e relações externas;
-- Administrar, desenvolver e apoiar os Comitês Locais;
 - Desenvolvimento de atividades centrais em seis principais campos da saúde:
   - Saúde pública;
   - Educação médica;
@@ -57,9 +58,9 @@ A Diretoria Executiva é composta por 21 cargos a nível nacional, responsável 
 
 ### O que fazem os Coordenadores Regionais?
 
-Os Coordenadores Regionais prestam assistência à Diretoria Executiva em tarefas a nível regional; desenvolve competência de nossos eixos de atuação em Escolas Médicas de cada região; promove oportunidades, como Assembleias Regionais, espaços de representatividade de nossos coordenadores locais.
+Os Coordenadores Regionais prestam assistência à Diretoria Executiva em tarefas a nível regional; desenvolvem competências de nossos eixos de atuação em Escolas Médicas de cada região; promovem oportunidades, como Assembleias Regionais, espaços de representatividade de nossos coordenadores locais.
 
-As Regionais da IFMSA Brazil são: Norte 1 (AC, RO, AM, RR), Norte 2 (PA, AP), Nordeste 1 (MA, PI, CE), Nordeste 2 (RN, PB, PE), Nordeste 3 (AL, SE, BA), Leste (MG, ES, RJ), Oeste (TO, GO, MT, MS), Paulista (SP), Sul (PR, SC, RS).
+As Regionais da IFMSA Brazil são: Norte 1 (AC, RO, AM, RR), Norte 2 (PA, AP), Nordeste 1 (MA, PI, CE), Nordeste 2 (RN, PB, PE), Nordeste 3 (AL, SE, BA), Leste (MG, ES, RJ), Oeste (TO, GO, DF, MT, MS), Paulista (SP), Sul (PR, SC, RS).
 `;
 
   const markdownContent3 = `
@@ -75,13 +76,17 @@ O Conselho Supervisor supervisiona ações e decisões tomadas pela Diretoria Ex
 
 O Conselho de Reforma e Elaboração de Documentos é responsável por revisar documentos internos e promover reuniões com participação de todos os membros para definir alterações nesses documentos.
 
-## Alumni
+## Alumni e Conselho Alumni 
 
 Os alumni são médicos filiados à IFMSA Brazil que foram Coordenadores Locais (membros de comitês locais) em suas instituições de ensino superior de origem.
 
+O Conselho Alumni é o órgão da IFMSA Brazil destinado a representar os Alumni,
+prestando assistência às atividades da Diretoria Executiva, dos Times Regionais e dos
+Coordenadores Locais, oferecendo suporte prático e teórico à IFMSA Brazil.
+
 ### Como me tornar alumni?
 
-É um processo interno que ocorre quando um Coordenador Local pede desfiliação ao Vice-Presidente para Assuntos Internos, declarando interesse em se tornar alumnus ou alumna da IFMSA Brazil. A partir disso, nosso Diretor Nacional de Alumni entrará em contato com o interessado, para que entenda seu novo papel.
+Por meio de um processo interno que ocorre quando um Coordenador Local pede desfiliação ao Vice-Presidente para Assuntos Internos, declarando interesse em se tornar alumnus ou alumna da IFMSA Brazil. A partir disso, nosso Diretor Nacional de Alumni entrará em contato com o interessado, para que entenda seu novo papel.
 `;
 
   return (

@@ -16,19 +16,69 @@ const Title = styled(Typography)({
   textAlign: "center", // Center the title
 });
 
-const Revista = () => {
+const IntercambioInternacional = () => {
   const markdownContent1 = `
 
-A IFMSA (International Federation of Medical Student’s Association) administra, juntamente com suas Organizações Nacionais Associadas, como a IFMSA Brazil, dois tipos de programas de Intercâmbio Internacional: Os clínicos-cirúrgicos (SCOPE) e os de pesquisa (SCORE), ambos apoiados por organizações como: Federação Mundial de Educação Médica (WFME); Organização Mundial dos Médicos de Família (WONCA);  Federação Mundial das Sociedades Neurocirúrgicas (WFNS); Sociedade Europeia de Medicina de Emergência (EuSEM); Federação Internacional de Ginecologia e Obstetrícia (FIGO);  Associação Internacional de Pediatria (IPA); Sociedade Internacional de Cirurgia Ortopédica e de Traumatologia (SICOT); Federação Mundial de Sociedades de Anestesiologistas (WFSA).
+## O que é o Período de Intercâmbio Internacional (PI)?
 
-Todos os anos, mais de 400 estudantes de medicina do Brasil iniciam uma jornada para explorar serviços e sistemas de saúde em diferentes contextos culturais e sociais do mundo. Isto é possível através da criação de uma rede de estudantes a nível local e internacional que, globalmente, facilitam o acesso a projetos de intercâmbio clínico e de pesquisa. Através do nosso programa, buscamos desenvolver estudantes culturalmente sensíveis e pesquisadores especializados com intenção de moldar o mundo das ciências no futuro próximo. Acreditamos que os programas de intercâmbio são o principal promotor da compreensão e cooperação intercultural entre estudantes de medicina e profissionais de saúde, o que é muito necessário nesse mundo globalizado.
+O Período de Intercâmbio Internacional (PI) é o período para realização do intercâmbio em si. Ele possui duas fases de inscrição: primeira etapa e vagas remanescentes. O PI ocorre de abril de um ano a março do outro ano e você pode escolher tanto vagas em pesquisa (SCORE) quanto clínico-cirúrgicas (SCOPE).
 
-A maioria dos intercâmbios são de quatro semanas e são tratadas em bases bilaterais. Os alunos recebem um estágio em algum departamento ou projeto de pesquisa, bem como hospedagem, acomodação e, muitas vezes, um Social Program. Eles recebem tutores durante todo o período, os quais garantem que os alunos participem ativamente e melhorem suas habilidades. O certificado oficial é entregue aos alunos se todos os requisitos forem cumpridos. Este certificado é assinado pelo tutor e agente de intercâmbio de hospedagem, e permite que a maioria dos alunos obtenham créditos de sua universidade de origem e adicione essa vivência em seus currículos.
+## Pré-Requisitos para se inscrever:
 
-Com o objetivo de tornar os intercâmbios mais acessíveis, o total de taxas que você paga é somente de R$630,00, além de não precisar arcar com a hospedagem e nem com uma de suas refeições por dia de estágio devido ao caráter bilateral de nossos intercâmbios. Estes, além de motivo de economia, constituem um retorno da experiência que você teve fora do país quando você hospeda um intercambista em sua residência, nos mesmos moldes que você foi recebido no exterior. Receber um intercambista e sua casa é um meio bastante eficaz de praticar competências interculturais, quase como viajar sem sair de casa.
+- Ser estudante de medicina, devidamente matriculado em uma faculdade cujo campus de origem seja comitê pleno da IFMSA Brazil.
 
-Nosso trabalho e foco constantes para garantir grandes experiências em intercâmbios nacionais e internacionais foram recompensados, em 2020, com o segundo lugar na Feira dos Intercâmbios da IFMSA, além do segundo lugar no prêmio NMO Exchange Glory, sendo premiadas as atividades educacionais Experiência Muiraquitã e SCORPIncomings. Embarque conosco nessa ideia e descubra novos horizontes em sua jornada.
-Para mais informações, contate o Coordenador Local de Intercâmbios da sua faculdade, ou mande um email para intercambios@ifmsabrazil.org .
+- Ler o Regulamento Oficial dos Programas de Intercâmbios (disponível [aqui no site da IFMSA Brazil](/arquivos/regulamento-intercambios)).
+
+- Ler integralmente e estar de acordo com as Exchange Conditions dos países para onde tem interesse de realizar o intercâmbio, acessando:
+  - No caso do Intercâmbio Clínico Cirúrgico (SCOPE): https://exchange.ifmsa.org/exchange-conditions/scope
+  - No caso do Intercâmbio de Pesquisa (SCORE): https://exchange.ifmsa.org/exchange-conditions/score
+
+
+## Diferença Entre Primeira Vaga e Vagas Remanescentes
+
+### Primeira Etapa
+
+É a primeira oferta de vagas de cada PI, a concorrência é maior, e a classificação do estudante é feita por meio de critérios de pontuação especificados em nosso Regulamento de Intercâmbios, dentro dos quais temos: participação em monitoria, liga acadêmica, projeto de extensão, iniciação científica, atividades vinculadas à IFMSA Brazil, dentre outros.
+
+### Vagas Remanescentes
+
+Após a primeira etapa, as vagas que não foram preenchidas são oferecidas novamente mensalmente até a abertura de uma nova primeira etapa. A concorrência tende a ser menor e não há critério de pontuação para inscrição! A classificação ocorre por ordem de prioridade e de inscrição.
+
+## Como se Inscrever nas Vagas Remanescentes
+
+Para se inscrever no PI, o estudante deve estar matriculado em uma faculdade que tenha um comitê pleno vinculado à IFMSA Brazil, ter vagas declaradas e seguir alguns passos básicos:
+
+1. **Liberação da Lista de Vagas e do Edital de Vagas Remanescentes:** nos meses em que houverem vagas disponíveis, você deve consultar a lista e ler a Exchange Condition do país para ver se está dentro dos pré-requisitos.
+2. **Período de Inscrição por formulário:** o mesmo será divulgado no Edital das Vagas Remanescentes todo mês em que forem realizadas.
+3. **Divulgação da Lista de Classificados em Lista Geral de E-mails da IFMSA Brazil**;
+4. **Pagamento das Taxas I e II, preenchimento do Instrumento Bilateral de Interesse e Confirmação da Vaga:** isso deve ser realizado conforme prazo estabelecido no Edital de Vagas Remanescentes.
+5. **Divulgação da Lista de Classificados na Lista de Espera em Lista Geral de E- mails da IFMSA Brazil**;
+6. **Pagamento das Taxas I e II, preenchimento do Instrumento Bilateral de Interesse e Confirmação da Vaga em Lista de Espera:** isso deve ser realizado conforme prazo estabelecido no Edital de Vagas Remanescentes.
+
+## Direitos e Deveres do Intercambista
+
+Os intercâmbios são obrigatoriamente de quatro semanas e são realizados em bases bilaterais. Isso significa que os alunos recebem um estágio em algum departamento ou projeto de pesquisa, bem como hospedagem, uma refeição por dia e, muitas vezes, um Social Program. Vocês recebem tutores durante todo o período, os quais garantem que os alunos participem ativamente e melhorem suas habilidades. O certificado oficial é entregue aos alunos se todos os requisitos forem cumpridos. Este certificado é assinado pelo tutor e agente de intercâmbio internacional, e permite que a maioria dos alunos obtenham créditos de sua universidade de origem e adicione essa vivência em seus currículos.
+
+## Taxas para Inscrição:
+
+1. Taxa I: R$ 160,00
+2. Taxa II: R$ 620,00
+
+O pagamento das Taxas I e II dos intercâmbios internacionais deverá ser realizado através da Loja Virtual da IFMSA Brazil ou por transação bancária conforme as orientações fornecidas pelos Diretores Nacionais através de meios oficiais.
+
+## Edital de Vulnerabilidade:
+
+O edital de vulnerabilidade faz parte da Política de Inclusão do Coordenador Local em Vulnerabilidade Socioeconômica que a IFMSA Brazil possui no seu Regimento Geral. A finalidade é realizar a concessão gratuita de pelo menos 2 inscrições, financiamento de passagens aéreas e/ou terrestres, isenção das taxas e bolsa auxílio, conforme Regimento, à Estudantes de Graduação em vulnerabilidade socioeconômica filiados a um comitê local pleno da IFMSA Brazil, interessados em participar do Período de Intercâmbio Internacional que será aberto, sendo apenas válido para a primeira etapa do PI.
+
+## Como Obter Mais Informações:
+
+Para obter mais informações sobre os intercâmbios internacionais, os estudantes podem:
+
+- Acessar o regulamento de intercâmbios no site. Lá constam todas as informações necessárias sobre o PI e outros programas.
+- Enviar um e-mail para: [neo.out@ifmsabrazil.org](mailto:neo.out@ifmsabrazil.org) ou [nore.out@ifmsabrazil.org](mailto:nore.out@ifmsabrazil.org)
+- Entrar em contato com o seu comitê local
+- Acompanhar o instagram do intercâmbio internacional [@ifmsabrazilexchanges](http://instagram.com/ifmsabrazilexchanges).
+
 
 `;
 
@@ -40,4 +90,4 @@ Para mais informações, contate o Coordenador Local de Intercâmbios da sua fac
   );
 };
 
-export default Revista;
+export default IntercambioInternacional;

@@ -57,7 +57,7 @@ Para se filiar, é necessário que sua escola médica tenha um comitê local da 
 
 ## Como eu posso fundar um comitê local?
 
-Basta mandar um e-mail para vpi@ifmsabrazil.org contendo o nome da sua instituição de ensino, demonstrando interesse em fundar um comitê local.
+Basta mandar um e-mail para [vpi@ifmsabrazil.org](mailto:vpi@ifmsabrazil.org) contendo o nome da sua instituição de ensino, demonstrando interesse em fundar um comitê local.
 Por lá, podemos começar um processo de filiação.
 Confira essa página com atenção para ver as informações sobre a filiação!
 

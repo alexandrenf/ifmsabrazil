@@ -26,6 +26,12 @@ const SocialPrograms = lazy(() => import("./paginas/SocialPrograms.jsx")); // Im
 const Eixos = lazy(() => import("./paginas/Eixos.jsx")); // Import the Eixos component
 const Eventos = lazy(() => import("./paginas/Eventos.jsx")); // Import the Eventos component
 const Regulamento = lazy(() => import("./paginas/Regulamento.jsx")); // Import the Regulamento component
+const OutrosIntercambios = lazy(() =>
+  import("./paginas/OutrosIntercambios.jsx")
+); // Import the OutrosIntercambios component
+const IntercambioInternacional = lazy(() =>
+  import("./paginas/IntercambioInternacional.jsx")
+); // Import the IntercambioInternacional component
 const IntercambioNacional = lazy(() =>
   import("./paginas/IntercambioNacional.jsx")
 ); // Import the IntercambioNacional component
@@ -45,6 +51,7 @@ const App = () => {
               element={<MarkdownPage needsExternal={true} />}
             />
             <Route path="/gerarlink" element={<GeradorLink />} />
+            <Route path="/filie-se" element={<Filiacao />} />
             <Route path="/estrutura" element={<Estrutura />} />
             <Route path="/filiacao" element={<Filiacao />} />
             <Route path="/noticias" element={<Noticias />} />
@@ -56,8 +63,16 @@ const App = () => {
             <Route path="/eventos" element={<Eventos />} />
             <Route path="/regulamento" element={<Regulamento />} />
             <Route
+              path="/outras-modalidades"
+              element={<OutrosIntercambios />}
+            />
+            <Route
               path="/intercambio_nacional"
               element={<IntercambioNacional />}
+            />
+            <Route
+              path="/intercambio_internacional"
+              element={<IntercambioInternacional />}
             />
             <Route
               path="/tutorial"
