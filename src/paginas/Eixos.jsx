@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import Loading from "../components/Loading.jsx";
 import MarkdownContent from "../components/MarkdownContent.jsx";
 
 const Root = styled(Container)({
@@ -18,6 +18,17 @@ const Title = styled(Typography)({
 });
 
 const Eixos = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   const markdownContent1 = `
 
   ### Sumário

@@ -62,6 +62,7 @@ const AreaCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Center the content vertically */
   padding: 20px;
   background-color: ${(props) => props.bgColor};
   color: ${(props) => props.color || "rgba(255, 255, 255, 1)"};
@@ -71,9 +72,15 @@ const AreaCard = styled.div`
   font-family: "Poppins", sans-serif;
   text-align: center;
   border: ${(props) => props.border || "none"};
+  width: 100%; /* Ensure it takes the full width of the grid cell */
+  height: 100%; /* Set a fixed height for all cards */
 
   &:hover {
     transform: translateY(-10px);
+  }
+
+  @media (min-width: 992px) {
+    height: 100%; /* Adjust height for larger screens if needed */
   }
 `;
 
@@ -89,12 +96,14 @@ export default function AreasOfIFMSABrazil() {
       bgColor: "rgba(182, 120, 38, 1)",
       text: "Representatividade estudantil",
       icon: faGraduationCap,
+      link: "/eixos#representatividade-estudantil",
     },
     {
       id: 2,
       bgColor: "rgba(0, 0, 0, 1)",
       text: "Capacity Building",
       icon: faBook,
+      link: "/eixos#construcao-de-habilidades",
     },
     {
       id: 3,
@@ -103,30 +112,35 @@ export default function AreasOfIFMSABrazil() {
       icon: faHospital,
       color: "#000",
       border: "2px solid #000",
+      link: "/eixos#educacao-medica",
     },
     {
       id: 4,
       bgColor: "rgba(220, 0, 0, 1)",
       text: "Promoção de Saúde",
       icon: faHeartbeat,
+      link: "/eixos#promocao-de-saude",
     },
     {
       id: 5,
       bgColor: "rgba(0, 150, 60, 1)",
       text: "Humanização",
       icon: faHandsHelping,
+      link: "/eixos#humanizacao",
     },
     {
       id: 6,
       bgColor: "rgba(0, 80, 140, 1)",
       text: "Mobilidade Estudantil",
       icon: faUniversity,
+      link: "/eixos#mobilidade-academica",
     },
     {
       id: 7,
       bgColor: "rgba(128, 128, 128, 1)",
       text: "Pesquisa e Extensão",
       icon: faSearch,
+      link: "/eixos#pesquisa",
     },
   ];
 
@@ -135,15 +149,16 @@ export default function AreasOfIFMSABrazil() {
       <Title>Nossos eixos de atuação</Title>
       <AreasGrid>
         {areasData.map((area) => (
-          <AreaCard
-            key={area.id}
-            bgColor={area.bgColor}
-            color={area.color}
-            border={area.border}
-          >
-            <FontAwesomeIcon icon={area.icon} size="3x" />
-            <AreaText>{area.text}</AreaText>
-          </AreaCard>
+          <a href={area.link} key={area.id} style={{ textDecoration: "none" }}>
+            <AreaCard
+              bgColor={area.bgColor}
+              color={area.color}
+              border={area.border}
+            >
+              <FontAwesomeIcon icon={area.icon} size="3x" />
+              <AreaText>{area.text}</AreaText>
+            </AreaCard>
+          </a>
         ))}
       </AreasGrid>
     </AreasSection>
