@@ -2,6 +2,7 @@
 
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import CookieConsent from "react-cookie-consent";
 import Navbar from "./components/Navbar.jsx";
 import GlobalStyles from "./styles/GlobalStyles.jsx";
 import "./styles/Fonts.js"; // Ensure this file is imported to load the fonts
@@ -35,6 +36,7 @@ const OutrosIntercambios = lazy(() =>
 const IntercambioInternacional = lazy(() =>
   import("./paginas/IntercambioInternacional.jsx")
 ); // Import the IntercambioInternacional component
+const PoliticaPriv = lazy(() => import("./paginas/PoliticaPrivacidade.jsx")); // Import the PoliticaPriv component
 const IntercambioNacional = lazy(() =>
   import("./paginas/IntercambioNacional.jsx")
 ); // Import the IntercambioNacional component
@@ -64,6 +66,7 @@ const App = () => {
             <Route path="/social-programs" element={<SocialPrograms />} />
             <Route path="/eixos" element={<Eixos />} />
             <Route path="/eventos" element={<Eventos />} />
+            <Route path="/privacidade" element={<PoliticaPriv />} />
             <Route path="/regulamento" element={<Regulamento />} />
             <Route
               path="/outras-modalidades"
@@ -91,6 +94,19 @@ const App = () => {
             <Route path="*" element={<NotFound />} />{" "}
             {/* Catch-all route for 404 */}
           </Routes>
+          <CookieConsent
+          location="bottom"
+          buttonText="Aceito"
+          cookieName="userCookieConsent"
+          style={{ background: "#2B373B" }}
+          buttonStyle={{ color: "#fff", backgroundColor: "#00963B", fontSize: "14px" }}
+          expires={365}
+        >
+          Esse site usa cookies para melhorar a sua experiência.{" "}
+          <span style={{ fontSize: "12px" }}>
+            Ao usar esse site, você concorda com o uso de cookies e nossa política de privacidade.
+          </span>
+        </CookieConsent>
         </Suspense>
         <Footer />
       </Router>

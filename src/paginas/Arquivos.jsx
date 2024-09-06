@@ -25,6 +25,7 @@ const Revista = lazy(() => import("./Revista.jsx"));
 const Ressonancia = lazy(() => import("./Ressonancia.jsx"));
 const Declaracoes = lazy(() => import("./Declaracoes.jsx"));
 const Notas = lazy(() => import("./Notas.jsx"));
+const InformaSUSi = lazy(() => import("./InformaSUSi.jsx"));
 const NotFound = lazy(() => import("../components/NotFound.jsx")); // Import the NotFound component
 
 const allowedTypes = [
@@ -34,7 +35,7 @@ const allowedTypes = [
     file: "1",
     ref: "notas-de-posicionamento",
   },
-  { href: "susi", label: "Informa SUSi", file: "", ref: "informa-susi" },
+  { href: "susi", label: "Informa SUSi", file: "2", ref: "informa-susi" },
   {
     href: "rp",
     label: "Edições da Ressonância Poética",
@@ -84,6 +85,8 @@ const returnProperty = (fileNumber) => {
       return <Revista />;
     case "6":
       return <Declaracoes />;
+    case "2":
+      return <InformaSUSi />;
     default:
       return null;
   }

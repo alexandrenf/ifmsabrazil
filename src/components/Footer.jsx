@@ -7,6 +7,8 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import { faPhone } from "@fortawesome/free-solid-svg-icons/faPhone";
 import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
+
 
 // Import FontAwesome core
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -74,8 +76,8 @@ const Footer = () => (
             <Typography variant="body1">atendimento@ifmsabrazil.org</Typography>
           </ContactItem>
           <ContactItem>
-            <FontAwesomeIcon icon="phone" />
-            <Typography variant="body1">Tel: + 55 11 3170-3251</Typography>
+            <Typography variant="body1"><Link to="/privacidade">
+            Política de Privacidade</Link></Typography>
           </ContactItem>
         </Grid>
         <Grid item xs={12} md={4}>
