@@ -58,7 +58,7 @@ No entanto, este eixo não se limita apenas à formação técnica e não técni
 A Educação Médica deve, ainda, buscar a integração entre ensino-serviço-gestão e comunidade, de forma a atender as demandas dos usuários do serviço de saúde daquela região, considerando seu contexto sócio-político-econômico e seus determinantes sociais de saúde. Assim, ela procura formar profissionais capazes de atuar de maneira crítica, reflexiva e embasada cientificamente, comprometidos com a transformação social e a promoção da saúde em suas diversas dimensões. Os estudantes devem ser preparados não apenas com as habilidades, conhecimentos e atitudes necessárias para o desenvolvimento de determinadas competências, mas também devem ser socialmente conscientes e engajados, tornando-os capazes de responder e intervir nas necessidades complexas, diversas e dinâmicas da sociedade contemporânea.
 
 
-###Pesquisa:
+### Pesquisa:
 
 O eixo de Publicação, Pesquisa e Extensão visa proporcionar bases de evidência científica às atividades desenvolvidas pela federação. O eixo é alicerçado em três principais bases, sendo a primeira delas a promoção de acesso à pesquisa e educação em pesquisa através de capacitações, cursos e espaços abertos para discussões prezando sempre pela medicina baseada em evidência e pela reprodução de uma ciência de qualidade, também é fundamentado pela produção de evidência científica através das pesquisas e projetos promovidos pelo Scientific Team e pelos Coordenadores Locais, sempre prezando pela responsabilidade social e pelo envolvimento significativo da comunidade acadêmica ou civil, de acordo com a abordagem. Além disso, a representatividade é indissociável do eixo visto que proporciona voz a federação no que tange a construção de conhecimento dentro desta, ademais por meio da nossa Revista Científica Brazilian Medical Students podemos disseminar as atividades e construções sociais realizadas pela IFMSA Brazil em abrangência nacional e internacional.
 
@@ -86,6 +86,17 @@ Para tanto, é utilizada a estrutura internacional de multiplicação de conheci
 O sistema de formação é continuado, preservando o sistema de membros, novos treinadores e treinadores experientes, partindo de encontros regionais e nacionais para globais, ampliando progressiva e sustentavelmente as possibilidades de atuação do treinador, bem como oportunidades em educação com seus pares.
 
 ### Representatividade Estudantil:
+
+A IFMSA Brazil deve representar e defender os entendimentos estabelecidos por seus Coordenadores Locais. 
+
+Em se tratando desses entendimentos, a IFMSA Brazil se posiciona na forma de suas Declarações de Políticas e Notas Oficiais, e qualquer Coordenador Local que fale em nome da Federação deve respeitar e defender os entendimentos estabelecidos nestes documentos, acima de suas diligências particulares. 
+
+Além disso, Declaração de Política, ou Policy Statement, é o instrumento pelo qual a IFMSA Brazil manifesta à sociedade seus posicionamentos e estratégias de intervenção relativas a pautas de abrangência nacional ou global, pertinentes aos seus Coordenadores Locais e consonantes aos seus eixos de atuação e deve estar de acordo com o Regimento Geral e as Normas Complementares, bem como Missão, Visão, Valores e Declarações de Políticas já vigentes da IFMSA Brazil. Assim, por meio de Small Working Groups (SWGs) ou pequenos grupos de trabalhos, os estudantes de medicina têm a oportunidade de participar na construção desses documentos.
+
+Ainda, nota oficial é a ferramenta pela qual a IFMSA Brazil pode se expressar à sociedade a respeito de acontecimentos específicos, não contemplados total ou parcialmente pelas Declarações de Políticas vigentes, e cuja urgência demandada não permite discussão ampla para deliberação de posicionamento em plenária de Assembleia Geral.
+
+Diante disso, a Federação incentiva os estudantes de medicina a serem protagonistas na construção desses meios de representatividade, de forma a permitir o contraditório, o consenso e a pluralização dos espaços deliberativos. 
+
 
 `;
 

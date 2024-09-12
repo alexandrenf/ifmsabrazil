@@ -40,6 +40,7 @@ const PoliticaPriv = lazy(() => import("./paginas/PoliticaPrivacidade.jsx")); //
 const IntercambioNacional = lazy(() =>
   import("./paginas/IntercambioNacional.jsx")
 ); // Import the IntercambioNacional component
+const LinkPage = lazy(() => import("./paginas/LinkPage.jsx"));
 
 const App = () => {
   return (
@@ -90,6 +91,7 @@ const App = () => {
                 />
               }
             />
+            <Route path="/cobem" element={<LinkPage />} />
             {/* Add other routes here */}
             <Route path="*" element={<NotFound />} />{" "}
             {/* Catch-all route for 404 */}
