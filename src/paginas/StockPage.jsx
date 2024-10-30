@@ -136,11 +136,11 @@ const productImages = {
   'Camisa Representatividade G': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/Fotos Camisas_12.png',
   'Camisa Representatividade GG': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/Fotos Camisas_12.png',
   'Cartela de Adesivos': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/adesivos1.png',
+  'Roller Clip Logo Clássica': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller4.png',
+  'Roller Clip Viagens (colorido)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller3.png',
+  'Roller Clip Viagens (preto e branco)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller2.png',
   // ... Add mappings for all other Camisas with appropriate images
   // Roller Clips
-  'Roller Clip Logo Clássica': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/rollerclips/roller_logo_classica.png',
-  'Roller Clip Viagens (colorido)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/rollerclips/roller_viagens_colorido.png',
-  'Roller Clip Viagens (preto e branco)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/rollerclips/roller_viagens_pb.png',
   // Add mappings for other products if images are available
 };
 
