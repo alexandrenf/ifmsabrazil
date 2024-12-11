@@ -64,7 +64,7 @@ const Footer = () => (
             </Typography>
           </ContactItem>
           <Typography variant="body1">
-            Boa Vista, São Paulo/SP - Brasil
+            Bela Vista, São Paulo/SP - Brasil
           </Typography>
         </Grid>
         <Grid item xs={12} md={4}>
