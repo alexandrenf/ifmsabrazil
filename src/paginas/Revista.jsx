@@ -36,7 +36,6 @@ A BMS é indexada em várias bases de dados e diretórios acadêmicos, garantind
 
   return (
     <Root>
-      <Title variant="h4">{"Brazilian Medical Students"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

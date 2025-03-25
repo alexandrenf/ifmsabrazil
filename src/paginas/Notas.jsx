@@ -26,7 +26,6 @@ Nota Oficial é a ferramenta pela qual a IFMSA Brazil pode se expressar à socie
 
   return (
     <Root>
-      <Title variant="h4">{"Notas de Posicionamento"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

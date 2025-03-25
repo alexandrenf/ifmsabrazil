@@ -30,7 +30,6 @@ Apesar de não fornecer certificado, a publicação na Informa SUSi aumenta a vi
 
   return (
     <Root>
-      <Title variant="h4">{"Informa SUSi"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

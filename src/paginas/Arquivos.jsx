@@ -1,5 +1,5 @@
-import React, { useState, useEffect, lazy } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect, lazy, Suspense } from "react";
+import styled, { keyframes } from "styled-components";
 import {
   Container,
   Typography,
@@ -26,7 +26,140 @@ const Ressonancia = lazy(() => import("./Ressonancia.jsx"));
 const Declaracoes = lazy(() => import("./Declaracoes.jsx"));
 const Notas = lazy(() => import("./Notas.jsx"));
 const InformaSUSi = lazy(() => import("./InformaSUSi.jsx"));
-const NotFound = lazy(() => import("../components/NotFound.jsx")); // Import the NotFound component
+const NotFound = lazy(() => import("../components/NotFound.jsx"));
+
+// Animations
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 100px;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+`;
+
+const HeaderSection = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: ${fadeIn} 1s ease-out;
+`;
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #00508c;
+  margin-bottom: 1rem;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #00508c, #fac800);
+    border-radius: 2px;
+  }
+`;
+
+const ContentSection = styled.section`
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  animation: ${fadeIn} 1s ease-out 0.3s forwards;
+`;
+
+const FilterContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  animation: ${slideIn} 1s ease-out;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const SearchField = styled(TextField)`
+  flex: 1;
+  min-width: 250px;
+  
+  & .MuiOutlinedInput-root {
+    &:hover fieldset {
+      border-color: #00508c;
+    }
+    &.Mui-focused fieldset {
+      border-color: #00508c;
+    }
+  }
+`;
+
+const StyledFormControl = styled(FormControl)`
+  min-width: 200px;
+  flex: 1;
+`;
+
+const ListContainer = styled.div`
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  margin-top: 2rem;
+`;
+
+const SortButton = styled(Button)`
+  &.MuiButton-root {
+    background-color: ${props => props.active ? '#00508c' : 'white'};
+    color: ${props => props.active ? 'white' : '#00508c'};
+    border: 1px solid #00508c;
+    
+    &:hover {
+      background-color: ${props => props.active ? '#003c69' : '#f5f5f5'};
+    }
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  
+  &:hover {
+    text-decoration: none;
+  }
+`;
 
 const allowedTypes = [
   {
@@ -91,51 +224,6 @@ const returnProperty = (fileNumber) => {
       return null;
   }
 };
-
-const BlogSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 30px 20px;
-  background-color: #f0f2f5;
-`;
-
-const Title = styled.h2`
-  font-family: "Poppins", sans-serif;
-  font-size: 2rem;
-  color: #333;
-  text-align: center;
-  margin-bottom: 30px;
-`;
-
-const ListContainer = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-`;
-
-const ButtonContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-`;
-
-const DividerStyled = styled(Divider)`
-  margin: 0 20px;
-`;
-
-const FilterContainer = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 1200px;
-`;
 
 const Arquivos = () => {
   const { type } = useParams();
@@ -219,69 +307,67 @@ const Arquivos = () => {
 
   const uniqueAuthors = [...new Set(arquivos.map((arquivo) => arquivo.author))];
 
+  // Add this helper function to generate URL-friendly titles
+  const generateUrlFriendlyTitle = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-');
+  };
+
   return (
-    <>
-      {returnProperty(typeObject?.file)}
-      <BlogSection>
+    <PageContainer>
+      <HeaderSection>
         <Title>{label}</Title>
+      </HeaderSection>
+
+      <ContentSection>
+        {/* Show the description component first */}
+        <Suspense fallback={<Loading />}>
+          {typeObject?.file && returnProperty(typeObject.file)}
+        </Suspense>
+
+        {/* Then show the filters and list */}
         <FilterContainer>
-          <TextField
-            label="Buscar por Título"
+          <SearchField
+            fullWidth
             variant="outlined"
+            placeholder="Pesquisar por título..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ marginRight: "20px", flexGrow: 1 }}
           />
-          <FormControl variant="outlined" style={{ minWidth: 200 }}>
-            <InputLabel>Filtrar por Autor</InputLabel>
+          
+          <StyledFormControl>
+            <InputLabel>Ordenar por</InputLabel>
             <Select
-              multiple
-              value={selectedAuthors}
-              onChange={(e) => setSelectedAuthors(e.target.value)}
-              input={<OutlinedInput label="Filtrar por Autor" />}
-              renderValue={(selected) => selected.join(", ")}
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              label="Ordenar por"
             >
-              {uniqueAuthors.map((author) => (
-                <MenuItem key={author} value={author}>
-                  <Checkbox checked={selectedAuthors.indexOf(author) > -1} />
-                  <ListItemText primary={author} />
-                </MenuItem>
-              ))}
+              <MenuItem value="dateDesc">Mais recentes</MenuItem>
+              <MenuItem value="dateAsc">Mais antigos</MenuItem>
+              <MenuItem value="titleAsc">A-Z</MenuItem>
+              <MenuItem value="titleDesc">Z-A</MenuItem>
             </Select>
-          </FormControl>
+          </StyledFormControl>
         </FilterContainer>
-        <ButtonContainer>
-          <ButtonGroup variant="outlined" color="primary">
-            <Button onClick={() => setSortOrder("dateDesc")}>
-              Data (mais recentes)
-            </Button>
-            <Button onClick={() => setSortOrder("dateAsc")}>
-              Data (mais antigas)
-            </Button>
-            <DividerStyled orientation="vertical" flexItem />
-            <Button onClick={() => setSortOrder("titleAsc")}>
-              Título (A-Z)
-            </Button>
-            <Button onClick={() => setSortOrder("titleDesc")}>
-              Título (Z-A)
-            </Button>
-          </ButtonGroup>
-        </ButtonContainer>
+
         <ListContainer>
-          {filteredArquivos.map((arquivo, index) => (
-            <a
-              href={arquivo.fileLink}
-              key={index}
-              style={{ textDecoration: "none" }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <BlogPostListItem post={arquivo} />
-            </a>
-          ))}
+          {loading ? (
+            <Loading />
+          ) : (
+            filteredArquivos.map((arquivo) => (
+              <StyledLink
+                key={arquivo.id}
+                to={`/arquivo/${arquivo.id}/${generateUrlFriendlyTitle(arquivo.title)}`}
+              >
+                <BlogPostListItem post={arquivo} />
+              </StyledLink>
+            ))
+          )}
         </ListContainer>
-      </BlogSection>
-    </>
+      </ContentSection>
+    </PageContainer>
   );
 };
 

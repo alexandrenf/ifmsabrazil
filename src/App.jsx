@@ -1,7 +1,7 @@
 "use client"; // Add this directive for client-side rendering
 
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { Suspense, lazy, useEffect } from "react"; // Add useEffect
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom"; // Add useLocation
 import CookieConsent from "react-cookie-consent";
 import Navbar from "./components/Navbar.jsx";
 import GlobalStyles from "./styles/GlobalStyles.jsx";
@@ -12,6 +12,47 @@ import { ThemeProvider } from "@mui/material/styles";
 import Loading from "./components/Loading.jsx";
 import Home from "./paginas/Home.jsx";
 import theme from "./styles/theme.js";
+
+// Add color-scheme meta tag to prevent dark mode override
+const ColorSchemeMetaTag = () => {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'color-scheme';
+    meta.content = 'light';
+    document.head.appendChild(meta);
+    return () => document.head.removeChild(meta);
+  }, []);
+  return null;
+};
+
+// Create a ScrollToTop component
+const ScrollToTop = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (location.hash) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          const navbarHeight = 85; // Adjust this value based on your navbar height
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }, 100);
+      return;
+    }
+    // Otherwise, scroll to top
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+};
 
 // Lazy load components for code-splitting
 const MarkdownPage = lazy(() => import("./components/MarkdownPage.jsx"));
@@ -46,13 +87,16 @@ const LinkPage = lazy(() => import("./paginas/LinkPage.jsx"));
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <ColorSchemeMetaTag />
       <Router>
+        <ScrollToTop /> {/* Add the ScrollToTop component */}
         <GlobalStyles />
         <CssBaseline />
         <Navbar />
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/eixos" element={<Eixos />} />
             <Route
               path="/arquivo/:id/:title"
               element={<MarkdownPage needsExternal={true} />}
@@ -66,7 +110,6 @@ const App = () => {
             <Route path="/acoes" element={<AcoesETematicas />} />
             <Route path="/arquivos/:type" element={<Arquivos />} />
             <Route path="/social-programs" element={<SocialPrograms />} />
-            <Route path="/eixos" element={<Eixos />} />
             <Route path="/eventos" element={<Eventos />} />
             <Route path="/privacidade" element={<PoliticaPriv />} />
             <Route path="/regulamento" element={<Regulamento />} />
@@ -99,18 +142,86 @@ const App = () => {
             {/* Catch-all route for 404 */}
           </Routes>
           <CookieConsent
-          location="bottom"
-          buttonText="Aceito"
-          cookieName="userCookieConsent"
-          style={{ background: "#2B373B" }}
-          buttonStyle={{ color: "#fff", backgroundColor: "#00963B", fontSize: "14px" }}
-          expires={365}
-        >
-          Esse site usa cookies para melhorar a sua experiência.{" "}
-          <span style={{ fontSize: "12px" }}>
-            Ao usar esse site, você concorda com o uso de cookies e nossa política de privacidade.
-          </span>
-        </CookieConsent>
+            location="bottom"
+            buttonText="Aceitar"
+            cookieName="userCookieConsent"
+            style={{ 
+              background: "rgba(255, 255, 255, 0.7)",
+              zIndex: 10,
+              maxWidth: "320px",
+              margin: "24px",
+              borderRadius: "16px",
+              left: "0",
+              right: "auto",
+              transform: "none",
+              padding: "16px",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+              backdropFilter: "blur(20px) saturate(180%)",
+              WebkitBackdropFilter: "blur(20px) saturate(180%)",
+              border: "1px solid rgba(255, 255, 255, 0.4)",
+              fontSize: "13px",
+              lineHeight: "1.5",
+              color: "#1a1a1a"
+            }}
+            buttonStyle={{ 
+              background: "rgba(0, 80, 140, 0.9)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              color: "white", 
+              fontSize: "13px",
+              borderRadius: "12px",
+              padding: "8px 16px",
+              fontWeight: "600",
+              marginTop: "12px",
+              transition: "all 0.3s ease",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              cursor: "pointer",
+              width: "100%"
+            }}
+            contentStyle={{
+              margin: "0",
+              padding: "0"
+            }}
+            buttonWrapperClasses="cookie-consent-buttons"
+            expires={365}
+            hideOnAccept={true}
+          >
+            <div style={{ 
+              display: "flex", 
+              alignItems: "flex-start", 
+              gap: "10px"
+            }}>
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: "2px" }}>
+                <path d="M10 6v1.5m0 5.5v1.5m-4-4h1.5m5.5 0h1.5m-7.207-5.793L9.5 6.5m4.707 7.293L13.5 13m-7 0-.793.793m8.586-8.586L13.5 6" 
+                  stroke="#00508c" 
+                  strokeWidth="1.5" 
+                  strokeLinecap="round"
+                />
+                <circle cx="10" cy="10" r="8" stroke="#00508c" strokeWidth="1.5"/>
+              </svg>
+              <div>
+                <div style={{ 
+                  fontWeight: "600",
+                  marginBottom: "4px",
+                  color: "#00508c",
+                  fontSize: "13px"
+                }}>
+                  Cookies
+                </div>
+                Utilizamos cookies para melhorar sua experiência.{" "}
+                <a 
+                  href="/privacidade" 
+                  style={{ 
+                    color: "#00508c",
+                    textDecoration: "none",
+                    fontWeight: "500"
+                  }}
+                >
+                  Saiba mais
+                </a>
+              </div>
+            </div>
+          </CookieConsent>
         </Suspense>
         <Footer />
       </Router>
