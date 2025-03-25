@@ -180,32 +180,24 @@ const BlogPostListItem = ({ post }) => {
     if (!dateString) return "";
     
     try {
+      let date;
       if (dateString instanceof Date) {
-        return dateString.toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-          timeZone: "UTC"
-        });
+        date = dateString;
+      } else if (typeof dateString === 'string' && dateString.includes('T')) {
+        date = new Date(dateString);
+      } else if (typeof dateString === 'number') {
+        date = new Date(dateString);
+      } else {
+        date = new Date(Date.parse(dateString));
       }
 
-      if (typeof dateString === 'number') {
-        return new Date(dateString).toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-          timeZone: "UTC"
-        });
-      }
-
-      const date = new Date(Date.parse(dateString));
       if (isNaN(date.getTime())) {
         return dateString;
       }
       
       return date.toLocaleDateString("pt-BR", {
         day: "2-digit",
-        month: "long",
+        month: "2-digit",
         year: "numeric",
         timeZone: "UTC"
       });

@@ -283,6 +283,23 @@ const Arquivos = () => {
     return sortedArquivos;
   };
 
+  // Add this helper function for date formatting
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        timeZone: "UTC"
+      });
+    } catch (error) {
+      console.warn("Date parsing failed:", error);
+      return dateString;
+    }
+  };
+
   const filterArquivos = (arquivos) => {
     return arquivos.filter((arquivo) => {
       const matchesSearchTerm = arquivo.title
@@ -361,7 +378,7 @@ const Arquivos = () => {
                 key={arquivo.id}
                 to={arquivo.fileLink}
               >
-                <BlogPostListItem post={arquivo} />
+                <BlogPostListItem post={{...arquivo, date: formatDate(arquivo.date)}} />
               </StyledLink>
             ))
           )}
