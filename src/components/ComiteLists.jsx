@@ -311,6 +311,13 @@ const ComiteLists = ({ members }) => {
   };
 
   const filterAndSortMembers = (members) => {
+    const keyMapping = {
+      regional: "Regional",
+      cidade: "Cidade",
+      uf: "UF",
+      status: "Status",
+    };
+
     return members
       .filter((member) => {
         const searchFields = [
@@ -329,7 +336,8 @@ const ComiteLists = ({ members }) => {
 
         const matchesFilters = Object.entries(filters).every(([key, value]) => {
           if (!value) return true;
-          return normalizeString(member[key]) === normalizeString(value);
+          const mappedKey = keyMapping[key];
+          return normalizeString(member[mappedKey]) === normalizeString(value);
         });
 
         return matchesSearchTerm && matchesFilters;

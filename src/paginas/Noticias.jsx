@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   Container,
   Typography,
@@ -22,49 +22,121 @@ import Loading from "../components/Loading.jsx";
 import { generateUrlFriendlyTitle } from "../components/characterConversion.jsx";
 import axios from "axios";
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const BlogSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 30px 20px;
-  background-color: #f0f2f5;
+  padding: 100px 20px;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  min-height: 100vh;
 `;
 
 const Title = styled.h2`
-  font-family: "Poppins", sans-serif;
-  font-size: 2.5rem;
-  color: #333;
-  text-align: center;
-  margin-bottom: 30px;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #00508c;
+  position: relative;
+  display: inline-block;
+  animation: ${fadeIn} 0.6s ease-out;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #00508c, #fac800);
+    border-radius: 2px;
+  }
 `;
 
 const ListContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  animation: ${fadeIn} 0.6s ease-out;
 `;
 
-const ButtonContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-`;
+const StyledButtonGroup = styled(ButtonGroup)`
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 
-const DividerStyled = styled(Divider)`
-  margin: 0 20px;
+  .MuiButton-root {
+    padding: 10px 20px;
+    border: none;
+    color: #00508c;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(0, 80, 140, 0.1);
+    }
+
+    &.active {
+      background-color: #00508c;
+      color: white;
+    }
+  }
 `;
 
 const FilterContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   width: 100%;
   max-width: 1200px;
+  gap: 20px;
+  animation: ${fadeIn} 0.6s ease-out;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const StyledTextField = styled(TextField)`
+  .MuiOutlinedInput-root {
+    border-radius: 50px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    &:hover fieldset {
+      border-color: #00508c;
+    }
+  }
+`;
+
+const StyledFormControl = styled(FormControl)`
+  .MuiOutlinedInput-root {
+    border-radius: 50px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+`;
+
+const ButtonContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  animation: ${fadeIn} 0.6s ease-out;
 `;
 
 const Noticias = () => {
@@ -145,14 +217,14 @@ const Noticias = () => {
     <BlogSection>
       <Title>Últimas Publicações</Title>
       <FilterContainer>
-        <TextField
+        <StyledTextField
           label="Buscar por Título"
           variant="outlined"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ marginRight: "20px", flexGrow: 1 }}
+          fullWidth
         />
-        <FormControl variant="outlined" style={{ minWidth: 200 }}>
+        <StyledFormControl variant="outlined" style={{ minWidth: 200 }}>
           <InputLabel>Filtrar por Autor</InputLabel>
           <Select
             multiple
@@ -168,22 +240,35 @@ const Noticias = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </StyledFormControl>
       </FilterContainer>
       <ButtonContainer>
-        <ButtonGroup variant="outlined" color="primary">
-          <Button onClick={() => setSortOrder("dateDesc")}>
+        <StyledButtonGroup variant="outlined">
+          <Button 
+            className={sortOrder === "dateDesc" ? "active" : ""}
+            onClick={() => setSortOrder("dateDesc")}
+          >
             Data (mais recentes)
           </Button>
-          <Button onClick={() => setSortOrder("dateAsc")}>
+          <Button 
+            className={sortOrder === "dateAsc" ? "active" : ""}
+            onClick={() => setSortOrder("dateAsc")}
+          >
             Data (mais antigas)
           </Button>
-          <DividerStyled orientation="vertical" flexItem />
-          <Button onClick={() => setSortOrder("titleAsc")}>Título (A-Z)</Button>
-          <Button onClick={() => setSortOrder("titleDesc")}>
+          <Button 
+            className={sortOrder === "titleAsc" ? "active" : ""}
+            onClick={() => setSortOrder("titleAsc")}
+          >
+            Título (A-Z)
+          </Button>
+          <Button 
+            className={sortOrder === "titleDesc" ? "active" : ""}
+            onClick={() => setSortOrder("titleDesc")}
+          >
             Título (Z-A)
           </Button>
-        </ButtonGroup>
+        </StyledButtonGroup>
       </ButtonContainer>
       <ListContainer>
         {filteredPosts.map((post, index) => (
