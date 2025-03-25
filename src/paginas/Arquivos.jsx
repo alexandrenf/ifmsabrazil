@@ -359,7 +359,7 @@ const Arquivos = () => {
             filteredArquivos.map((arquivo) => (
               <StyledLink
                 key={arquivo.id}
-                to={`/arquivo/${arquivo.id}/${generateUrlFriendlyTitle(arquivo.title)}`}
+                to={arquivo.fileLink}
               >
                 <BlogPostListItem post={arquivo} />
               </StyledLink>
