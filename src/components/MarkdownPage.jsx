@@ -21,6 +21,22 @@ const MarkdownContainer = styled("div")({
   padding: "12px 120px",
   fontFamily: "'Poppins', sans-serif",
 
+  "@media (max-width: 768px)": {
+    padding: "6px 8px",
+    "& h1": { fontSize: "2rem" },
+    "& h2": { fontSize: "1.5rem" },
+    "& h3": { fontSize: "1.25rem" },
+    "& h4": { fontSize: "1.1rem" },
+    "& h5": { fontSize: "1rem" },
+    "& h6": { fontSize: "0.9rem" },
+    "& blockquote": {
+      padding: "1rem",
+      margin: "1.5rem 0"
+    },
+    "& pre": {
+      padding: "1rem"
+    }
+  },
   "& table": {
     width: "100%",
     borderCollapse: "separate",

@@ -188,6 +188,22 @@ const Noticias = () => {
     return sortedPosts;
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        timeZone: "UTC"
+      });
+    } catch (error) {
+      console.warn("Date parsing failed:", error);
+      return dateString;
+    }
+  };
+
   const filterPosts = (posts) => {
     return posts.filter((post) => {
       const matchesSearchTerm = post.title
@@ -277,7 +293,7 @@ const Noticias = () => {
             key={index}
             style={{ textDecoration: "none" }}
           >
-            <BlogPostListItem post={post} />
+            <BlogPostListItem post={{...post, date: formatDate(post.date)}} />
           </Link>
         ))}
       </ListContainer>
