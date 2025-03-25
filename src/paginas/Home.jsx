@@ -229,7 +229,6 @@ const Particles = styled.div`
     height: 10px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.5);
-    animation: ${particleFloat} 4s infinite linear;
   }
 
   ${[...Array(20)].map((_, i) => `
