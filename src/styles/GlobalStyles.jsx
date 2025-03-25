@@ -112,6 +112,65 @@ const GlobalStyles = () => (
           margin: 5px; /* Adjust margin for horizontal layout */
         }
       }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .cookie-consent-buttons button {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cookie-consent-buttons button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 80, 140, 0.2);
+        background: rgba(0, 80, 140, 1);
+      }
+
+      .cookie-consent-buttons button:active {
+        transform: translateY(0);
+      }
+
+      .cookie-consent-buttons button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+      }
+
+      .cookie-consent-buttons button:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .CookieConsent {
+        animation: fadeIn 0.6s ease-out;
+      }
     `}
   />
 );
