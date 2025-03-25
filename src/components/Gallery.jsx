@@ -198,6 +198,30 @@ const StyledCarousel = styled(RMCarousel)`
     padding: 0;
   }
 
+  .react-multiple-carousel__arrow {
+    background: rgba(0, 80, 140, 0.8);
+    backdrop-filter: blur(4px);
+    min-width: 40px;
+    min-height: 40px;
+    
+    &:hover {
+      background: rgba(0, 80, 140, 0.95);
+    }
+
+    @media (max-width: 768px) {
+      min-width: 32px;
+      min-height: 32px;
+    }
+  }
+
+  .react-multiple-carousel__arrow--left {
+    left: 0;
+  }
+
+  .react-multiple-carousel__arrow--right {
+    right: 0;
+  }
+
   @media (max-width: 768px) {
     .react-multi-carousel-item {
       display: flex;
@@ -257,7 +281,6 @@ const Gallery = ({ url, nameOnPage }) => {
         autoPlaySpeed={5000}
         keyBoardControl={true}
         showDots={true}
-        removeArrowOnDeviceType={["tablet", "mobile"]}
         itemClass="carousel-item"
       >
         {members.map((member, index) => (
