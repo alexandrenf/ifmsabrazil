@@ -291,10 +291,18 @@ const CloseButton = styled.button`
   background: rgba(0, 0, 0, 0.05);
   border: none;
   cursor: pointer;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #666;
   transition: all 0.2s ease;
+  padding: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
 
   &:hover {
     background: rgba(0, 0, 0, 0.1);
