@@ -27,7 +27,6 @@ Ressonância Poética é um periódico cultural de acesso aberto, ou seja, tem s
 
   return (
     <Root>
-      <Title variant="h4">{"Ressonância Poética"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

@@ -111,6 +111,16 @@ Após a filiação em si, todos os novos comitês não-plenos passam por um cicl
 
 `;
 
+  const markdownContent2 = `
+## Coordenação Regional
+
+### O que fazem os Coordenadores Regionais?
+
+Os Coordenadores Regionais prestam assistência à Diretoria Executiva em tarefas a nível regional; desenvolvem competências de nossos eixos de atuação em Escolas Médicas de cada região; promovem oportunidades, como Assembleias Regionais, espaços de representatividade de nossos coordenadores locais.
+
+As Regionais da IFMSA Brazil são: Norte 1 (AC, RO, AM, RR), Norte 2 (PA, AP), Nordeste 1 (MA, PI, CE), Nordeste 2 (RN, PB, PE), Nordeste 3 (AL, SE, BA), Leste (MG, ES, RJ), Oeste (TO, GO, DF, MT, MS), Paulista (SP), Sul (PR, SC, RS).
+`;
+
   if (loading) {
     return <Loading />;
   }
@@ -119,6 +129,7 @@ Após a filiação em si, todos os novos comitês não-plenos passam por um cicl
     <Root>
       <Title variant="h4">{"Processo de Filiação e Comitês Filiados"}</Title>
       <MarkdownContent content={markdownContent1} />
+      <MarkdownContent content={markdownContent2} />
       <ComiteLists members={members} />
     </Root>
   );

@@ -25,7 +25,6 @@ Declaração de Política, ou Policy Statement, é o instrumento pelo qual a IFM
 
   return (
     <Root>
-      <Title variant="h4">{"Declarações de Política"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );
