@@ -1,7 +1,7 @@
 "use client"; // Add this directive for client-side rendering
 
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { Suspense, lazy, useEffect } from "react"; // Add useEffect
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom"; // Add useLocation
 import CookieConsent from "react-cookie-consent";
 import Navbar from "./components/Navbar.jsx";
 import GlobalStyles from "./styles/GlobalStyles.jsx";
@@ -12,6 +12,65 @@ import { ThemeProvider } from "@mui/material/styles";
 import Loading from "./components/Loading.jsx";
 import Home from "./paginas/Home.jsx";
 import theme from "./styles/theme.js";
+
+// Create a ScrollToTop component
+const ScrollToTop = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (location.hash) {
+      // Prevent default hash behavior
+      const handleHashClick = (e) => {
+        if (e.target.hash) {
+          e.preventDefault();
+          const element = document.querySelector(e.target.hash);
+          if (element) {
+            const navbarHeight = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+          }
+        }
+      };
+
+      // Add click handler to all hash links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.removeEventListener('click', handleHashClick);
+        anchor.addEventListener('click', handleHashClick);
+      });
+
+      // Initial scroll to hash if present
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          const navbarHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }, 100);
+
+      return () => {
+        // Cleanup event listeners
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.removeEventListener('click', handleHashClick);
+        });
+      };
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
+
+  return null;
+};
 
 // Lazy load components for code-splitting
 const MarkdownPage = lazy(() => import("./components/MarkdownPage.jsx"));
@@ -47,6 +106,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
+        <ScrollToTop /> {/* Add the ScrollToTop component */}
         <GlobalStyles />
         <CssBaseline />
         <Navbar />
