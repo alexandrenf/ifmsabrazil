@@ -6,12 +6,19 @@ import { faThumbtack, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const ListItem = styled(Box)`
   display: flex;
-  align-items: center;
-  padding: 24px;
+  align-items: stretch;
+  padding: 16px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid rgba(0, 80, 140, 0.1);
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    padding: 12px;
+    gap: 16px;
+  }
 
   &:hover {
     background-color: rgba(0, 80, 140, 0.02);
@@ -30,13 +37,27 @@ const ListItem = styled(Box)`
 
 const ImageContainer = styled(Box)`
   position: relative;
-  min-width: 120px;
-  height: 120px;
-  border-radius: 12px;
+  flex: 0 0 120px;
+  min-height: 120px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   background: #f0f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+
+  @media (max-width: 768px) {
+    flex: 0 0 100px;
+    min-height: 100px;
+  }
+
+  @media (max-width: 480px) {
+    flex: 0 0 80px;
+    min-height: 80px;
+  }
 
   &:hover {
     transform: scale(1.05);
@@ -45,17 +66,24 @@ const ImageContainer = styled(Box)`
 `;
 
 const StyledImage = styled.img`
+  min-width: 100%;
+  min-height: 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const ListItemContent = styled(Box)`
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin-left: 24px;
+  min-width: 0;
   position: relative;
 `;
 
@@ -63,54 +91,88 @@ const Title = styled(Typography)`
   font-weight: 600;
   color: #00508c;
   margin-bottom: 8px;
-  font-size: 1.25rem;
-  line-height: 1.4;
+  font-size: clamp(0.9rem, 2vw, 1.25rem);
+  line-height: 1.3;
   transition: color 0.3s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   ${ListItem}:hover & {
     color: #fac800;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 4px;
   }
 `;
 
 const Author = styled(Typography)`
   color: #666;
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
   margin-bottom: 4px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Date = styled(Typography)`
   color: #888;
-  font-size: 0.85rem;
-  margin-bottom: 12px;
+  font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+  margin-bottom: 8px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 4px;
+  }
 `;
 
 const Summary = styled(Typography)`
   color: #444;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  max-width: 90%;
+  font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    -webkit-line-clamp: 2;
+  }
+
+  @media (max-width: 480px) {
+    -webkit-line-clamp: 2;
+    font-size: 0.8rem;
+  }
 `;
 
 const PinIcon = styled(FontAwesomeIcon)`
   color: #fac800;
-  font-size: 1.2rem;
+  font-size: 1rem;
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 0;
+  right: 0;
   filter: drop-shadow(0 2px 4px rgba(250, 200, 0, 0.2));
 `;
 
 const ArrowIcon = styled(FontAwesomeIcon)`
-  color: #00508c;
-  font-size: 1.2rem;
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
+  display: none;
+
+  @media (min-width: 769px) {
+    display: block;
+    color: #00508c;
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+  }
 `;
 
 const BlogPostListItem = ({ post }) => {
@@ -118,7 +180,6 @@ const BlogPostListItem = ({ post }) => {
     if (!dateString) return "";
     
     try {
-      // If dateString is already a Date object
       if (dateString instanceof Date) {
         return dateString.toLocaleDateString("pt-BR", {
           day: "2-digit",
@@ -128,7 +189,6 @@ const BlogPostListItem = ({ post }) => {
         });
       }
 
-      // If dateString is a timestamp
       if (typeof dateString === 'number') {
         return new Date(dateString).toLocaleDateString("pt-BR", {
           day: "2-digit",
@@ -138,10 +198,9 @@ const BlogPostListItem = ({ post }) => {
         });
       }
 
-      // Handle string format
       const date = new Date(Date.parse(dateString));
       if (isNaN(date.getTime())) {
-        return dateString; // Return original string if parsing fails
+        return dateString;
       }
       
       return date.toLocaleDateString("pt-BR", {
@@ -152,7 +211,7 @@ const BlogPostListItem = ({ post }) => {
       });
     } catch (error) {
       console.warn("Date parsing failed:", error);
-      return dateString; // Return original string if any error occurs
+      return dateString;
     }
   };
 
@@ -169,33 +228,15 @@ const BlogPostListItem = ({ post }) => {
       </ImageContainer>
       
       <ListItemContent>
-        <Title variant="h6">
-          {post.title}
-        </Title>
-        
-        <Author>
-          {post.author}
-        </Author>
-        
-        <Date>
-          {formatDate(post["dia-mes-ano"] || post.date)}
-        </Date>
-        
-        <Summary>
-          {post.summary}
-        </Summary>
-
-        <ArrowIcon 
-          icon={faArrowRight} 
-          className="arrow-icon"
-        />
+        <Title variant="h6">{post.title}</Title>
+        <Author>{post.author}</Author>
+        <Date>{formatDate(post["dia-mes-ano"] || post.date)}</Date>
+        <Summary>{post.summary}</Summary>
+        <ArrowIcon icon={faArrowRight} className="arrow-icon" />
       </ListItemContent>
 
       {post.forceHomePage && (
-        <PinIcon
-          icon={faThumbtack}
-          title="Post fixado"
-        />
+        <PinIcon icon={faThumbtack} title="Post fixado" />
       )}
     </ListItem>
   );

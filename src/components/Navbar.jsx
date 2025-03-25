@@ -227,6 +227,7 @@ const MobileLink = styled.div`
   padding: 0.5rem;
   border-radius: 8px;
   width: 100%;
+  text-align: center;
   
   &:hover {
     color: #fac800;
@@ -238,6 +239,7 @@ const MobileLink = styled.div`
     text-decoration: none;
     display: block;
     width: 100%;
+    text-align: center;
   }
 `
 
@@ -250,6 +252,8 @@ const MobileSubLink = styled(Link)`
   transition: all 0.3s ease;
   text-decoration: none;
   background: rgba(255, 255, 255, 0.05);
+  text-align: center;
+  width: 100%;
 
   &:hover {
     color: #fac800;
@@ -262,6 +266,8 @@ const MobileExternalSubLink = styled.div`
   display: block;
   margin: 0.75rem 0;
   transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
   
   a {
     display: block;
@@ -271,6 +277,7 @@ const MobileExternalSubLink = styled.div`
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
+    text-align: center;
     
     &:hover {
       color: #fac800;
@@ -329,23 +336,18 @@ const Navbar = () => {
   }, [])
 
   useEffect(() => {
-    // Close mobile menu when route changes
+    // Close mobile menu and reset body scroll when route changes
     setIsOpen(false)
     setActiveSubMenu("")
+    document.body.style.overflow = "auto" // Add this line to ensure body scroll is restored
   }, [location])
 
   const toggleMobileMenu = () => {
-    if (isOpen) {
-      setActiveSubMenu("")
-    }
     setIsOpen(!isOpen)
+    setActiveSubMenu("") // Add this line to reset submenus when toggling mobile menu
 
     // Prevent body scroll when menu is open
-    if (!isOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "auto"
-    }
+    document.body.style.overflow = !isOpen ? "hidden" : "auto"
   }
 
   const toggleSubMenu = (menu) => {

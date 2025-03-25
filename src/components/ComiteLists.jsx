@@ -349,11 +349,6 @@ const ComiteLists = ({ members }) => {
       });
   };
 
-  const displayedMembers = filteredMembers.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
-
   return (
     <Section>
       <Title>Lista de Comitês Locais Filiados</Title>
@@ -396,14 +391,14 @@ const ComiteLists = ({ members }) => {
       </FilterContainer>
       <TableContainer>
         <TableComponent
-          displayedMembers={displayedMembers}
+          displayedMembers={filteredMembers} // pass full filtered list
           filteredMembersLength={filteredMembers.length}
           page={page}
           rowsPerPage={rowsPerPage}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           showPrompt={showPrompt}
-          onClosePrompt={() => handleCloseRotatePrompt()}
+          onClosePrompt={handleCloseRotatePrompt}
         />
       </TableContainer>
     </Section>

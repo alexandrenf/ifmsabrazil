@@ -153,7 +153,7 @@ const ResponsiveWrapper = styled.div`
 `;
 
 const TableComponent = ({
-  displayedMembers,
+  displayedMembers, // full filtered list from parent
   filteredMembersLength,
   page,
   rowsPerPage,
@@ -161,41 +161,14 @@ const TableComponent = ({
   handleChangeRowsPerPage,
   showPrompt,
   onClosePrompt,
-  searchTerm = '', // New prop for search term
-  filters = {}, // New prop for filters
 }) => {
-  // Filter function with robust string comparison
-  const filterMembers = (members) => {
-    return members.filter(member => {
-      // Search term filtering
-      if (searchTerm) {
-        const searchableFields = [
-          member["Comitê Local"],
-          member.Regional,
-          member.Cidade,
-          member.UF,
-          member.Status
-        ];
-        
-        const matchesSearch = searchableFields.some(field => 
-          compareStrings(field, searchTerm)
-        );
-        
-        if (!matchesSearch) return false;
-      }
-
-      // Filters object filtering
-      return Object.entries(filters).every(([key, value]) => {
-        if (!value) return true; // Skip empty filters
-        
-        const memberValue = member[key];
-        return compareStrings(memberValue, value);
-      });
-    });
-  };
-
-  // Apply filtering to members
-  const filteredMembers = filterMembers(displayedMembers);
+  // Compute the paginated items
+  const paginatedMembers = displayedMembers.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+  
+  const totalPages = Math.ceil(filteredMembersLength / rowsPerPage);
 
   return (
     <>
@@ -212,27 +185,25 @@ const TableComponent = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredMembers
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((member, index) => (
-                  <StyledTableRow key={index}>
-                    <TableCell>{member["Comitê Local"]}</TableCell>
-                    <TableCell>{member.Regional}</TableCell>
-                    <TableCell>{member.Cidade}</TableCell>
-                    <TableCell>{member.UF}</TableCell>
-                    <TableCell>
-                      <StatusBadge status={member.Status}>
-                        {member.Status}
-                      </StatusBadge>
-                    </TableCell>
-                  </StyledTableRow>
-                ))}
+              {paginatedMembers.map((member, index) => (
+                <StyledTableRow key={index}>
+                  <TableCell>{member["Comitê Local"]}</TableCell>
+                  <TableCell>{member.Regional}</TableCell>
+                  <TableCell>{member.Cidade}</TableCell>
+                  <TableCell>{member.UF}</TableCell>
+                  <TableCell>
+                    <StatusBadge status={member.Status}>
+                      {member.Status}
+                    </StatusBadge>
+                  </TableCell>
+                </StyledTableRow>
+              ))}
             </TableBody>
           </StyledTable>
           <StyledTablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={filteredMembers.length}
+            count={filteredMembersLength}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -241,6 +212,24 @@ const TableComponent = ({
             labelDisplayedRows={({ from, to, count }) =>
               `${from}-${to} de ${count}`
             }
+            slotProps={{
+              select: {
+                native: true,
+              },
+              backButton: {
+                disabled: page === 0,
+              },
+              nextButton: {
+                disabled: page + 1 >= totalPages,
+              },
+            }}
+            getItemAriaLabel={(type) => {
+              if (type === 'first') return 'Ir para primeira página';
+              if (type === 'last') return 'Ir para última página';
+              if (type === 'next') return 'Ir para próxima página';
+              if (type === 'previous') return 'Ir para página anterior';
+              return '';
+            }}
           />
         </StyledTableContainer>
       </ResponsiveWrapper>

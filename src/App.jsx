@@ -13,7 +13,17 @@ import Loading from "./components/Loading.jsx";
 import Home from "./paginas/Home.jsx";
 import theme from "./styles/theme.js";
 
-
+// Add color-scheme meta tag to prevent dark mode override
+const ColorSchemeMetaTag = () => {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'color-scheme';
+    meta.content = 'light';
+    document.head.appendChild(meta);
+    return () => document.head.removeChild(meta);
+  }, []);
+  return null;
+};
 
 // Create a ScrollToTop component
 const ScrollToTop = () => {
@@ -77,6 +87,7 @@ const LinkPage = lazy(() => import("./paginas/LinkPage.jsx"));
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <ColorSchemeMetaTag />
       <Router>
         <ScrollToTop /> {/* Add the ScrollToTop component */}
         <GlobalStyles />
