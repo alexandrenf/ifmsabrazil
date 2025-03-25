@@ -113,6 +113,7 @@ const App = () => {
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/eixos" element={<Eixos />} />
             <Route
               path="/arquivo/:id/:title"
               element={<MarkdownPage needsExternal={true} />}
@@ -126,7 +127,6 @@ const App = () => {
             <Route path="/acoes" element={<AcoesETematicas />} />
             <Route path="/arquivos/:type" element={<Arquivos />} />
             <Route path="/social-programs" element={<SocialPrograms />} />
-            <Route path="/eixos" element={<Eixos />} />
             <Route path="/eventos" element={<Eventos />} />
             <Route path="/privacidade" element={<PoliticaPriv />} />
             <Route path="/regulamento" element={<Regulamento />} />
