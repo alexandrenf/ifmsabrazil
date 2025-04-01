@@ -23,7 +23,7 @@ const MarkdownContainer = styled("div")({
   fontFamily: "'Poppins', sans-serif",
 
   "@media (max-width: 768px)": {
-    padding: "6px 8px",
+    padding: "16px",
     "& h1": { fontSize: "2rem" },
     "& h2": { fontSize: "1.5rem" },
     "& h3": { fontSize: "1.25rem" },
@@ -36,6 +36,10 @@ const MarkdownContainer = styled("div")({
     },
     "& pre": {
       padding: "1rem"
+    },
+    "& img": {
+      maxWidth: "100%",
+      margin: "1rem auto"
     }
   },
   "& table": {
@@ -133,6 +137,7 @@ const MarkdownContainer = styled("div")({
     width: "100%",
     maxWidth: "800px",
     height: "auto",
+    objectFit: "contain",
     display: "block",
     margin: "2rem auto",
     borderRadius: "20px",
@@ -314,7 +319,14 @@ const MarkdownOptions = {
     },
     img: {
       component: ({ children, ...props }) => (
-        <img {...props} style={{ height: "auto" }} />
+        <img 
+          {...props} 
+          style={{ 
+            maxWidth: '100%',
+            height: 'auto',
+            objectFit: 'contain'
+          }} 
+        />
       ),
     },
   },

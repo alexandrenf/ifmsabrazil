@@ -123,6 +123,7 @@ const MarkdownContainer = styled.div`
     width: 100%;
     max-width: 800px;
     height: auto;
+    object-fit: contain;
     display: block;
     margin: 2rem auto;
     border-radius: 20px;
@@ -310,7 +311,15 @@ const MarkdownOptions = {
     },
     img: {
       component: ({ children, ...props }) => (
-        <img {...props} alt={props.alt || ""} />
+        <img 
+          {...props} 
+          alt={props.alt || ""} 
+          style={{ 
+            maxWidth: '100%',
+            height: 'auto',
+            objectFit: 'contain'
+          }}
+        />
       ),
     },
     code: {
