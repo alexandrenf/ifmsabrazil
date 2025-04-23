@@ -11,7 +11,49 @@ import {
   Modal,
   Box,
   Button,
+  Chip,
+  Stack,
+  Container,
+  CircularProgress,
+  Alert,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { motion } from 'framer-motion';
+
+// Styled components
+const StyledCard = styled(Card)(({ theme }) => ({
+  transition: 'all 0.3s ease-in-out',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: theme.shadows[8],
+  },
+}));
+
+const PriceTag = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: 'white',
+  padding: '6px 16px',
+  borderRadius: '20px',
+  fontWeight: 'bold',
+  fontSize: '1.1rem',
+  position: 'absolute',
+  top: '12px',
+  right: '12px',
+  boxShadow: theme.shadows[2],
+}));
+
+const StockBadge = styled(Chip)(({ theme, instock }) => ({
+  position: 'absolute',
+  top: '12px',
+  left: '12px',
+  backgroundColor: instock ? theme.palette.success.main : theme.palette.error.main,
+  color: 'white',
+  fontWeight: 'bold',
+  boxShadow: theme.shadows[1],
+}));
 
 // Function to normalize strings for comparison
 const normalizeString = (str) => {
@@ -20,6 +62,12 @@ const normalizeString = (str) => {
     .normalize('NFD') // Decompose Unicode
     .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
     .trim();
+};
+
+// Add this function after normalizeString
+const cleanProductName = (name) => {
+  if (!name) return '';
+  return name.replace(/^\[NC\]\s*/i, '');
 };
 
 // Function to check if a product is in stock
@@ -65,6 +113,8 @@ const getCategoryImage = (categoryName) => {
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/adesivos1.png';
     case 'fita metrica':
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/fitam.png';
+    case 'camisas - nova colecao':
+      return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_br.png';
     default:
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/default_placeholder.png';
   }
@@ -139,6 +189,18 @@ const productImages = {
   'Roller Clip Logo Clássica': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller4.png',
   'Roller Clip Viagens (colorido)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller3.png',
   'Roller Clip Viagens (preto e branco)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller2.png',
+  '[NC] Camisa Raiz P': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_raiz.png',
+  '[NC] Camisa Raiz M': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_raiz.png',
+  '[NC] Camisa Raiz G': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_raiz.png',
+  '[NC] Camisa Raiz GG': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_raiz.png',
+  '[NC] Camisa AG 62 P': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_ag62.png',
+  '[NC] Camisa AG 62 M': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_ag62.png',
+  '[NC] Camisa AG 62 G': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_ag62.png',
+  '[NC] Camisa AG 62 GG': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_ag62.png',
+  '[NC] Camisa Brasilidades P': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_br.png',
+  '[NC] Camisa Brasilidades M': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_br.png',
+  '[NC] Camisa Brasilidades G': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_br.png',
+  '[NC] Camisa Brasilidades GG': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/camisa_br.png',
   // ... Add mappings for all other Camisas with appropriate images
   // Roller Clips
   // Add mappings for other products if images are available
@@ -155,9 +217,40 @@ const getProductImage = (product) => {
   }
 };
 
+// Add this function after the existing utility functions
+const parsePrice = (price) => {
+  if (!price) return 0;
+  
+  // Remove any currency symbols and spaces
+  const cleanPrice = price.toString().replace(/[R$\s]/g, '');
+  
+  // Replace comma with dot for decimal point
+  const normalizedPrice = cleanPrice.replace(',', '.');
+  
+  // Parse the number
+  const parsedPrice = parseFloat(normalizedPrice);
+  
+  // Return 0 if parsing fails
+  return isNaN(parsedPrice) ? 0 : parsedPrice;
+};
+
+// Add this function after parsePrice
+const hasUniformPricing = (products) => {
+  if (!products || products.length === 0) return false;
+  
+  const prices = products
+    .filter(product => isInStock(product.Estoque))
+    .map(product => parsePrice(product.Valor));
+  
+  if (prices.length === 0) return false;
+  
+  const firstPrice = prices[0];
+  return prices.every(price => price === firstPrice);
+};
+
 const StockPage = () => {
   const csvUrl =
-    'https://docs.google.com/spreadsheets/d/1JadpkRuL5WdGmjdjX4KnTUbC66yYD9UJcfNaC9H7Dg4/export?format=csv';
+    'https://docs.google.com/spreadsheets/d/1kr_Q9njQ3nBcs4Z9XGIn2pkEh5stw9boas5rCLGIg6Q/export?format=csv';
 
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
@@ -197,7 +290,9 @@ const StockPage = () => {
       const normalizedProductName = normalizeString(productName);
       let categoryName = 'Outros';
 
-      if (normalizedProductName.startsWith('camisa')) {
+      if (normalizedProductName.startsWith('[nc]')) {
+        categoryName = 'Camisas - Nova Coleção';
+      } else if (normalizedProductName.startsWith('camisa')) {
         categoryName = 'Camisas';
       } else if (
         normalizedProductName.startsWith('botton') ||
@@ -272,187 +367,360 @@ const StockPage = () => {
 
   if (loading) {
     return (
-      <Typography variant="h6" align="center">
-        Carregando...
-      </Typography>
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
+        <CircularProgress />
+      </Box>
     );
   }
 
   if (error) {
     return (
-      <Typography variant="h6" align="center">
-        {error}
-      </Typography>
+      <Container>
+        <Alert severity="error" sx={{ mt: 4 }}>
+          {error}
+        </Alert>
+      </Container>
     );
   }
 
   return (
-    <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Estoque de Produtos
+    <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Typography 
+        variant="h3" 
+        component="h1" 
+        align="center" 
+        gutterBottom 
+        sx={{ 
+          mb: 8, 
+          fontWeight: 'bold',
+          color: 'primary.main',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
+        }}
+      >
+        Nossa Loja
       </Typography>
-      <Grid container spacing={3}>
+      
+      <Grid container spacing={4}>
         {Object.keys(categories).map((categoryName, index) => {
           const allOutOfStock = !isCategoryInStock(categories[categoryName]);
           return (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card
-                onClick={() => handleCategoryClick(categoryName)}
-                sx={{
-                  backgroundColor: allOutOfStock ? '#f0f0f0' : '#fff',
-                  cursor: allOutOfStock ? 'not-allowed' : 'pointer',
-                  position: 'relative',
-                  '&:hover': {
-                    boxShadow: !allOutOfStock && '0px 4px 20px rgba(0, 0, 0, 0.1)',
-                  },
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
               >
-                <CardActionArea disabled={allOutOfStock}>
-                  <Box sx={{ aspectRatio: '1', overflow: 'hidden' }}>
-                    <CardMedia
-                      component="img"
-                      image={getCategoryImage(categoryName)}
-                      sx={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        filter: allOutOfStock ? 'grayscale(100%)' : 'none',
-                      }}
-                    />
-                  </Box>
-                  <CardContent>
-                    <Typography variant="h6" align="center">
-                      {categoryName}
-                    </Typography>
-                  </CardContent>
-                  {allOutOfStock && (
-                    <Typography
-                      variant="h6"
-                      color="red"
-                      sx={{ position: 'absolute', top: 10, right: 10 }}
-                    >
-                      Esgotado
-                    </Typography>
-                  )}
-                </CardActionArea>
-              </Card>
+                <StyledCard
+                  onClick={() => handleCategoryClick(categoryName)}
+                  sx={{
+                    cursor: allOutOfStock ? 'not-allowed' : 'pointer',
+                    opacity: allOutOfStock ? 0.7 : 1,
+                    background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                    borderRadius: '16px',
+                  }}
+                >
+                  <CardActionArea disabled={allOutOfStock}>
+                    <Box sx={{ position: 'relative', paddingTop: '100%' }}>
+                      <CardMedia
+                        component="img"
+                        image={getCategoryImage(categoryName)}
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          filter: allOutOfStock ? 'grayscale(100%)' : 'none',
+                          borderRadius: '16px 16px 0 0',
+                        }}
+                      />
+                      {allOutOfStock && (
+                        <StockBadge
+                          label="ESGOTADO"
+                          instock={false}
+                        />
+                      )}
+                    </Box>
+                    <CardContent sx={{ 
+                      textAlign: 'center', 
+                      position: 'relative',
+                      flexGrow: 1,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      padding: '24px',
+                    }}>
+                      <Typography 
+                        variant="h5" 
+                        component="h2" 
+                        gutterBottom
+                        sx={{
+                          fontWeight: 'bold',
+                          color: 'text.primary',
+                          mb: 1,
+                        }}
+                      >
+                        {categoryName}
+                      </Typography>
+                      <Typography 
+                        variant="body1" 
+                        color="text.secondary"
+                        sx={{
+                          fontSize: '1.1rem',
+                        }}
+                      >
+                        {categories[categoryName].length} produtos
+                        {hasUniformPricing(categories[categoryName]) && (
+                          <> · R$ {parsePrice(categories[categoryName][0].Valor).toFixed(2)}</>
+                        )}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </StyledCard>
+              </motion.div>
             </Grid>
           );
         })}
       </Grid>
 
       {/* Category Modal */}
-      {currentCategory && (
-        <Modal
-          open={showCategoryModal}
-          onClose={handleCloseCategoryModal}
-          aria-labelledby="category-modal-title"
+      <Modal
+        open={showCategoryModal}
+        onClose={handleCloseCategoryModal}
+        aria-labelledby="category-modal-title"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '90%',
+            maxWidth: '1200px',
+            maxHeight: '90vh',
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: '16px',
+            overflow: 'auto',
+            background: 'linear-gradient(145deg, #ffffff, #f8f8f8)',
+          }}
         >
-          <Box
+          <Typography 
+            id="category-modal-title" 
+            variant="h4" 
+            component="h2" 
+            gutterBottom
             sx={{
-              padding: 3,
-              backgroundColor: 'white',
-              margin: '5% auto',
-              width: '80%',
-              height: '80vh',
-              overflowY: 'auto',
-              borderRadius: 2,
+              color: 'primary.main',
+              fontWeight: 'bold',
+              mb: 4,
             }}
           >
-            <Typography id="category-modal-title" variant="h5" gutterBottom>
-              {currentCategory}
-            </Typography>
-            <Grid container spacing={3}>
-              {categories[currentCategory].map((product, index) => {
-                const outOfStock = !isInStock(product.Estoque);
-                return (
-                  <Grid item xs={12} sm={6} md={4} key={index}>
-                    <Card
+            {currentCategory}
+          </Typography>
+          <Grid container spacing={3}>
+            {categories[currentCategory]?.map((product, index) => {
+              const outOfStock = !isInStock(product.Estoque);
+              return (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <StyledCard
                       onClick={() => handleProductClick(product)}
                       sx={{
-                        backgroundColor: outOfStock ? '#f0f0f0' : '#fff',
                         cursor: outOfStock ? 'not-allowed' : 'pointer',
-                        position: 'relative',
-                        '&:hover': {
-                          boxShadow:
-                            !outOfStock && '0px 4px 20px rgba(0, 0, 0, 0.1)',
-                        },
+                        opacity: outOfStock ? 0.7 : 1,
+                        background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                        borderRadius: '16px',
                       }}
                     >
                       <CardActionArea disabled={outOfStock}>
-                        <Box sx={{ aspectRatio: '1', overflow: 'hidden' }}>
+                        <Box sx={{ position: 'relative', paddingTop: '100%' }}>
                           <CardMedia
                             component="img"
                             image={getProductImage(product)}
                             sx={{
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
                               width: '100%',
                               height: '100%',
                               objectFit: 'cover',
                               filter: outOfStock ? 'grayscale(100%)' : 'none',
+                              borderRadius: '16px 16px 0 0',
                             }}
                           />
+                          <PriceTag>
+                            R$ {parsePrice(product.Valor).toFixed(2)}
+                          </PriceTag>
+                          <StockBadge
+                            label={outOfStock ? "ESGOTADO" : "DISPONÍVEL"}
+                            instock={!outOfStock}
+                          />
                         </Box>
-                        <CardContent>
-                          <Typography variant="h6" align="center">
-                            {product.Produto}
-                          </Typography>
-                        </CardContent>
-                        {outOfStock && (
-                          <Typography
-                            variant="h6"
-                            color="red"
-                            sx={{ position: 'absolute', top: 10, right: 10 }}
+                        <CardContent sx={{ 
+                          padding: '20px',
+                          textAlign: 'center',
+                        }}>
+                          <Typography 
+                            variant="h6" 
+                            component="h3" 
+                            gutterBottom
+                            sx={{
+                              fontWeight: 'bold',
+                              color: 'text.primary',
+                            }}
                           >
-                            Esgotado
+                            {cleanProductName(product.Produto)}
                           </Typography>
-                        )}
+                          <Stack direction="row" spacing={1} justifyContent="center">
+                            <Chip
+                              label={`Tamanho: ${product.Tamanho || 'Único'}`}
+                              size="small"
+                              sx={{
+                                backgroundColor: 'primary.light',
+                                color: 'white',
+                              }}
+                            />
+                          </Stack>
+                        </CardContent>
                       </CardActionArea>
-                    </Card>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-        </Modal>
-      )}
-
-      {/* Product Modal */}
-      {currentProduct && (
-        <Modal open={showProductModal} onClose={handleCloseProductModal}>
-          <Box
-            sx={{
-              padding: 3,
-              backgroundColor: 'white',
-              margin: '5% auto',
-              width: '50%',
-              maxHeight: '80vh',
-              overflowY: 'auto',
-              borderRadius: 2,
-            }}
-          >
-            <Typography variant="h6" gutterBottom>
-              {currentProduct.Produto}
-            </Typography>
-            <Typography>
-              <strong>Valor:</strong> {currentProduct.Valor}
-            </Typography>
-            <Typography>
-              <strong>Estoque:</strong>{' '}
-              {isInStock(currentProduct.Estoque) ? 'Disponível' : 'Indisponível'}
-            </Typography>
-            {/* Additional product details can be added here */}
+                    </StyledCard>
+                  </motion.div>
+                </Grid>
+              );
+            })}
+          </Grid>
+          <Box sx={{ mt: 4, textAlign: 'center' }}>
             <Button
               variant="contained"
-              color="primary"
-              sx={{ mt: 2 }}
-              onClick={handleCloseProductModal}
+              onClick={handleCloseCategoryModal}
+              sx={{ 
+                mt: 2,
+                borderRadius: '20px',
+                padding: '8px 24px',
+                fontSize: '1.1rem',
+              }}
             >
               Fechar
             </Button>
           </Box>
-        </Modal>
-      )}
-    </Box>
+        </Box>
+      </Modal>
+
+      {/* Product Modal */}
+      <Modal
+        open={showProductModal}
+        onClose={handleCloseProductModal}
+        aria-labelledby="product-modal-title"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '90%',
+            maxWidth: '800px',
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: '16px',
+            background: 'linear-gradient(145deg, #ffffff, #f8f8f8)',
+          }}
+        >
+          {currentProduct && (
+            <>
+              <Grid container spacing={4}>
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ position: 'relative', paddingTop: '100%' }}>
+                    <CardMedia
+                      component="img"
+                      image={getProductImage(currentProduct)}
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        borderRadius: '16px',
+                      }}
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Typography 
+                    id="product-modal-title" 
+                    variant="h4" 
+                    component="h2" 
+                    gutterBottom
+                    sx={{
+                      color: 'primary.main',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {cleanProductName(currentProduct.Produto)}
+                  </Typography>
+                  <Typography 
+                    variant="h5" 
+                    color="primary" 
+                    gutterBottom
+                    sx={{
+                      fontWeight: 'bold',
+                      mb: 3,
+                    }}
+                  >
+                    R$ {parsePrice(currentProduct.Valor).toFixed(2)}
+                  </Typography>
+                  <Stack spacing={3} sx={{ mt: 2 }}>
+                    <Box>
+                      <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+                        Tamanho
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
+                        {currentProduct.Tamanho || 'Único'}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+                        Estoque
+                      </Typography>
+                      <Chip
+                        label={isInStock(currentProduct.Estoque) ? "DISPONÍVEL" : "ESGOTADO"}
+                        color={isInStock(currentProduct.Estoque) ? "success" : "error"}
+                        sx={{ fontWeight: 'bold' }}
+                      />
+                    </Box>
+                  </Stack>
+                  <Box sx={{ mt: 4 }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      size="large"
+                      onClick={handleCloseProductModal}
+                      sx={{
+                        borderRadius: '20px',
+                        padding: '12px',
+                        fontSize: '1.1rem',
+                      }}
+                    >
+                      Fechar
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </>
+          )}
+        </Box>
+      </Modal>
+    </Container>
   );
 };
 
