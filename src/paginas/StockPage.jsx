@@ -23,7 +23,8 @@ import { motion } from 'framer-motion';
 // Styled components
 const StyledCard = styled(Card)(({ theme }) => ({
   transition: 'all 0.3s ease-in-out',
-  height: '100%',
+  height: 'auto',
+  maxHeight: { xs: '280px', sm: '350px', md: '400px' },
   display: 'flex',
   flexDirection: 'column',
   '&:hover': {
@@ -43,6 +44,12 @@ const PriceTag = styled(Box)(({ theme }) => ({
   top: '12px',
   right: '12px',
   boxShadow: theme.shadows[2],
+  [theme.breakpoints.down('sm')]: {
+    padding: '4px 12px',
+    fontSize: '0.9rem',
+    top: '8px',
+    right: '8px',
+  },
 }));
 
 const StockBadge = styled(Chip)(({ theme, instock }) => ({
@@ -554,29 +561,30 @@ const StockPage = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
+    <Container maxWidth="lg" sx={{ py: { xs: 4, sm: 4, md: 6 }, px: { xs: 3, sm: 3, md: 4 } }}>
       <Typography 
         variant="h3" 
         component="h1" 
         align="center" 
         gutterBottom 
         sx={{ 
-          mb: 8, 
+          mb: { xs: 4, sm: 6, md: 8 }, 
           fontWeight: 'bold',
           color: 'primary.main',
-          textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
+          textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+          fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }
         }}
       >
         Nossa Loja
       </Typography>
       
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 3, sm: 3, md: 4 }}>
         {Object.keys(categories)
           .sort((a, b) => a.localeCompare(b, 'pt-BR'))
           .map((categoryName, index) => {
           const allOutOfStock = !isCategoryInStock(categories[categoryName]);
           return (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid item xs={6} sm={6} md={4} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -614,14 +622,14 @@ const StockPage = () => {
                         />
                       )}
                     </Box>
-                    <CardContent sx={{ 
-                      textAlign: 'center', 
+                    <CardContent sx={{
+                      textAlign: 'center',
                       position: 'relative',
                       flexGrow: 1,
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'center',
-                      padding: '24px',
+                      padding: { xs: '12px', sm: '20px', md: '24px' },
                     }}>
                       <Typography 
                         variant="h5" 
@@ -639,7 +647,7 @@ const StockPage = () => {
                         variant="body1" 
                         color="text.secondary"
                         sx={{
-                          fontSize: '1.1rem',
+                          fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' },
                         }}
                       >
                         {countUniqueProducts(categories[categoryName])} {countUniqueProducts(categories[categoryName]) === 1 ? 'produto' : 'produtos'}
@@ -668,15 +676,17 @@ const StockPage = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '90%',
-            maxWidth: '1200px',
+            width: { xs: '100%', sm: '90%', md: '80%' },
+            maxWidth: { xs: '400px', sm: '800px', md: '1200px' },
             maxHeight: '90vh',
             bgcolor: 'background.paper',
             boxShadow: 24,
-            p: 4,
+            p: { xs: 1, sm: 4 },
             borderRadius: '16px',
             overflow: 'auto',
             background: 'linear-gradient(145deg, #ffffff, #f8f8f8)',
+            mx: { xs: 2, sm: 0 },
+            my: { xs: 2, sm: 0 },
           }}
         >
           <Typography 
@@ -685,14 +695,15 @@ const StockPage = () => {
             component="h2" 
             gutterBottom
             sx={{
+              fontSize: { xs: '1.25rem', sm: '2rem', md: '2.5rem' },
+              mb: { xs: 2, sm: 3, md: 4 },
               color: 'primary.main',
               fontWeight: 'bold',
-              mb: 4,
             }}
           >
             {currentCategory}
           </Typography>
-          <Grid container spacing={3}>
+          <Grid container spacing={{ xs: 1, sm: 2, md: 3 }}>
             {getGroupedProductsForCategory(categories[currentCategory] || [])
               .sort((a, b) => a.baseName.localeCompare(b.baseName, 'pt-BR'))
               .map((group, index) => {
@@ -739,8 +750,8 @@ const StockPage = () => {
                             instock={!outOfStock}
                           />
                         </Box>
-                        <CardContent sx={{ 
-                          padding: '20px',
+                        <CardContent sx={{
+                          padding: { xs: '8px', sm: '16px', md: '20px' },
                           textAlign: 'center',
                         }}>
                           <Typography 
@@ -805,10 +816,11 @@ const StockPage = () => {
               variant="contained"
               onClick={handleCloseCategoryModal}
               sx={{ 
-                mt: 2,
+                mt: { xs: 1, sm: 2 },
                 borderRadius: '20px',
-                padding: '8px 24px',
-                fontSize: '1.1rem',
+                padding: { xs: '8px 16px', sm: '8px 24px' },
+                fontSize: { xs: '0.9rem', sm: '1.1rem' },
+                width: { xs: '100%', sm: 'auto' },
               }}
             >
               Fechar
@@ -829,18 +841,20 @@ const StockPage = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '90%',
-            maxWidth: '800px',
+            width: { xs: '100%', sm: '90%', md: '70%' },
+            maxWidth: { xs: '350px', sm: '600px', md: '800px' },
             bgcolor: 'background.paper',
             boxShadow: 24,
-            p: 4,
+            p: { xs: 1, sm: 4 },
             borderRadius: '16px',
             background: 'linear-gradient(145deg, #ffffff, #f8f8f8)',
+            mx: { xs: 2, sm: 0 },
+            my: { xs: 2, sm: 0 },
           }}
         >
           {currentProduct && (
             <>
-              <Grid container spacing={4}>
+              <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
                 <Grid item xs={12} md={6}>
                   <Box sx={{ position: 'relative', paddingTop: '100%' }}>
                     <CardMedia
@@ -865,6 +879,8 @@ const StockPage = () => {
                     component="h2" 
                     gutterBottom
                     sx={{
+                      fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                      mb: { xs: 1, sm: 2 },
                       color: 'primary.main',
                       fontWeight: 'bold',
                     }}
@@ -880,7 +896,8 @@ const StockPage = () => {
                     gutterBottom
                     sx={{
                       fontWeight: 'bold',
-                      mb: 3,
+                      fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2rem' },
+                      mb: { xs: 1, sm: 2, md: 3 },
                     }}
                   >
                     R$ {parsePrice(currentProduct.Valor).toFixed(2)}
@@ -951,8 +968,8 @@ const StockPage = () => {
                       onClick={handleCloseProductModal}
                       sx={{
                         borderRadius: '20px',
-                        padding: '12px',
-                        fontSize: '1.1rem',
+                        padding: { xs: '10px', sm: '12px' },
+                        fontSize: { xs: '1rem', sm: '1.1rem' },
                       }}
                     >
                       Fechar
