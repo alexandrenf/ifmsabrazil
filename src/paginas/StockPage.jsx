@@ -95,6 +95,15 @@ const cleanProductName = (name) => {
   // Remove [NC] prefix if present
   let result = name.replace(/^\[NC\]\s*/i, '');
   
+  // Special handling for moletinho products
+  if (result.toLowerCase().includes('moletinho')) {
+    // Keep the base name "Moletinho" and remove size indicators
+    result = result.replace(/\s+(P|M|G|GG)$/i, '');
+    result = result.replace(/\s+-\s+(P|M|G|GG)$/i, '');
+    result = result.replace(/\s+\((P|M|G|GG)\)$/i, '');
+    return result.trim();
+  }
+  
   // Remove size indicators only at the very end of the string
   // Using a more precise regex that only matches at the end
   const sizePatterns = [
@@ -150,7 +159,7 @@ const getCategoryImage = (categoryName) => {
     case 'camisas':
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/yt.png';
     case 'bottons':
-      return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/botton-placeholder.png';
+      return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b1.png';
     case 'roller clips':
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller1.png';
     case 'moletons':
@@ -172,7 +181,7 @@ const getCategoryImage = (categoryName) => {
     case 'necessaires':
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/necessaire.png';
     case 'adesivos':
-      return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/adesivos1.png';
+      return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/c2.png';
     case 'fita metrica':
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/fitam.png';
     case 'camisas - nova colecao':
@@ -181,6 +190,8 @@ const getCategoryImage = (categoryName) => {
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/bucket2.png';
     case 'moletinho':
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/moletinho.png';
+    case 'slides':
+      return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/slides.png';
     default:
       return 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/default_placeholder.png';
   }
@@ -189,18 +200,15 @@ const getCategoryImage = (categoryName) => {
 // Mapping of product names to image URLs
 const productImages = {
   // Bottons
-  'Botton Queer': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_queer.png',
-  'Botton Estudantes de Medicina': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/botton-placeholder.png',
-  'Botton IF LGBTQIAP+': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_if_lgbtqiap.png',
-  'Botton Marie Curie': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_marie_curie.png',
-  'Botton Expressões Regionais': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_expressoes_regionais.png',
-  'Botton Educação Paulo Freire': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_paulo_freire.png',
-  'Botton Martin Luther King Jr': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_mlk.png',
-  'Botton Girls Just Wanna Have Fun': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_girls_just_wanna_have_fun.png',
-  'Bottom Feminista': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_feminista.png',
-  'Botton Em Tudo Que O Sol toca': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_em_tudo_que_o_sol_toca.png',
-  'Botton (Ex)Change': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/botton_exchange.png',
-  'Botton Capacity Building': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/bottons/Botton_Capacity_Building.png',
+  'Botton IFMSA Brazil': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b1.png',
+  'Botton Caramelo': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b2.png',
+  'Botton PANDemic': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b3.png',
+  'Botton Juntos': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b4.png',
+  'Bottom Love is Love': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b5.png',
+  'Botton Queen': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b6.png',
+  'Botton Gatinho Científico': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b7.png',
+  'Botton Capacity Building': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b8.png',
+  'Botton Expressões Regionais': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b9.png',
   // Camisas
   // Repeat the same image for different sizes or use specific images if available
   'Camisa Administrativo P': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/yt.png',
@@ -247,7 +255,9 @@ const productImages = {
   'Camisa Representatividade M': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/tre.png',
   'Camisa Representatividade G': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/tre.png',
   'Camisa Representatividade GG': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/tre.png',
-  'Cartela de Adesivos': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/adesivos1.png',
+  'Cartela de Adesivos - Modelo 1': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/c1.png',
+  'Cartela de Adesivos - Modelo 2': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/c2.png',
+  'Cartela de Adesivos - Modelo 3': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/c3.png',
   'Roller Clip Logo Clássica': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller4.png',
   'Roller Clip Viagens (colorido)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller3.png',
   'Roller Clip Viagens (preto e branco)': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/roller2.png',
@@ -277,6 +287,7 @@ const productImages = {
   'Moletinho G': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/moletinho.png',
   'Moletinho GG': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/moletinho.png',
   'Pin Metálico Capivara': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/capivara.png',
+  'Slides Iéfico': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/slides.png',
   // ... Add mappings for all other Camisas with appropriate images
   // Roller Clips
   // Add mappings for other products if images are available
@@ -334,6 +345,24 @@ const groupProductsByBaseName = (products) => {
     
     // Use product.Tamanho field if available
     const sizeFromField = product.Tamanho?.trim();
+    
+    // Special handling for moletinho products
+    if (originalProductName.toLowerCase().includes('moletinho')) {
+      const baseName = 'Moletinho';
+      const size = originalProductName.split(' ').pop(); // Get the last word (P, M, G, GG)
+      
+      if (!grouped[baseName]) {
+        grouped[baseName] = [];
+      }
+      
+      grouped[baseName].push({
+        ...product,
+        determinedSize: size,
+        isSizedProduct: true,
+        originalName: originalProductName
+      });
+      return;
+    }
     
     // Check if this is a sized product - only look at the very end of the string
     const sizeRegex = /\s+(P|M|G|GG)$/i;
@@ -497,6 +526,8 @@ const StockPage = () => {
         categoryName = 'Buckets';
       } else if (normalizedProductName.startsWith('moletinho')) {
         categoryName = 'Moletinho';
+      } else if (normalizedProductName.startsWith('slides')) {
+        categoryName = 'Slides';
       }
 
       product.CategoryName = categoryName; // Add category name to product for later use
@@ -904,42 +935,34 @@ const StockPage = () => {
                   </Typography>
                   <Stack spacing={3} sx={{ mt: 2 }}>
                     {(() => {
-                      const modalBaseName = cleanProductName(currentProduct.Produto)
-                        .replace(/\s+(P|M|G|GG)$/, '')
-                        .replace(/\s+-\s+(P|M|G|GG)$/, '')
-                        .replace(/\s+\(P|M|G|GG\)$/, '')
-                        .trim();
-                        
+                      const modalBaseName = cleanProductName(currentProduct.Produto);
                       const groupedProducts = groupProductsByBaseName(products);
                       const sizeProducts = groupedProducts[modalBaseName] || [];
                       
                       // Check if this is a product with size variants
                       const hasSizeVariants = sizeProducts.some(p => p.isSizedProduct);
-                      const availableSizes = sizeProducts.filter(p => isInStock(p.Estoque) && p.determinedSize);
                       
-                      if (hasSizeVariants && availableSizes.length > 0) {
+                      if (hasSizeVariants) {
+                        // Get all possible sizes
+                        const allSizes = ['P', 'M', 'G', 'GG'];
+                        const availableSizes = sizeProducts
+                          .filter(p => isInStock(p.Estoque))
+                          .map(p => p.determinedSize);
+                        
                         return (
                           <Box>
                             <Typography variant="subtitle1" color="text.secondary" gutterBottom>
                               Tamanhos Disponíveis
                             </Typography>
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                              {availableSizes.length === 1 ? (
+                              {allSizes.map(size => (
                                 <SizeBalloon
-                                  label="Tamanho Único"
-                                  available={true}
+                                  key={size}
+                                  label={size}
+                                  available={availableSizes.includes(size)}
                                   size="medium"
                                 />
-                              ) : (
-                                availableSizes.map(product => (
-                                  <SizeBalloon
-                                    key={product.determinedSize}
-                                    label={product.determinedSize}
-                                    available={true}
-                                    size="medium"
-                                  />
-                                ))
-                              )}
+                              ))}
                             </Box>
                           </Box>
                         );
