@@ -204,7 +204,7 @@ const productImages = {
   'Botton Caramelo': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b2.png',
   'Botton PANDemic': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b3.png',
   'Botton Juntos': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b4.png',
-  'Bottom Love is Love': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b5.png',
+  'Botton Love is Love': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b5.png',
   'Botton Queen': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b6.png',
   'Botton Gatinho Científico': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b7.png',
   'Botton Capacity Building': 'https://cdn.jsdelivr.net/gh/alexandrenf/fotoslojinhaif24@latest/ag62/_b8.png',
