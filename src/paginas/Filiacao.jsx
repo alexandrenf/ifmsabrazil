@@ -27,27 +27,29 @@ const Title = styled(Typography)(({ theme }) => ({
 }));
 
 const Filiacao = () => {
-  const csvUrl =
-    "https://docs.google.com/spreadsheets/d/1PF7Lqb0jq1ULQBmHzFxOif5UvGwsVLqM2LESq7JVh6c/export?gid=1583477648&format=csv";
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(csvUrl);
+        const apiUrl = "https://api.ifmsabrazil.org/api/filiacao";
+        const apiResponse = await axios.get(apiUrl); // First fetch the API to get the CSV URL
+        const csvUrl = apiResponse.data.url; // Extract the CSV URL from the response
+
+        const response = await axios.get(csvUrl); // Then fetch the CSV data from the extracted URL
         const parsedData = Papa.parse(response.data, { header: true });
         const realData = parsedData.data;
         setMembers(realData);
       } catch (error) {
-        console.error("Error fetching spreadsheet:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [csvUrl]);
+  }, []);
 
   const markdownContent1 = `
 
