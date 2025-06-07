@@ -15,91 +15,162 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const AuthorsSection = styled("div")({
-  margin: "2rem 0",
-  padding: "2rem",
-  backgroundColor: "#f8f9fa",
+const PostHeader = styled("div")({
+  background: "linear-gradient(135deg, rgba(0, 80, 140, 0.02), rgba(250, 200, 0, 0.02))",
   borderRadius: "16px",
-  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
-});
-
-const AuthorsTitle = styled(Typography)({
-  color: "#00508C",
-  fontWeight: "bold",
-  marginBottom: "1.5rem",
-  textAlign: "center",
-});
-
-const AuthorsGrid = styled("div")({
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-  gap: "1.5rem",
+  padding: "2.5rem 2rem 2rem 2rem",
+  marginBottom: "2.5rem",
+  border: "1px solid rgba(0, 80, 140, 0.06)",
+  position: "relative",
+  "&::before": {
+    content: "''",
+    position: "absolute",
+    top: "0",
+    left: "0",
+    right: "0",
+    height: "3px",
+    background: "linear-gradient(90deg, #00508C, #FAC800)",
+    borderRadius: "16px 16px 0 0"
+  },
   "@media (max-width: 768px)": {
-    gridTemplateColumns: "1fr",
-    gap: "1rem",
-  },
+    padding: "2rem 1.5rem 1.5rem 1.5rem",
+    marginBottom: "2rem"
+  }
 });
 
-const AuthorCard = styled("div")({
+const Title = styled(Typography)({
+  color: "#00508C",
+  fontWeight: "700",
+  textAlign: "center",
+  fontSize: "2.2rem",
+  lineHeight: "1.3",
+  marginBottom: "1.5rem",
+  letterSpacing: "-0.02em",
+  "@media (max-width: 768px)": {
+    fontSize: "1.8rem",
+    marginBottom: "1.2rem"
+  }
+});
+
+const PostMeta = styled("div")({
   display: "flex",
+  justifyContent: "center",
   alignItems: "center",
-  gap: "1rem",
-  padding: "1.5rem",
-  backgroundColor: "white",
-  borderRadius: "12px",
-  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.05)",
-  transition: "all 0.3s ease",
-  "&:hover": {
-    transform: "translateY(-2px)",
-    boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)",
-  },
+  gap: "1.5rem",
+  flexWrap: "wrap",
   "@media (max-width: 768px)": {
     flexDirection: "column",
-    textAlign: "center",
-    padding: "1rem",
+    gap: "1rem"
+  }
+});
+
+const DateInfo = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "0.6rem",
+  color: "#666",
+  fontSize: "0.95rem",
+  fontWeight: "500",
+  padding: "0.7rem 1.2rem",
+  backgroundColor: "white",
+  borderRadius: "30px",
+  border: "1px solid rgba(0, 80, 140, 0.12)",
+  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+  "& svg": {
+    opacity: 0.7
+  }
+});
+
+const AuthorsContainer = styled("div")({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexWrap: "wrap",
+  gap: "0.8rem"
+});
+
+const AuthorChip = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "0.8rem",
+  padding: "0.7rem 1.2rem",
+  backgroundColor: "white",
+  borderRadius: "30px",
+  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+  border: "1px solid rgba(0, 80, 140, 0.12)",
+  transition: "all 0.2s ease",
+  position: "relative",
+  cursor: "pointer",
+  WebkitTapHighlightColor: "transparent",
+  "&:hover": {
+    transform: "translateY(-1px)",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+    borderColor: "rgba(0, 80, 140, 0.2)"
   },
+  "@media (min-width: 769px)": {
+    "&:hover .author-tooltip-container": {
+      opacity: 1,
+      visibility: "visible",
+      pointerEvents: "auto"
+    }
+  }
 });
 
 const AuthorPhoto = styled("img")({
-  width: "80px",
-  height: "80px",
+  width: "36px",
+  height: "36px",
   borderRadius: "50%",
   objectFit: "cover",
-  border: "3px solid #00508C",
-  flexShrink: 0,
-  "@media (max-width: 768px)": {
-    width: "100px",
-    height: "100px",
-  },
+  border: "2px solid rgba(0, 80, 140, 0.1)",
+  flexShrink: 0
 });
 
 const AuthorInfo = styled("div")({
-  flex: 1,
+  textAlign: "left",
+  minWidth: 0
 });
 
 const AuthorName = styled(Typography)({
   color: "#00508C",
   fontWeight: "600",
-  fontSize: "1.1rem",
-  marginBottom: "0.5rem",
+  fontSize: "0.9rem",
+  lineHeight: "1.3",
+  margin: "0"
 });
 
-const AuthorBio = styled(Typography)({
+const AuthorTitle = styled(Typography)({
   color: "#666",
-  fontSize: "0.9rem",
-  lineHeight: "1.4",
+  fontSize: "0.8rem",
+  lineHeight: "1.2",
+  margin: "0",
+  marginTop: "0.1rem",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  maxWidth: "150px"
 });
 
 const FallbackAuthor = styled("div")({
-  textAlign: "center",
-  padding: "1rem",
-  backgroundColor: "rgba(0, 80, 140, 0.05)",
-  borderRadius: "8px",
+  display: "flex",
+  alignItems: "center",
+  gap: "0.6rem",
+  color: "#666",
+  fontSize: "0.95rem",
+  fontWeight: "500",
+  padding: "0.7rem 1.2rem",
+  backgroundColor: "white",
+  borderRadius: "30px",
+  border: "1px solid rgba(0, 80, 140, 0.12)",
+  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)"
 });
 
-const FallbackAuthorText = styled(Typography)({
-  color: "#00508C",
-  fontWeight: "500",
+const Divider = styled("div")({
+  width: "1px",
+  height: "30px",
+  backgroundColor: "rgba(0, 80, 140, 0.15)",
+  "@media (max-width: 768px)": {
+    display: "none"
+  }
 });
 
 const MarkdownContainer = styled("div")({
@@ -330,13 +401,6 @@ const MarkdownContainer = styled("div")({
   }
 });
 
-const Title = styled(Typography)({
-  color: "#00508C",
-  marginBottom: "16px",
-  fontWeight: "bold",
-  textAlign: "center",
-});
-
 const MetaData = styled("div")({
   marginBottom: "16px",
   color: "#666",
@@ -418,6 +482,107 @@ const MarkdownOptions = {
   },
 };
 
+// Date icon component
+const DateInfoIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 8.5 21 8.5Z" stroke="#666" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const AuthorTooltip = styled("div")(({ theme }) => ({
+  position: "absolute",
+  top: "calc(100% + 10px)",
+  left: "50%",
+  transform: "translateX(-50%)",
+  backgroundColor: "white",
+  border: "1px solid rgba(0, 80, 140, 0.15)",
+  borderRadius: "12px",
+  padding: "1rem",
+  minWidth: "280px",
+  maxWidth: "320px",
+  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12)",
+  zIndex: 1000,
+  opacity: 0,
+  visibility: "hidden",
+  transition: "opacity 0.2s ease, visibility 0.2s ease",
+  pointerEvents: "none",
+  "&::before": {
+    content: "''",
+    position: "absolute",
+    top: "-5px",
+    left: "50%",
+    transform: "translateX(-50%) rotate(45deg)",
+    width: "10px",
+    height: "10px",
+    backgroundColor: "white",
+    border: "1px solid rgba(0, 80, 140, 0.15)",
+    borderRight: "none",
+    borderBottom: "none"
+  },
+  "&.active": {
+    opacity: 1,
+    visibility: "visible",
+    pointerEvents: "auto"
+  },
+  "@media (max-width: 768px)": {
+    position: "absolute",
+    top: "auto",
+    bottom: "calc(100% + 10px)",
+    left: "50%",
+    transform: "translateX(-50%)",
+    minWidth: "280px",
+    maxWidth: "calc(100vw - 32px)",
+    "&::before": {
+      top: "auto",
+      bottom: "-5px",
+      transform: "translateX(-50%) rotate(225deg)"
+    }
+  }
+}));
+
+const TooltipHeader = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "0.8rem",
+  marginBottom: "0.8rem"
+});
+
+const TooltipPhoto = styled("img")({
+  width: "48px",
+  height: "48px",
+  borderRadius: "50%",
+  objectFit: "cover",
+  border: "2px solid rgba(0, 80, 140, 0.1)",
+  flexShrink: 0
+});
+
+const TooltipInfo = styled("div")({
+  flex: 1
+});
+
+const TooltipName = styled(Typography)({
+  color: "#00508C",
+  fontWeight: "600",
+  fontSize: "1rem",
+  lineHeight: "1.3",
+  margin: "0"
+});
+
+const TooltipRole = styled(Typography)({
+  color: "#666",
+  fontSize: "0.85rem",
+  lineHeight: "1.3",
+  margin: "0",
+  marginTop: "0.1rem"
+});
+
+const TooltipBio = styled(Typography)({
+  color: "#444",
+  fontSize: "0.9rem",
+  lineHeight: "1.5",
+  margin: "0"
+});
+
 const MarkdownPage = ({ needsExternal, filepath }) => {
   const { id } = useParams();
   const [markdownContent, setMarkdownContent] = useState("");
@@ -427,6 +592,44 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
   const [authorsLoading, setAuthorsLoading] = useState(false);
   const [hasExtendedAuthorInfo, setHasExtendedAuthorInfo] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [activeTooltip, setActiveTooltip] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleAuthorClick = (authorId, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    if (isMobile) {
+      setActiveTooltip(activeTooltip === authorId ? null : authorId);
+    }
+  };
+
+  // Close tooltip when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (activeTooltip && !event.target.closest('.author-tooltip-container')) {
+        setActiveTooltip(null);
+      }
+    };
+
+    if (activeTooltip) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [activeTooltip]);
 
   const fetchAuthors = async (postId) => {
     setAuthorsLoading(true);
@@ -534,48 +737,70 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
     <Root>
       {needsExternal && post && (
         <>
-          <Title variant="h4">{post.title}</Title>
-          <MetaData>
-            <Typography variant="subtitle2">
-              {new Date(post.date).toLocaleDateString('pt-BR')}
-            </Typography>
-          </MetaData>
+          <PostHeader>
+            <Title variant="h4">{post.title}</Title>
+            <PostMeta>
+              <DateInfo>
+                <DateInfoIcon />
+                <Typography variant="body2">
+                  {new Date(post.date).toLocaleDateString('pt-BR')}
+                </Typography>
+              </DateInfo>
+              {hasExtendedAuthorInfo && authors.length > 0 ? (
+                <>
+                  <Divider />
+                  <AuthorsContainer>
+                    {authors.map((author) => (
+                      <AuthorChip 
+                        key={author.id} 
+                        onClick={(e) => handleAuthorClick(author.id, e)}
+                        className="author-chip"
+                      >
+                        <AuthorPhoto 
+                          src={author.photo} 
+                          alt={author.name}
+                          onError={(e) => {
+                            e.target.src = `https://placehold.co/150`;
+                          }}
+                        />
+                        <AuthorInfo>
+                          <AuthorName variant="body2">{author.name}</AuthorName>
+                          <AuthorTitle variant="body2">{author.bio}</AuthorTitle>
+                        </AuthorInfo>
+                        <AuthorTooltip 
+                          className={`author-tooltip-container ${activeTooltip === author.id ? 'active' : ''}`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <TooltipHeader>
+                            <TooltipPhoto 
+                              src={author.photo} 
+                              alt={author.name}
+                              onError={(e) => {
+                                e.target.src = `https://placehold.co/150`;
+                              }}
+                            />
+                            <TooltipInfo>
+                              <TooltipName>{author.name}</TooltipName>
+                              <TooltipRole>Autor</TooltipRole>
+                            </TooltipInfo>
+                          </TooltipHeader>
+                          <TooltipBio>{author.bio}</TooltipBio>
+                        </AuthorTooltip>
+                      </AuthorChip>
+                    ))}
+                  </AuthorsContainer>
+                </>
+              ) : (
+                <>
+                  <Divider />
+                  <FallbackAuthor>
+                    Escrito por: {post.author}
+                  </FallbackAuthor>
+                </>
+              )}
+            </PostMeta>
+          </PostHeader>
         </>
-      )}
-      
-      {needsExternal && post && (
-        <AuthorsSection>
-          {hasExtendedAuthorInfo && authors.length > 0 ? (
-            <>
-              <AuthorsTitle variant="h5">
-                {authors.length > 1 ? "Autores" : "Autor"}
-              </AuthorsTitle>
-              <AuthorsGrid>
-                {authors.map((author) => (
-                  <AuthorCard key={author.id}>
-                    <AuthorPhoto 
-                      src={author.photo} 
-                      alt={author.name}
-                      onError={(e) => {
-                        e.target.src = `https://placehold.co/150`;
-                      }}
-                    />
-                    <AuthorInfo>
-                      <AuthorName variant="h6">{author.name}</AuthorName>
-                      <AuthorBio variant="body2">{author.bio}</AuthorBio>
-                    </AuthorInfo>
-                  </AuthorCard>
-                ))}
-              </AuthorsGrid>
-            </>
-          ) : (
-            <FallbackAuthor>
-              <FallbackAuthorText variant="body1">
-                Escrito por: {post.author}
-              </FallbackAuthorText>
-            </FallbackAuthor>
-          )}
-        </AuthorsSection>
       )}
       
       <MarkdownContainer>
