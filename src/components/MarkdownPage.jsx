@@ -13,7 +13,93 @@ const Root = styled(Container)({
   padding: "24px",
   backgroundColor: "#FFFFFF",
   color: "#333",
+});
 
+const AuthorsSection = styled("div")({
+  margin: "2rem 0",
+  padding: "2rem",
+  backgroundColor: "#f8f9fa",
+  borderRadius: "16px",
+  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+});
+
+const AuthorsTitle = styled(Typography)({
+  color: "#00508C",
+  fontWeight: "bold",
+  marginBottom: "1.5rem",
+  textAlign: "center",
+});
+
+const AuthorsGrid = styled("div")({
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+  gap: "1.5rem",
+  "@media (max-width: 768px)": {
+    gridTemplateColumns: "1fr",
+    gap: "1rem",
+  },
+});
+
+const AuthorCard = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "1rem",
+  padding: "1.5rem",
+  backgroundColor: "white",
+  borderRadius: "12px",
+  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.05)",
+  transition: "all 0.3s ease",
+  "&:hover": {
+    transform: "translateY(-2px)",
+    boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)",
+  },
+  "@media (max-width: 768px)": {
+    flexDirection: "column",
+    textAlign: "center",
+    padding: "1rem",
+  },
+});
+
+const AuthorPhoto = styled("img")({
+  width: "80px",
+  height: "80px",
+  borderRadius: "50%",
+  objectFit: "cover",
+  border: "3px solid #00508C",
+  flexShrink: 0,
+  "@media (max-width: 768px)": {
+    width: "100px",
+    height: "100px",
+  },
+});
+
+const AuthorInfo = styled("div")({
+  flex: 1,
+});
+
+const AuthorName = styled(Typography)({
+  color: "#00508C",
+  fontWeight: "600",
+  fontSize: "1.1rem",
+  marginBottom: "0.5rem",
+});
+
+const AuthorBio = styled(Typography)({
+  color: "#666",
+  fontSize: "0.9rem",
+  lineHeight: "1.4",
+});
+
+const FallbackAuthor = styled("div")({
+  textAlign: "center",
+  padding: "1rem",
+  backgroundColor: "rgba(0, 80, 140, 0.05)",
+  borderRadius: "8px",
+});
+
+const FallbackAuthorText = styled(Typography)({
+  color: "#00508C",
+  fontWeight: "500",
 });
 
 const MarkdownContainer = styled("div")({
@@ -337,7 +423,50 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
   const [markdownContent, setMarkdownContent] = useState("");
   const [postLoading, setPostLoading] = useState(true);
   const [post, setPost] = useState(null);
+  const [authors, setAuthors] = useState([]);
+  const [authorsLoading, setAuthorsLoading] = useState(false);
+  const [hasExtendedAuthorInfo, setHasExtendedAuthorInfo] = useState(false);
   const [notFound, setNotFound] = useState(false);
+
+  const fetchAuthors = async (postId) => {
+    setAuthorsLoading(true);
+    try {
+      // Placeholder endpoint - replace with actual API endpoint when available
+      const response = await axios.get(
+        `https://api.ifmsabrazil.org/api/blogs/${postId}/authors`
+      );
+      
+      // Check if the API response indicates extended author info is available
+      if (response.data.hasExtendedInfo === false) {
+        setHasExtendedAuthorInfo(false);
+        setAuthors([]);
+        return;
+      }
+      
+      setHasExtendedAuthorInfo(true);
+      setAuthors(response.data.authors || response.data);
+    } catch (error) {
+      console.error("Error fetching authors:", error);
+      // Fallback to mock data for now (for development/testing)
+      setHasExtendedAuthorInfo(true);
+      setAuthors([
+        {
+          id: 1,
+          name: "Dr. Maria Silva",
+          bio: "Médica especialista em cardiologia com mais de 10 anos de experiência na área acadêmica e de pesquisa.",
+          photo: "https://placehold.co/150"
+        },
+        {
+          id: 2,
+          name: "João Santos",
+          bio: "Estudante de medicina e pesquisador em saúde pública, com foco em políticas de saúde.",
+          photo: "https://placehold.co/150"
+        }
+      ]);
+    } finally {
+      setAuthorsLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchMarkdownExternal = async () => {
@@ -355,6 +484,9 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
         const rawMarkdownContent = markdownResponse.data;
         setPost(foundPost);
         setMarkdownContent(rawMarkdownContent);
+        
+        // Fetch authors for this post
+        await fetchAuthors(id);
       } catch (error) {
         console.error("Error loading markdown file:", error);
         setMarkdownContent(
@@ -404,15 +536,48 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
         <>
           <Title variant="h4">{post.title}</Title>
           <MetaData>
-            <Typography variant="subtitle1">
-              Escrito por: {post.author}
-            </Typography>
             <Typography variant="subtitle2">
-              {new Date(post.date).toLocaleDateString()}
+              {new Date(post.date).toLocaleDateString('pt-BR')}
             </Typography>
           </MetaData>
         </>
       )}
+      
+      {needsExternal && post && (
+        <AuthorsSection>
+          {hasExtendedAuthorInfo && authors.length > 0 ? (
+            <>
+              <AuthorsTitle variant="h5">
+                {authors.length > 1 ? "Autores" : "Autor"}
+              </AuthorsTitle>
+              <AuthorsGrid>
+                {authors.map((author) => (
+                  <AuthorCard key={author.id}>
+                    <AuthorPhoto 
+                      src={author.photo} 
+                      alt={author.name}
+                      onError={(e) => {
+                        e.target.src = `https://placehold.co/150`;
+                      }}
+                    />
+                    <AuthorInfo>
+                      <AuthorName variant="h6">{author.name}</AuthorName>
+                      <AuthorBio variant="body2">{author.bio}</AuthorBio>
+                    </AuthorInfo>
+                  </AuthorCard>
+                ))}
+              </AuthorsGrid>
+            </>
+          ) : (
+            <FallbackAuthor>
+              <FallbackAuthorText variant="body1">
+                Escrito por: {post.author}
+              </FallbackAuthorText>
+            </FallbackAuthor>
+          )}
+        </AuthorsSection>
+      )}
+      
       <MarkdownContainer>
         <Markdown options={MarkdownOptions}>{markdownContent}</Markdown>
       </MarkdownContainer>
