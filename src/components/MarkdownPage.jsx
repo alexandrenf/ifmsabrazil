@@ -650,22 +650,9 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
       setAuthors(response.data.authors || response.data);
     } catch (error) {
       console.error("Error fetching authors:", error);
-      // Fallback to mock data for now (for development/testing)
-      setHasExtendedAuthorInfo(true);
-      setAuthors([
-        {
-          id: 1,
-          name: "Dr. Maria Silva",
-          bio: "Médica especialista em cardiologia com mais de 10 anos de experiência na área acadêmica e de pesquisa.",
-          photo: "https://placehold.co/150"
-        },
-        {
-          id: 2,
-          name: "João Santos",
-          bio: "Estudante de medicina e pesquisador em saúde pública, com foco em políticas de saúde.",
-          photo: "https://placehold.co/150"
-        }
-      ]);
+      // Default to legacy author format on error
+      setHasExtendedAuthorInfo(false);
+      setAuthors([]);
     } finally {
       setAuthorsLoading(false);
     }
