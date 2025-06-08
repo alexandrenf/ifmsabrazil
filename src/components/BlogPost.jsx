@@ -214,7 +214,7 @@ const BlogPost = ({ post }) => {
         <PostMeta>
           <span>{post.author}</span>
           <PostDate>
-            {post.date ? new Date(post.date).toLocaleDateString() : ""}
+            {post.date ? new Date(post.date).toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: '2-digit'}) : ""}
           </PostDate>
         </PostMeta>
         <PostSummary>{post.summary}</PostSummary>
