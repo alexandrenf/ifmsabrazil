@@ -313,8 +313,8 @@ const AlgoliaSearch = ({ placeholder = "Pesquisar no site...", onResultClick }) 
       const stripDomain = (url) => {
         const domain = 'ifmsabrazil.org';
         const replaced = url.replace(`https://${domain}`, '');
-        if (replaced.includes('arquivo') && /\d+/.test(replaced)) {
-          return replaced;
+        if (replaced.includes('arquivo') && replaced.match(/\d+/)) {
+          return replaced+'/a';
         } else {
           return replaced;
         }
