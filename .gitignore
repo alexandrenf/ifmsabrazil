@@ -22,3 +22,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+scripts/crawl-and-index.js
+src/crawler/algolia-indexer.js

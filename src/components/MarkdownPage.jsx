@@ -3,7 +3,7 @@ import { Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import Markdown from "markdown-to-jsx";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Loading from "./Loading.jsx";
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx.js";
@@ -583,8 +583,22 @@ const TooltipBio = styled(Typography)({
   margin: "0"
 });
 
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+};
+
 const MarkdownPage = ({ needsExternal, filepath }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [markdownContent, setMarkdownContent] = useState("");
   const [postLoading, setPostLoading] = useState(true);
   const [post, setPost] = useState(null);
@@ -594,6 +608,20 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
   const [notFound, setNotFound] = useState(false);
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Update URL with title slug when post is loaded
+  useEffect(() => {
+    if (post && post.title) {
+      const titleSlug = slugify(post.title);
+      const currentPath = window.location.pathname;
+      const newPath = `/arquivo/${id}/${titleSlug}`;
+      
+      // Only update URL if it's different from current
+      if (currentPath !== newPath) {
+        navigate(newPath, { replace: true });
+      }
+    }
+  }, [post, id, navigate]);
 
   // Handle window resize
   useEffect(() => {

@@ -8,6 +8,8 @@ import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import logoFundoAzul from "../assets/logo-fundo-azul.png"
+import SearchButton from "./SearchButton"
+import SearchModal from "./SearchModal"
 
 // Add only the icons you need to the library
 library.add(faBars, faTimes)
@@ -46,21 +48,90 @@ const Nav = styled.nav`
   z-index: 1000;
   transition: all 0.3s ease;
   box-shadow: ${(props) => (props.$scrolled ? "0 4px 20px rgba(0, 0, 0, 0.1)" : "none")};
+
+  @media screen and (max-width: 1400px) {
+    padding: ${(props) => (props.$scrolled ? "0.4rem 1.5rem" : "0.7rem 1.5rem")};
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: ${(props) => (props.$scrolled ? "0.4rem 0.8rem" : "0.6rem 0.8rem")};
+  }
+  
+  /* When space gets really tight, reduce overall sizing */
+  @media screen and (max-width: 1080px) {
+    font-size: 0.9em;
+  }
 `
 
 const NavLogo = styled.img`
   height: ${(props) => (props.$scrolled ? "45px" : "50px")};
   transition: all 0.3s ease;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  flex-shrink: 0;
+  margin-right: 2.5rem;
+
+  @media screen and (max-width: 1300px) {
+    height: ${(props) => (props.$scrolled ? "42px" : "48px")};
+    margin-right: 2rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    height: ${(props) => (props.$scrolled ? "40px" : "45px")};
+    margin-right: 1.5rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    height: ${(props) => (props.$scrolled ? "38px" : "42px")};
+    margin-right: 1rem;
+  }
+  
+  @media screen and (max-width: 1080px) {
+    height: ${(props) => (props.$scrolled ? "35px" : "38px")};
+    margin-right: 0.8rem;
+  }
 `
 
 const NavLinks = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
+  overflow: visible;
+  flex: 1;
+  justify-content: flex-end;
+  max-width: calc(100vw - 320px); /* More space for logo */
+  gap: 0;
+
+  @media screen and (max-width: 1400px) {
+    max-width: calc(100vw - 300px);
+  }
+
+  @media screen and (max-width: 1300px) {
+    max-width: calc(100vw - 280px);
+  }
+
+  @media screen and (max-width: 1200px) {
+    max-width: calc(100vw - 260px);
+  }
+
+  @media screen and (max-width: 1100px) {
+    max-width: calc(100vw - 220px);
+  }
+  
+  @media screen and (max-width: 1080px) {
+    max-width: calc(100vw - 200px);
+  }
 
   @media screen and (max-width: 1040px) {
     display: none;
   }
+`
+
+const NavLinksWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  flex: 1;
 `
 
 const NavLink = styled.div`
@@ -93,8 +164,31 @@ const NavLink = styled.div`
     }
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1400px) {
+    font-size: 1.05rem;
+    margin: 0 0.9rem;
+  }
+
+  @media screen and (max-width: 1300px) {
     font-size: 1rem;
+    margin: 0 0.7rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 0.9rem;
+    margin: 0 0.5rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    font-size: 0.85rem;
+    margin: 0 0.3rem;
+    padding: 0.4rem 0;
+  }
+  
+  @media screen and (max-width: 1080px) {
+    font-size: 0.8rem;
+    margin: 0 0.25rem;
+    padding: 0.3rem 0;
   }
 
   & > a {
@@ -113,15 +207,46 @@ const SubMenu = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
-  background: rgba(0, 80, 140, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 80, 140, 0.98);
+  backdrop-filter: blur(15px);
   padding: 1rem;
   border-radius: 8px;
-  z-index: 20;
+  z-index: 1001;
   min-width: 200px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   animation: ${fadeIn} 0.3s ease-out;
   transform-origin: top left;
+
+  @media screen and (max-width: 1300px) {
+    min-width: 180px;
+    padding: 0.8rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    min-width: 160px;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    min-width: 140px;
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    
+    /* Adjust position for items that might overflow */
+    &:nth-child(n+4) {
+      left: auto;
+      right: 0;
+      transform-origin: top right;
+    }
+  }
+  
+  @media screen and (max-width: 1080px) {
+    min-width: 130px;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
 
   & a {
     display: block;
@@ -130,11 +255,30 @@ const SubMenu = styled.div`
     transition: all 0.3s ease;
     padding: 0.5rem;
     border-radius: 4px;
+    text-decoration: none;
 
     &:hover {
       color: #fac800;
       background: rgba(255, 255, 255, 0.1);
       transform: translateX(5px);
+    }
+
+    @media screen and (max-width: 1200px) {
+      margin: 0.6rem 0;
+      padding: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    @media screen and (max-width: 1100px) {
+      margin: 0.5rem 0;
+      padding: 0.3rem;
+      font-size: 0.85rem;
+    }
+    
+    @media screen and (max-width: 1080px) {
+      margin: 0.4rem 0;
+      padding: 0.3rem;
+      font-size: 0.8rem;
     }
   }
 `
@@ -151,11 +295,42 @@ const JoinButton = styled(Link)`
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
   text-decoration: none;
+  white-space: nowrap;
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
     background: linear-gradient(135deg, #218838, #1e7e34);
+  }
+
+  @media screen and (max-width: 1400px) {
+    padding: 0.7rem 1.3rem;
+    margin-left: 1rem;
+    font-size: 0.95rem;
+  }
+
+  @media screen and (max-width: 1300px) {
+    padding: 0.6rem 1.2rem;
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 0.5rem 1rem;
+    margin-left: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    padding: 0.4rem 0.8rem;
+    margin-left: 0.4rem;
+    font-size: 0.8rem;
+  }
+  
+  @media screen and (max-width: 1080px) {
+    padding: 0.35rem 0.7rem;
+    margin-left: 0.3rem;
+    font-size: 0.75rem;
   }
 `
 
@@ -173,6 +348,10 @@ const MobileIcon = styled.div`
     &:hover {
       color: #fac800;
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.6rem;
   }
 `
 
@@ -312,12 +491,48 @@ const Spacer = styled.div`
   background: #FAC800;
   height: ${(props) => (props.$scrolled ? "70px" : "84px")};
   transition: height 0.3s ease;
+
+  @media screen and (max-width: 1200px) {
+    height: ${(props) => (props.$scrolled ? "65px" : "78px")};
+  }
+
+  @media screen and (max-width: 1040px) {
+    height: ${(props) => (props.$scrolled ? "60px" : "72px")};
+  }
+`
+
+// Add a compact navbar for tablet-sized screens
+const CompactNavLinks = styled.div`
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+
+  @media screen and (max-width: 1040px) and (min-width: 900px) {
+    display: flex;
+  }
+`
+
+const CompactNavLink = styled(Link)`
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  &:hover {
+    color: #fac800;
+    background: rgba(255, 255, 255, 0.1);
+  }
 `
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSubMenu, setActiveSubMenu] = useState("")
   const [scrolled, setScrolled] = useState(false)
+  const [searchModalOpen, setSearchModalOpen] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
@@ -339,8 +554,31 @@ const Navbar = () => {
     // Close mobile menu and reset body scroll when route changes
     setIsOpen(false)
     setActiveSubMenu("")
+    setSearchModalOpen(false)
     document.body.style.overflow = "auto" // Add this line to ensure body scroll is restored
   }, [location])
+
+  // Global keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Only trigger if no input element is focused and modal is not already open
+      const activeElement = document.activeElement;
+      const isInputFocused = activeElement && (
+        activeElement.tagName === 'INPUT' || 
+        activeElement.tagName === 'TEXTAREA' || 
+        activeElement.contentEditable === 'true'
+      );
+      
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k' && !isInputFocused && !searchModalOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+        setSearchModalOpen(true);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown, true)
+    return () => document.removeEventListener('keydown', handleKeyDown, true)
+  }, [searchModalOpen])
 
   const toggleMobileMenu = () => {
     setIsOpen(!isOpen)
@@ -422,11 +660,19 @@ const Navbar = () => {
               </a>
             </SubMenu>
           </NavLink>
+          <SearchButton onClick={() => setSearchModalOpen(true)} />
           <JoinButton to="/filie-se">FILIE-SE</JoinButton>
         </NavLinks>
 
         <MobileOverlay $isOpen={isOpen} onClick={toggleMobileMenu} />
         <MobileMenu $isOpen={isOpen}>
+          <SearchButton 
+            onClick={() => {
+              setSearchModalOpen(true)
+              setIsOpen(false)
+            }} 
+            isMobile={true} 
+          />
           <MobileSubMenu>
             <MobileLink onClick={() => toggleSubMenu("quemSomosMobile")}>Quem Somos</MobileLink>
             {activeSubMenu === "quemSomosMobile" && (
@@ -547,6 +793,11 @@ const Navbar = () => {
         </MobileMenu>
       </Nav>
       <Spacer $scrolled={scrolled} />
+      
+      <SearchModal 
+        isOpen={searchModalOpen} 
+        onClose={() => setSearchModalOpen(false)} 
+      />
     </>
   )
 }
