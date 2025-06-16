@@ -90,6 +90,16 @@ const SummaryContainer = styled.div`
       display: none;
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    
+    &.collapsed {
+      padding: 1rem 1.5rem;
+    }
+  }
 `;
 
 const SummaryHeader = styled.div`
@@ -99,6 +109,13 @@ const SummaryHeader = styled.div`
   margin-bottom: 1.5rem;
   position: relative;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const SummaryTitle = styled.div`
@@ -227,7 +244,7 @@ const MagicalSummary = ({ content }) => {
     <SummaryContainer className={`${isCollapsed ? 'collapsed' : ''} ${isComplete ? 'animation-complete' : ''}`}>
       <SummaryHeader>
         <SummaryTitle>
-          <SparkleIcon className={isComplete ? 'animation-complete' : ''}>★</SparkleIcon>
+          <SparkleIcon>✨</SparkleIcon>
           Resumo do artigo:
         </SummaryTitle>
         <ToggleButton onClick={toggleCollapse}>
@@ -258,6 +275,9 @@ const MarkdownContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 12px 8px;  // Reduced padding
+  @media (max-width: 768px) {
+    padding: 12px 48px;
+  }
   font-family: 'Poppins', sans-serif;
 
   & table {
@@ -366,36 +386,36 @@ const MarkdownContainer = styled.div`
   }
 
   & h1, & h2, & h3, & h4, & h5, & h6 {
-    margin: 0.75rem 0 0.25rem;  // Significantly reduced margins
-    color: #00508c;
-    font-weight: 600;
-    line-height: 1.3;
-    display: inline-block;
-  }
-
-  & h1 { font-size: 2.25rem; }
-  & h2 { 
-    font-size: 1.75rem;
-    margin-top: 1rem;  // Slightly more space before h2
-    width: fit-content;
-  }
-  & h3 { 
-    font-size: 1.5rem;
-    margin-top: 1rem;  // Reduced from 1.75rem
-  }
-  & h4 { font-size: 1.25rem; }
-  & h5 { font-size: 1.1rem; }
-  & h6 { font-size: 1rem; }
-
-
-  /* Base header styles */
-  & h1, & h2, & h3, & h4, & h5, & h6 {
     margin: 0.5rem 0 0.5rem;  // Reduced margins for all headers
     display: block;
     width: 100%;
     clear: both;
     position: relative;
+    color: #00508c;
+    font-weight: 600;
+    line-height: 1.3;
   }
+
+  & h1 { font-size: 2.25rem; }
+  & h2 { 
+    font-size: 1.75rem;
+    margin-top: 2rem;      // Reduced from 3rem
+    margin-bottom: 1rem;   // Reduced from 2rem
+    display: block;
+    width: 100%;
+    clear: both;
+  }
+  & h3 { 
+    font-size: 1.5rem;
+    margin-top: 1.5rem;    // Reduced from 2.5rem
+    margin-bottom: 1rem;   // Reduced from 1.5rem
+    display: block;
+    width: 100%;
+    clear: both;
+  }
+  & h4 { font-size: 1.25rem; }
+  & h5 { font-size: 1.1rem; }
+  & h6 { font-size: 1rem; }
 
   & pre {
     background-color: #1a1a1a !important;
@@ -499,36 +519,6 @@ const MarkdownContainer = styled.div`
     & pre {
       padding: 1rem;
     }
-  }
-
-  /* Add explicit spacing between headers */
-  & h2 {
-    margin-top: 2rem;      // Reduced from 3rem
-    margin-bottom: 1rem;   // Reduced from 2rem
-    display: block;
-    width: 100%;
-    clear: both;
-  }
-
-  & h3 {
-    margin-top: 1.5rem;    // Reduced from 2.5rem
-    margin-bottom: 1rem;   // Reduced from 1.5rem
-    display: block;
-    width: 100%;
-    clear: both;
-  }
-
-
-  /* Ensure headers are block elements with proper spacing */
-  & h1, & h2, & h3, & h4, & h5, & h6 {
-    display: block;
-    width: 100%;
-    clear: both;
-    position: relative;
-    break-before: auto;    // Changed from always
-    break-after: auto;     // Changed from always
-    page-break-before: auto; // Changed from always
-    page-break-after: auto;  // Changed from always
   }
 `;
 
