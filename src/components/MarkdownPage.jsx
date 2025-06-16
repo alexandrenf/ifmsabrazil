@@ -178,27 +178,6 @@ const MarkdownContainer = styled("div")({
   margin: "0 auto",
   padding: "12px 120px",
   fontFamily: "'Poppins', sans-serif",
-
-  "@media (max-width: 768px)": {
-    padding: "16px",
-    "& h1": { fontSize: "2rem" },
-    "& h2": { fontSize: "1.5rem" },
-    "& h3": { fontSize: "1.25rem" },
-    "& h4": { fontSize: "1.1rem" },
-    "& h5": { fontSize: "1rem" },
-    "& h6": { fontSize: "0.9rem" },
-    "& blockquote": {
-      padding: "1rem",
-      margin: "1.5rem 0"
-    },
-    "& pre": {
-      padding: "1rem"
-    },
-    "& img": {
-      maxWidth: "100%",
-      margin: "1rem auto"
-    }
-  },
   "& table": {
     width: "100%",
     borderCollapse: "separate",
@@ -251,14 +230,14 @@ const MarkdownContainer = styled("div")({
     }
   },
   "& a, & a:link, & a:visited": {
-    color: "#0077cc !important", // Brighter, more distinct blue
+    color: "#0077cc !important",
     textDecoration: "none !important",
     position: "relative",
-    fontWeight: "600 !important", // Made bolder
+    fontWeight: "600 !important",
     padding: "0 2px",
     transition: "all 0.2s ease",
     borderRadius: "3px",
-    backgroundColor: "rgba(0, 119, 204, 0.05) !important", // Subtle background
+    backgroundColor: "rgba(0, 119, 204, 0.05) !important",
     wordBreak: "break-all !important",
     overflowWrap: "anywhere !important",
     wordWrap: "break-word !important",
@@ -281,16 +260,14 @@ const MarkdownContainer = styled("div")({
       transition: "transform 0.2s ease"
     },
     "&:hover": {
-      color: "#005999 !important", // Darker blue on hover
-      backgroundColor: "rgba(0, 119, 204, 0.1) !important", // Slightly stronger background on hover
+      color: "#005999 !important",
+      backgroundColor: "rgba(0, 119, 204, 0.1) !important",
       textDecoration: "none !important",
       "&::after": {
         transform: "scaleX(1)"
       }
     }
   },
-
-  // Ensure links within other elements maintain styling
   "& p a, & li a, & td a, & th a, & blockquote a": {
     color: "#0077cc !important",
     fontWeight: "600 !important",
@@ -438,6 +415,10 @@ const MarkdownContainer = styled("div")({
     },
     "& pre": {
       padding: "1rem"
+    },
+    "& img": {
+      maxWidth: "100%",
+      margin: "1rem auto"
     }
   }
 });
