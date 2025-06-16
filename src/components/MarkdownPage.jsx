@@ -259,6 +259,16 @@ const MarkdownContainer = styled("div")({
     transition: "all 0.2s ease",
     borderRadius: "3px",
     backgroundColor: "rgba(0, 119, 204, 0.05) !important", // Subtle background
+    wordBreak: "break-all !important",
+    overflowWrap: "anywhere !important",
+    wordWrap: "break-word !important",
+    maxWidth: "100% !important",
+    whiteSpace: "normal !important",
+    lineBreak: "anywhere !important",
+    hyphens: "none !important",
+    WebkitHyphens: "none !important",
+    MozHyphens: "none !important",
+    msHyphens: "none !important",
     "&::after": {
       content: "''",
       position: "absolute",
@@ -285,6 +295,16 @@ const MarkdownContainer = styled("div")({
     color: "#0077cc !important",
     fontWeight: "600 !important",
     backgroundColor: "rgba(0, 119, 204, 0.05) !important",
+    wordBreak: "break-all !important",
+    overflowWrap: "anywhere !important",
+    wordWrap: "break-word !important",
+    maxWidth: "100% !important",
+    whiteSpace: "normal !important",
+    lineBreak: "anywhere !important",
+    hyphens: "none !important",
+    WebkitHyphens: "none !important",
+    MozHyphens: "none !important",
+    msHyphens: "none !important",
     "&:hover": {
       color: "#005999 !important",
       backgroundColor: "rgba(0, 119, 204, 0.1) !important"
@@ -306,28 +326,49 @@ const MarkdownContainer = styled("div")({
     }
   },
   "& pre": {
-    background: "linear-gradient(135deg, #1a1a1a, #2d2d2d)",
-    padding: "1.5rem",
-    borderRadius: "16px",
-    overflow: "hidden",
-    margin: "1.5rem 0",
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
+    backgroundColor: "#1a1a1a !important",
+    color: "#f8f8f2 !important",
+    padding: "1.5rem !important",
+    borderRadius: "12px !important",
+    overflow: "auto !important",
+    margin: "1.5rem 0 !important",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15) !important",
     position: "relative",
-    "&::before": {
-      content: "''",
-      position: "absolute",
-      top: "0",
-      left: "0",
-      right: "0",
-      height: "30px",
-      background: "rgba(255, 255, 255, 0.1)",
-      borderRadius: "16px 16px 0 0"
+    fontFamily: "'Fira Code', monospace !important",
+    fontSize: "0.9rem !important",
+    lineHeight: "1.6 !important",
+    border: "none !important",
+    whiteSpace: "pre !important",
+    wordWrap: "normal !important",
+    containment: "layout style",
+    "& *": {
+      fontFamily: "'Fira Code', monospace !important"
     },
     "& code": {
-      fontFamily: "'Fira Code', monospace",
-      fontSize: "0.9rem",
-      lineHeight: "1.6"
+      backgroundColor: "transparent !important",
+      color: "inherit !important",
+      padding: "0 !important",
+      border: "none !important",
+      borderRadius: "0 !important",
+      fontFamily: "inherit !important",
+      fontSize: "inherit !important",
+      lineHeight: "inherit !important",
+      whiteSpace: "pre !important",
+      wordWrap: "normal !important",
+      wordBreak: "normal !important",
+      wordSpacing: "normal !important",
+      tabSize: "2"
     }
+  },
+  "& code:not(pre code)": {
+    backgroundColor: "rgba(0, 80, 140, 0.08) !important",
+    color: "#00508C !important",
+    padding: "0.2em 0.4em !important",
+    borderRadius: "4px !important",
+    fontSize: "0.9em !important",
+    fontFamily: "'Fira Code', monospace !important",
+    border: "1px solid rgba(0, 80, 140, 0.12) !important",
+    whiteSpace: "nowrap !important"
   },
   "& h1, & h2, & h3, & h4, & h5, & h6": {
     margin: "0.75rem 0 0.25rem",
@@ -407,6 +448,209 @@ const MetaData = styled("div")({
   textAlign: "center",
 });
 
+// Add the magical summary component
+const SummaryContainer = styled("div")({
+  background: "linear-gradient(135deg, rgba(221, 214, 254, 0.3), rgba(243, 240, 255, 0.5))",
+  borderRadius: "16px",
+  padding: "2rem",
+  margin: "2rem 0",
+  border: "2px solid transparent",
+  backgroundImage: "linear-gradient(135deg, rgba(221, 214, 254, 0.3), rgba(243, 240, 255, 0.5)), linear-gradient(135deg, #ddd6fe, #f3f0ff)",
+  backgroundOrigin: "border-box",
+  backgroundClip: "padding-box, border-box",
+  position: "relative",
+  overflow: "hidden",
+  transition: "all 0.3s ease",
+  "&::before": {
+    content: "''",
+    position: "absolute",
+    top: "0",
+    left: "-100%",
+    width: "100%",
+    height: "100%",
+    background: "linear-gradient(90deg, transparent, rgba(221, 214, 254, 0.4), transparent)",
+    animation: "shimmer 3s infinite",
+    zIndex: 1
+  },
+  "&.animation-complete::before": {
+    animation: "none",
+    opacity: 0
+  },
+  "&.collapsed": {
+    padding: "1rem 2rem",
+    "& .summary-content": {
+      display: "none"
+    }
+  },
+  "@keyframes shimmer": {
+    "0%": { left: "-100%" },
+    "100%": { left: "100%" }
+  }
+});
+
+const SummaryHeader = styled("div")({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "1.5rem",
+  position: "relative",
+  zIndex: 2
+});
+
+const SummaryTitle = styled(Typography)({
+  color: "#7c3aed",
+  fontWeight: "700",
+  fontSize: "1.2rem",
+  display: "flex",
+  alignItems: "center",
+  gap: "0.5rem",
+  margin: 0,
+  "&::before": {
+    content: '"✨"',
+    fontSize: "1.5rem"
+  }
+});
+
+const ToggleButton = styled("button")({
+  background: "linear-gradient(135deg, #ddd6fe, #f3f0ff)",
+  border: "1px solid #c4b5fd",
+  borderRadius: "8px",
+  color: "#7c3aed",
+  padding: "0.5rem 1rem",
+  fontSize: "0.85rem",
+  fontWeight: "600",
+  cursor: "pointer",
+  transition: "all 0.2s ease",
+  "&:hover": {
+    transform: "translateY(-1px)",
+    boxShadow: "0 4px 12px rgba(168, 85, 247, 0.15)",
+    backgroundColor: "#f3f0ff"
+  },
+  "&:active": {
+    transform: "translateY(0)"
+  }
+});
+
+const LoadingSkeleton = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.8rem",
+  marginBottom: "1rem"
+});
+
+const SkeletonLine = styled("div")(({ width = "100%", delay = 0 }) => ({
+  height: "1rem",
+  background: "linear-gradient(90deg, rgba(221, 214, 254, 0.4), rgba(243, 240, 255, 0.8), rgba(221, 214, 254, 0.4))",
+  borderRadius: "4px",
+  width: width,
+  animation: `skeletonPulse 1.5s ease-in-out infinite`,
+  animationDelay: `${delay}s`,
+  "@keyframes skeletonPulse": {
+    "0%": { opacity: 0.6 },
+    "50%": { opacity: 1 },
+    "100%": { opacity: 0.6 }
+  }
+}));
+
+const TypewriterText = styled("div")({
+  color: "#4c1d95",
+  fontSize: "1rem",
+  lineHeight: "1.6",
+  position: "relative",
+  zIndex: 2,
+  minHeight: "3rem"
+});
+
+const Cursor = styled("span")({
+  display: "inline-block",
+  width: "2px",
+  height: "1.2rem",
+  backgroundColor: "#a855f7",
+  marginLeft: "2px",
+  animation: "blink 1s infinite",
+  "@keyframes blink": {
+    "0%, 50%": { opacity: 1 },
+    "51%, 100%": { opacity: 0 }
+  }
+});
+
+const MagicalSummary = ({ content, post }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [summary, setSummary] = useState("");
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [showCursor, setShowCursor] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    // Simulate loading time - faster now
+    const loadingTimer = setTimeout(() => {
+      // Use the actual content from the code block
+      setSummary(content.trim());
+      setIsLoading(false);
+      setShowCursor(true);
+    }, 1500); // Changed from 2500 to 1500
+
+    return () => clearTimeout(loadingTimer);
+  }, [content]);
+
+  useEffect(() => {
+    if (!isLoading && summary && !isComplete) {
+      const words = summary.split(' ');
+      
+      if (currentWordIndex < words.length) {
+        const timer = setTimeout(() => {
+          setDisplayedText(prev => {
+            const newText = prev + (prev ? ' ' : '') + words[currentWordIndex];
+            return newText;
+          });
+          setCurrentWordIndex(prev => prev + 1);
+        }, 50 + Math.random() * 100); // Vary timing slightly for natural feel
+
+        return () => clearTimeout(timer);
+      } else if (currentWordIndex >= words.length && !isComplete) {
+        // Animation complete
+        setIsComplete(true);
+        setShowCursor(false);
+      }
+    }
+  }, [currentWordIndex, summary, isLoading, isComplete]);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  return (
+    <SummaryContainer className={`${isCollapsed ? 'collapsed' : ''} ${isComplete ? 'animation-complete' : ''}`}>
+      <SummaryHeader>
+        <SummaryTitle className={isComplete ? 'animation-complete' : ''}>
+          Resumo do artigo:
+        </SummaryTitle>
+        <ToggleButton onClick={toggleCollapse}>
+          {isCollapsed ? 'Mostrar' : 'Ocultar'}
+        </ToggleButton>
+      </SummaryHeader>
+      
+      <div className="summary-content">
+        {isLoading ? (
+          <LoadingSkeleton>
+            <SkeletonLine width="90%" delay={0} />
+            <SkeletonLine width="95%" delay={0.2} />
+            <SkeletonLine width="85%" delay={0.4} />
+            <SkeletonLine width="75%" delay={0.6} />
+          </LoadingSkeleton>
+        ) : (
+          <TypewriterText>
+            {displayedText}
+            {showCursor && !isComplete && <Cursor />}
+          </TypewriterText>
+        )}
+      </div>
+    </SummaryContainer>
+  );
+};
+
 const MarkdownOptions = {
   overrides: {
     table: {
@@ -428,19 +672,112 @@ const MarkdownOptions = {
     },
     code: {
       component: ({ className, children, ...props }) => {
-        const language = className?.replace("lang-", "") || "javascript";
-        return (
-          <pre className={`language-${language}`}>
+        // Check for magical summary block
+        if (className === "lang-summary" || className === "lang-resumo") {
+          return <MagicalSummary content={children} />;
+        }
+
+        // Check if this is inline code (no className) or a code block
+        if (!className) {
+          // Inline code
+          return (
             <code
-              className={`language-${language}`}
+              style={{
+                backgroundColor: 'rgba(0, 80, 140, 0.08)',
+                color: '#00508C',
+                padding: '0.2em 0.4em',
+                borderRadius: '4px',
+                fontSize: '0.9em',
+                fontFamily: "'Fira Code', monospace",
+                border: '1px solid rgba(0, 80, 140, 0.12)',
+                whiteSpace: 'nowrap'
+              }}
+              {...props}
+            >
+              {children}
+            </code>
+          );
+        }
+
+        // Code block - extract language
+        const language = className.replace("lang-", "") || "text";
+        
+        // Ensure Prism has the language
+        const supportedLanguage = Prism.languages[language] ? language : "text";
+        
+        return (
+          <pre 
+            className={`language-${supportedLanguage}`}
+            style={{
+              backgroundColor: '#1a1a1a',
+              color: '#f8f8f2',
+              padding: '1.5rem',
+              borderRadius: '12px',
+              overflow: 'auto',
+              margin: '1.5rem 0',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+              position: 'relative',
+              fontSize: '0.9rem',
+              lineHeight: '1.6',
+              fontFamily: "'Fira Code', monospace"
+            }}
+          >
+            <code
+              className={`language-${supportedLanguage}`}
+              style={{
+                backgroundColor: 'transparent',
+                color: 'inherit',
+                padding: '0',
+                border: 'none',
+                borderRadius: '0',
+                fontFamily: 'inherit',
+                fontSize: 'inherit',
+                lineHeight: 'inherit',
+                whiteSpace: 'pre',
+                wordWrap: 'normal',
+                wordBreak: 'normal',
+                wordSpacing: 'normal',
+                tabSize: '2'
+              }}
               dangerouslySetInnerHTML={{
-                __html: Prism.highlight(
-                  children,
-                  Prism.languages[language],
-                  language
-                ),
+                __html: supportedLanguage !== "text" && Prism.languages[supportedLanguage]
+                  ? Prism.highlight(children, Prism.languages[supportedLanguage], supportedLanguage)
+                  : children,
               }}
             />
+          </pre>
+        );
+      },
+    },
+    pre: {
+      component: ({ children, ...props }) => {
+        // If pre contains code with className, let the code component handle it
+        if (React.Children.toArray(children).some(child => 
+          React.isValidElement(child) && child.props?.className?.startsWith('lang-')
+        )) {
+          return <>{children}</>;
+        }
+        
+        // Plain pre block
+        return (
+          <pre
+            style={{
+              backgroundColor: '#1a1a1a',
+              color: '#f8f8f2',
+              padding: '1.5rem',
+              borderRadius: '12px',
+              overflow: 'auto',
+              margin: '1.5rem 0',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+              fontFamily: "'Fira Code', monospace",
+              fontSize: '0.9rem',
+              lineHeight: '1.6',
+              whiteSpace: 'pre',
+              wordWrap: 'normal'
+            }}
+            {...props}
+          >
+            {children}
           </pre>
         );
       },
@@ -460,7 +797,17 @@ const MarkdownOptions = {
             textDecoration: 'none',
             backgroundColor: 'rgba(0, 119, 204, 0.05)',
             borderRadius: '3px',
-            padding: '0 2px'
+            padding: '0 2px',
+            wordBreak: 'break-all',
+            overflowWrap: 'anywhere',
+            wordWrap: 'break-word',
+            maxWidth: '100%',
+            whiteSpace: 'normal',
+            lineBreak: 'anywhere',
+            hyphens: 'none',
+            WebkitHyphens: 'none',
+            MozHyphens: 'none',
+            msHyphens: 'none'
           }}
         >
           {children}
