@@ -177,6 +177,9 @@ const MarkdownContainer = styled("div")({
   maxWidth: "1200px",
   margin: "0 auto",
   padding: "12px 120px",
+  "@media (max-width: 768px)": {
+    padding: "12px 48px"
+  },
   fontFamily: "'Poppins', sans-serif",
   "& table": {
     width: "100%",
@@ -192,7 +195,7 @@ const MarkdownContainer = styled("div")({
     "&:hover": {
       transform: "translateY(-5px)",
       boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)",
-    }
+    },
   },
   "& th": {
     background: "linear-gradient(135deg, #00508c, #003366)",
@@ -466,6 +469,14 @@ const SummaryContainer = styled("div")({
   "@keyframes shimmer": {
     "0%": { left: "-100%" },
     "100%": { left: "100%" }
+  },
+  "@media (max-width: 768px)": {
+    padding: "1.5rem",
+    margin: "1.5rem 0",
+    borderRadius: "12px",
+    "&.collapsed": {
+      padding: "1rem 1.5rem"
+    }
   }
 });
 
@@ -475,7 +486,13 @@ const SummaryHeader = styled("div")({
   alignItems: "center",
   marginBottom: "1.5rem",
   position: "relative",
-  zIndex: 2
+  zIndex: 2,
+  "@media (max-width: 768px)": {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "1rem",
+    marginBottom: "1rem"
+  }
 });
 
 const SummaryTitle = styled(Typography)({
