@@ -326,15 +326,17 @@ const MarkdownContainer = styled.div`
     position: relative;
     font-style: italic;
     color: #444;
+    border-left: 4px solid #00508c;
     
     &::before {
-      content: '"';
+      content: '""';
       position: absolute;
-      top: -20px;
+      top: -10px;
       left: 20px;
-      font-size: 60px;
-      color: rgba(0, 80, 140, 0.2);
+      font-size: 40px;
+      color: rgba(0, 80, 140, 0.3);
       font-family: Georgia, serif;
+      font-weight: bold;
     }
   }
 
@@ -696,11 +698,9 @@ const MarkdownOptions = {
 const MarkdownContent = ({ content }) => {
   const containerRef = useRef(null);
 
-  // Format markdown content to ensure proper line breaks and escape special characters
+  // Format markdown content to ensure proper line breaks
   const formatMarkdownContent = (content) => {
     return content
-      // Escape ">" characters that are not already escaped
-      .replace(/(?<!\\)>/g, '\\>')
       // Add explicit HTML breaks between headers
       .replace(/(#{2,3}[^\n]+)/g, '$1\n<br class="header-break"/>\n')
       // Clean up multiple breaks

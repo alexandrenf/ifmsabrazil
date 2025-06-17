@@ -222,14 +222,16 @@ const MarkdownContainer = styled("div")({
     position: "relative",
     fontStyle: "italic",
     color: "#444",
+    borderLeft: "4px solid #00508c",
     "&::before": {
-      content: '"',
+      content: '""',
       position: "absolute",
-      top: "-20px",
+      top: "-10px",
       left: "20px",
-      fontSize: "60px",
-      color: "rgba(0, 80, 140, 0.2)",
-      fontFamily: "Georgia, serif"
+      fontSize: "40px",
+      color: "rgba(0, 80, 140, 0.3)",
+      fontFamily: "Georgia, serif",
+      fontWeight: "bold"
     }
   },
   "& a, & a:link, & a:visited": {
@@ -954,11 +956,6 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Function to escape ">" characters in markdown content
-  const escapeMarkdownContent = (content) => {
-    return content.replace(/(?<!\\)>/g, '\\>');
-  };
-
   // Update URL with title slug when post is loaded
   useEffect(() => {
     if (post && post.title) {
@@ -1051,7 +1048,7 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
         const markdownResponse = await axios.get(foundPost.link);
         const rawMarkdownContent = markdownResponse.data;
         setPost(foundPost);
-        setMarkdownContent(escapeMarkdownContent(rawMarkdownContent));
+        setMarkdownContent(rawMarkdownContent);
         
         // Fetch authors for this post
         await fetchAuthors(id);
@@ -1070,7 +1067,7 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
       try {
         const response = await fetch(filepath);
         const text = await response.text();
-        setMarkdownContent(escapeMarkdownContent(text));
+        setMarkdownContent(text);
       } catch (error) {
         console.error("Error fetching markdown file:", error);
         setMarkdownContent("# Erro ao carregar o arquivo Markdown");
