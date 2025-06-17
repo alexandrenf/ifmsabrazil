@@ -102,6 +102,7 @@ const AuthorChip = styled("div")({
   position: "relative",
   cursor: "pointer",
   WebkitTapHighlightColor: "transparent",
+  zIndex: 100,
   "&:hover": {
     transform: "translateY(-1px)",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
@@ -848,7 +849,7 @@ const AuthorTooltip = styled("div")(({ theme }) => ({
   minWidth: "280px",
   maxWidth: "320px",
   boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12)",
-  zIndex: 1000,
+  zIndex: 9999,
   opacity: 0,
   visibility: "hidden",
   transition: "opacity 0.2s ease, visibility 0.2s ease",
@@ -864,7 +865,8 @@ const AuthorTooltip = styled("div")(({ theme }) => ({
     backgroundColor: "white",
     border: "1px solid rgba(0, 80, 140, 0.15)",
     borderRight: "none",
-    borderBottom: "none"
+    borderBottom: "none",
+    zIndex: 10000
   },
   "&.active": {
     opacity: 1,
@@ -879,10 +881,12 @@ const AuthorTooltip = styled("div")(({ theme }) => ({
     transform: "translateX(-50%)",
     minWidth: "280px",
     maxWidth: "calc(100vw - 32px)",
+    zIndex: 9999,
     "&::before": {
       top: "auto",
       bottom: "-5px",
-      transform: "translateX(-50%) rotate(225deg)"
+      transform: "translateX(-50%) rotate(225deg)",
+      zIndex: 10000
     }
   }
 }));
