@@ -696,9 +696,11 @@ const MarkdownOptions = {
 const MarkdownContent = ({ content }) => {
   const containerRef = useRef(null);
 
-  // Format markdown content to ensure proper line breaks
+  // Format markdown content to ensure proper line breaks and escape special characters
   const formatMarkdownContent = (content) => {
     return content
+      // Escape ">" characters that are not already escaped
+      .replace(/(?<!\\)>/g, '\\>')
       // Add explicit HTML breaks between headers
       .replace(/(#{2,3}[^\n]+)/g, '$1\n<br class="header-break"/>\n')
       // Clean up multiple breaks

@@ -954,6 +954,11 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  // Function to escape ">" characters in markdown content
+  const escapeMarkdownContent = (content) => {
+    return content.replace(/(?<!\\)>/g, '\\>');
+  };
+
   // Update URL with title slug when post is loaded
   useEffect(() => {
     if (post && post.title) {
@@ -1046,7 +1051,7 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
         const markdownResponse = await axios.get(foundPost.link);
         const rawMarkdownContent = markdownResponse.data;
         setPost(foundPost);
-        setMarkdownContent(rawMarkdownContent);
+        setMarkdownContent(escapeMarkdownContent(rawMarkdownContent));
         
         // Fetch authors for this post
         await fetchAuthors(id);
@@ -1065,7 +1070,7 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
       try {
         const response = await fetch(filepath);
         const text = await response.text();
-        setMarkdownContent(text);
+        setMarkdownContent(escapeMarkdownContent(text));
       } catch (error) {
         console.error("Error fetching markdown file:", error);
         setMarkdownContent("# Erro ao carregar o arquivo Markdown");
