@@ -436,7 +436,7 @@ const Home = () => {
   const [forceReopen, setForceReopen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  const apiEndpoint = "https://api.ifmsabrazil.org/api/blogs/recent"
+  const apiEndpoint = "https://blog2.ifmsabrazil.org/api/blogs/recent"
 
   useEffect(() => {
     const hashAlertData = (message, title, buttonUrl, buttonText, toggleButton, toggleMessage) => {

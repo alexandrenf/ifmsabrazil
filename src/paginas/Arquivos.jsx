@@ -240,7 +240,7 @@ const Arquivos = () => {
     return <NotFound />;
   }
 
-  const apiEndpoint = `https://api.ifmsabrazil.org/api/arquivos/${typeObject.href}`;
+  const apiEndpoint = `https://blog2.ifmsabrazil.org/api/arquivos/${typeObject.href}`;
 
   const label = typeObject ? typeObject.label : "Publicações";
 

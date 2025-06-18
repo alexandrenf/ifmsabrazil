@@ -94,13 +94,13 @@ Por meio de um processo interno que ocorre quando um Coordenador Local pede desf
       <Title variant="h4">{"Estrutura da IFMSA Brazil"}</Title>
       <MarkdownContent content={markdownContent1} />
       <Gallery
-        url="https://api.ifmsabrazil.org/api/ebs"
+        url="https://blog2.ifmsabrazil.org/api/ebs"
         nameOnPage="Diretoria Executiva"
       />
       <MarkdownContent content={markdownContent2} />
       <BrazilMap />
       <Gallery
-        url="https://api.ifmsabrazil.org/api/crs"
+        url="https://blog2.ifmsabrazil.org/api/crs"
         nameOnPage="Coordenadores Regionais"
       />
       <MarkdownContent content={markdownContent3} />

@@ -1015,7 +1015,7 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
     try {
       // Placeholder endpoint - replace with actual API endpoint when available
       const response = await axios.get(
-        `https://api.ifmsabrazil.org/api/blogs/${postId}/authors`
+        `https://blog2.ifmsabrazil.org/api/blogs/${postId}/authors`
       );
       
       // Check if the API response indicates extended author info is available
@@ -1041,7 +1041,7 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
     const fetchMarkdownExternal = async () => {
       try {
         const response = await axios.get(
-          `https://api.ifmsabrazil.org/api/blogs/${id}`
+          `https://blog2.ifmsabrazil.org/api/blogs/${id}`
         );
         const foundPost = response.data;
 

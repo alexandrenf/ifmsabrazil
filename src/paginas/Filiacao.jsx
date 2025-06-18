@@ -33,7 +33,7 @@ const Filiacao = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "https://api.ifmsabrazil.org/api/filiacao";
+        const apiUrl = "https://blog2.ifmsabrazil.org/api/filiacao";
         const apiResponse = await axios.get(apiUrl); // First fetch the API to get the CSV URL
         const csvUrl = apiResponse.data.url; // Extract the CSV URL from the response
 

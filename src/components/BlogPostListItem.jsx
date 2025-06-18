@@ -154,9 +154,10 @@ const PinIcon = styled(FontAwesomeIcon)`
   color: #fac800;
   font-size: 1rem;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 8px;
+  right: 8px;
   filter: drop-shadow(0 2px 4px rgba(250, 200, 0, 0.2));
+  z-index: 10;
 `;
 
 const ArrowIcon = styled(FontAwesomeIcon)`
@@ -227,9 +228,9 @@ const BlogPostListItem = ({ post }) => {
         <ArrowIcon icon={faArrowRight} className="arrow-icon" />
       </ListItemContent>
 
-      {post.forceHomePage && (
+      {post.forceHomePage ? (
         <PinIcon icon={faThumbtack} title="Post fixado" />
-      )}
+      ) : null}
     </ListItem>
   );
 };

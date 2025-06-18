@@ -147,7 +147,7 @@ const Noticias = () => {
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
 
-  const apiEndpoint = "https://api.ifmsabrazil.org/api/blogs"; // Update this to your actual API endpoint
+  const apiEndpoint = "https://blog2.ifmsabrazil.org/api/blogs"; // Update this to your actual API endpoint
 
   useEffect(() => {
     const fetchPosts = async () => {
