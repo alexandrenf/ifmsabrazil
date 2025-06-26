@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import { Helmet } from "react-helmet-async";
 import Markdown from "markdown-to-jsx";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -1099,8 +1100,68 @@ const MarkdownPage = ({ needsExternal, filepath }) => {
     );
   }
 
+  // Helper function to clean and truncate summary for meta description
+  const cleanSummary = (summary) => {
+    if (!summary) return "IFMSA Brazil - International Federation of Medical Students' Associations of Brazil";
+    
+    // Remove HTML tags and extra whitespace, truncate to 155 characters for optimal SEO
+    const cleaned = summary.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    return cleaned.length > 155 ? cleaned.substring(0, 152) + '...' : cleaned;
+  };
+
+  const generateCanonicalUrl = () => {
+    if (!post || !id) return `${window.location.origin}/`;
+    const titleSlug = slugify(post.title);
+    return `${window.location.origin}/arquivo/${id}/${titleSlug}`;
+  };
+
   return (
     <Root>
+      {needsExternal && post && (
+        <Helmet>
+          {/* Basic Meta Tags */}
+          <title>{post.title} - IFMSA Brazil</title>
+          <meta name="description" content={cleanSummary(post.summary)} />
+          <link rel="canonical" href={generateCanonicalUrl()} />
+          
+          {/* Open Graph Tags for Social Media */}
+          <meta property="og:type" content="article" />
+          <meta property="og:title" content={post.title} />
+          <meta property="og:description" content={cleanSummary(post.summary)} />
+          <meta property="og:url" content={generateCanonicalUrl()} />
+          <meta property="og:site_name" content="IFMSA Brazil" />
+          <meta property="og:locale" content="pt_BR" />
+          {post.imageLink && (
+            <>
+              <meta property="og:image" content={post.imageLink} />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="630" />
+              <meta property="og:image:alt" content={post.title} />
+            </>
+          )}
+          
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={post.title} />
+          <meta name="twitter:description" content={cleanSummary(post.summary)} />
+          {post.imageLink && (
+            <meta name="twitter:image" content={post.imageLink} />
+          )}
+          
+          {/* Article specific tags */}
+          {post.date && (
+            <meta property="article:published_time" content={new Date(post.date).toISOString()} />
+          )}
+          {post.author && (
+            <meta property="article:author" content={post.author} />
+          )}
+          <meta property="article:section" content="Blog" />
+          
+          {/* WhatsApp specific optimization */}
+          <meta property="og:image:type" content="image/jpeg" />
+        </Helmet>
+      )}
+      
       {needsExternal && post && (
         <>
           <PostHeader>

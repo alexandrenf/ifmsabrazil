@@ -9,6 +9,7 @@ import "./styles/Fonts.js"; // Ensure this file is imported to load the fonts
 import Footer from "./components/Footer.jsx";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
+import { HelmetProvider } from "react-helmet-async";
 import Loading from "./components/Loading.jsx";
 import Home from "./paginas/Home.jsx";
 import theme from "./styles/theme.js";
@@ -86,9 +87,10 @@ const LinkPage = lazy(() => import("./paginas/LinkPage.jsx"));
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <ColorSchemeMetaTag />
-      <Router>
+    <HelmetProvider>
+      <ThemeProvider theme={theme}>
+        <ColorSchemeMetaTag />
+        <Router>
         <ScrollToTop /> {/* Add the ScrollToTop component */}
         <GlobalStyles />
         <CssBaseline />
@@ -226,6 +228,7 @@ const App = () => {
         <Footer />
       </Router>
     </ThemeProvider>
+    </HelmetProvider>
   );
 };
 

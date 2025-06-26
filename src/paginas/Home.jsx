@@ -8,6 +8,7 @@ import FloatingContactButton from "../components/FloatingContactButton"
 import OndeEstamos from "../components/OndeEstamos"
 import AreasOfIFMSABrazil from "../components/AreasOfIFMSABrazil"
 import Blog from "../components/Blog"
+import LiquidGlass from "../components/LiquidGlass"
 import backgroundImage from "../assets/background-image.webp"
 import { isWithinInterval, parseISO } from "date-fns"
 import Alert from "../components/Alert"
@@ -234,22 +235,55 @@ const HeroText = styled.h1`
   }
 `
 
-const HeroSubtext = styled.p`
+const HeroSubtext = styled.div`
   font-size: 1.25rem;
   max-width: 700px;
   margin-bottom: 2rem;
   line-height: 1.6;
   opacity: 0;
   animation: ${fadeIn} 1s ease-out 0.3s forwards;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  padding: 20px;
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.2);
+  padding: 30px 40px;
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(1px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      rgba(255, 255, 255, 0.05) 50%, 
+      rgba(0, 80, 140, 0.1) 100%
+    );
+    border-radius: 25px;
+    z-index: 1;
+  }
+
+  p {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
 
   @media (max-width: 768px) {
     font-size: 1rem;
+    padding: 20px 25px;
+    max-width: 90%;
   }
 `
 
@@ -579,8 +613,11 @@ const Home = () => {
             Estudantes de medicina que fazem a <span>diferença</span>
           </HeroText>
           <HeroSubtext>
-            Conectando futuros médicos em todo o Brasil para promover saúde, educação médica, humanização e intercâmbios
-            que transformam vidas e comunidades.
+            <LiquidGlass />
+            <p>
+              Conectando futuros médicos em todo o Brasil para promover saúde, educação médica, humanização e intercâmbios
+              que transformam vidas e comunidades.
+            </p>
           </HeroSubtext>
           <ButtonContainer>
             <JoinButton onClick={() => (window.location.href = "/filie-se")}>
