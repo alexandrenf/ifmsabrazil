@@ -130,17 +130,7 @@ const ListContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const SortButton = styled(Button)`
-  &.MuiButton-root {
-    background-color: ${props => props.active ? '#00508c' : 'white'};
-    color: ${props => props.active ? 'white' : '#00508c'};
-    border: 1px solid #00508c;
-    
-    &:hover {
-      background-color: ${props => props.active ? '#003c69' : '#f5f5f5'};
-    }
-  }
-`;
+
 
 const StyledLink = styled(Link)`
   text-decoration: none;
