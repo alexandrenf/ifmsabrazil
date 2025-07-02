@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import Loading from "../components/Loading.jsx";
 import ComiteLists from "../components/ComiteLists.jsx";
@@ -7,24 +7,18 @@ import axios from "axios";
 import Papa from "papaparse";
 import MarkdownContent from "../components/MarkdownContent.jsx";
 
-const Root = styled(Container)(({ theme }) => ({
+const Root = styled(Container)({
   padding: "24px",
   backgroundColor: "#FFFFFF",
   color: "#333",
-  [theme.breakpoints.down("sm")]: {
-    padding: "16px",
-  },
-}));
+});
 
-const Title = styled(Typography)(({ theme }) => ({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
   textAlign: "center", // Center the title
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "1.5rem",
-  },
-}));
+});
 
 const Filiacao = () => {
   const [members, setMembers] = useState([]);
@@ -129,7 +123,7 @@ As Regionais da IFMSA Brazil são: Norte 1 (AC, RO, AM, RR), Norte 2 (PA, AP), N
 
   return (
     <Root>
-      <Title variant="h4">{"Processo de Filiação e Comitês Filiados"}</Title>
+      <Title>{"Processo de Filiação e Comitês Filiados"}</Title>
       <MarkdownContent content={markdownContent1} />
       <MarkdownContent content={markdownContent2} />
       <ComiteLists members={members} />

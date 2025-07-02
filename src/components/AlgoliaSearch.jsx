@@ -1,11 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { algoliasearch } from 'algoliasearch';
 import styled from 'styled-components';
 import { Search, X, ExternalLink } from 'lucide-react';
 
-// Initialize Algolia client
-const client = algoliasearch('6RE19NWP78', '72529d76b31f930f85662940f68f24e8');
+// Lazy load Algolia client to reduce initial bundle size
+let algoliasearch;
+let client;
+
+const initializeAlgolia = async () => {
+  if (!algoliasearch) {
+    const { algoliasearch: algoliaModule } = await import('algoliasearch');
+    algoliasearch = algoliaModule;
+    client = algoliasearch('6RE19NWP78', '72529d76b31f930f85662940f68f24e8');
+  }
+  return client;
+};
 
 const SearchContainer = styled.div`
   position: relative;
@@ -204,8 +213,11 @@ const AlgoliaSearch = ({ placeholder = "Pesquisar no site...", onResultClick }) 
   const performSearch = async (searchQuery) => {
     setIsLoading(true);
     try {
+      // Initialize Algolia client dynamically
+      const algoliaClient = await initializeAlgolia();
+      
       // Use Algolia v5 search format
-      const { results } = await client.search({
+      const { results } = await algoliaClient.search({
         requests: [
           {
             indexName: 'ifmsabrazil_pages',
@@ -261,7 +273,7 @@ const AlgoliaSearch = ({ placeholder = "Pesquisar no site...", onResultClick }) 
       
       // Fallback: try a simpler search without highlighting
       try {
-        const { results } = await client.search({
+        const { results } = await algoliaClient.search({
           requests: [
             {
               indexName: 'ifmsabrazil_pages',

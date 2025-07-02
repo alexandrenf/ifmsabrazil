@@ -61,7 +61,7 @@ const fetchSpreadsheet = async (url) => {
             row[key] = row[key].normalize('NFC'); // Normalize to NFC (Normalization Form C)
           } catch (e) {
             console.warn(`Error normalizing value for key ${key}: ${row[key]}. Keeping the original value.`, e);
-            row[key] = row[key]; // Leave it as is if normalization fails
+            // Keep original value if normalization fails
           }
         }
       });

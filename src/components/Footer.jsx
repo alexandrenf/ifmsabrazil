@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Grid, Typography, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons/faTwitter";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons/faEnvelope";
-import { faPhone } from "@fortawesome/free-solid-svg-icons/faPhone";
+import {
+  faInstagram,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 // Add specific icons to the library
-library.add(faTwitter, faInstagram, faMapMarkerAlt, faEnvelope, faPhone);
+library.add(faInstagram, faXTwitter, faEnvelope);
 
 const FooterContainer = styled("footer")({
   backgroundColor: "#00508C",
@@ -86,18 +86,18 @@ const Footer = () => (
           </Typography>
           <SocialLinks>
             <SocialLink
-              href="https://twitter.com/ifmsabrazil"
+              href="https://x.com/ifmsabrazil"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={["fab", "twitter"]} />
+              <FontAwesomeIcon icon={faXTwitter} />
             </SocialLink>
             <SocialLink
               href="https://instagram.com/ifmsabrazil"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={["fab", "instagram"]} />
+              <FontAwesomeIcon icon={faInstagram} />
             </SocialLink>
           </SocialLinks>
         </Grid>

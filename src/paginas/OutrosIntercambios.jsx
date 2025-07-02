@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import MarkdownContent from "../components/MarkdownContent.jsx";
 
@@ -9,7 +9,7 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const Title = styled(Typography)({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
@@ -21,7 +21,7 @@ const OutrosIntercambios = () => {
 
 ### BEACH PROJECT: 
 
-O Brazil’s Exchange Assistance on Care and Hospitality (BEACH Project) objetiva ser o projeto que todos lembrarão quando o assunto for Social Programs. O BEACH tem em seu cerne um princípio que se destaca mais que todos os outros: a integração. Buscamos, para tanto, juntar pessoas das mais diversas culturas, desde a Welcome Party até o último dia. Isso potencializa a própria experiência de se fazer intercâmbio.
+O Brazil's Exchange Assistance on Care and Hospitality (BEACH Project) objetiva ser o projeto que todos lembrarão quando o assunto for Social Programs. O BEACH tem em seu cerne um princípio que se destaca mais que todos os outros: a integração. Buscamos, para tanto, juntar pessoas das mais diversas culturas, desde a Welcome Party até o último dia. Isso potencializa a própria experiência de se fazer intercâmbio.
 
 O incoming passa a não apenas entrar em contato com a cultura do nosso país e seus regionalismos, como também tem a oportunidade de submergir na cultura de uma miríade de outros países, que ele sequer poderia pensar em conhecer. Todo o modelo e todos os programas do BEACH Project são estruturados de forma a aproximar o maior número de pessoas, dando a elas uma experiência única, inerente a se fazer um intercâmbio pela IFMSA Brazil. 
 Durante um final de semana, o seu comitê poderá receber intercambistas de vários países que vieram ao Brasil estagiar nas mais diversas regiões! Vocês montam a programação: parques, museus, praia, cachoeira, rodízio, pontos turísticos, caiaque, asa delta, o que sua cidade tiver a oferecer!
@@ -62,7 +62,7 @@ Para mais informações ou interesse em organizar um SCORA X-Change, envie um em
 
   return (
     <Root>
-      <Title variant="h4">{"Outras Modalidades de Intercâmbios"}</Title>
+      <Title>{"Outras Modalidades de Intercâmbios"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

@@ -599,6 +599,7 @@ const MarkdownOptions = {
         // Ensure Prism has the language
         const supportedLanguage = Prism.languages[language] ? language : "text";
         
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useEffect(() => {
           Prism.highlightAll();
         }, [children]);

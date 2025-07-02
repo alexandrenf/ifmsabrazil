@@ -1,20 +1,11 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import styled, { keyframes } from "styled-components";
 import {
-  Container,
-  Typography,
-  Button,
-  ButtonGroup,
-  Box,
-  Divider,
   TextField,
-  Checkbox,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  ListItemText,
-  OutlinedInput,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
@@ -235,16 +226,13 @@ const Arquivos = () => {
   const [filteredArquivos, setFilteredArquivos] = useState([]);
 
   const typeObject = allowedTypes.find((t) => t.ref === type);
-  console.log(typeObject);
-  if (!typeObject) {
-    return <NotFound />;
-  }
 
-  const apiEndpoint = `https://blog2.ifmsabrazil.org/api/arquivos/${typeObject.href}`;
-
+  const apiEndpoint = typeObject ? `https://blog2.ifmsabrazil.org/api/arquivos/${typeObject.href}` : null;
   const label = typeObject ? typeObject.label : "Publicações";
 
   useEffect(() => {
+    if (!apiEndpoint) return;
+    
     const fetchArquivos = async () => {
       try {
         const response = await axios.get(apiEndpoint);
@@ -317,6 +305,11 @@ const Arquivos = () => {
     const filteredArquivos = filterArquivos(sortedArquivos);
     return filteredArquivos;
   };
+
+  console.log(typeObject);
+  if (!typeObject) {
+    return <NotFound />;
+  }
 
   if (loading) {
     return <Loading />;

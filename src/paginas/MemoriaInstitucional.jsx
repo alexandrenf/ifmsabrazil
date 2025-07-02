@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import Loading from "../components/Loading.jsx";
 import MarkdownContent from "../components/MarkdownContent.jsx";
@@ -10,7 +10,7 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const Title = styled(Typography)({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
@@ -20,7 +20,7 @@ const Title = styled(Typography)({
 const MemoriaInstitucional = () => {
   const markdownContent1 = `
 
-A International Federation of Medical Students’ Association (IFMSA) foi uma das diversas organizações estudantis internacionais que surgiram após o término da Segunda Guerra Mundial, em um contexto no qual as nações buscavam entendimento mútuo para evitar a eclosão de novos conflitos.
+A International Federation of Medical Students' Association (IFMSA) foi uma das diversas organizações estudantis internacionais que surgiram após o término da Segunda Guerra Mundial, em um contexto no qual as nações buscavam entendimento mútuo para evitar a eclosão de novos conflitos.
 
 Criada em maio de 1951, em Copenhagen, contava inicialmente apenas com representações europeias. A primeira associação latino-americana a integrar a IFMSA foi a International Federation of Londrina Medical Students (IFLMS), fundada em 1991 por estudantes da Universidade Estadual de Londrina (UEL).
 
@@ -69,8 +69,8 @@ decisão, em um cenário de inúmeras mudanças na educação médica brasileira
 fundou-se o eixo de representatividade.
 Neste ano, uma grande reforma documental, que revisou dezenas de
 Regimentos Internos, agrupando-os em um único Regimento Geral, e removeu-
-se oficialmente do estatuto o termo “instituição apolítica”, substituindo-o por
-“suprapartidária”.
+se oficialmente do estatuto o termo "instituição apolítica", substituindo-o por
+"suprapartidária".
 
 A mudança conceitual repercutiu na prática, e a IFMSA Brazil conquistou, neste
 período, sua primeira titularidade em uma comissão do Conselho Federal de
@@ -99,7 +99,7 @@ acadêmicos.
 
   return (
     <Root>
-      <Title variant="h4">{"Memória Institucional"}</Title>
+      <Title>{"Memória Institucional"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

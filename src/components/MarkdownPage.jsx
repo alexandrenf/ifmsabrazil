@@ -179,9 +179,6 @@ const MarkdownContainer = styled("div")({
   maxWidth: "1200px",
   margin: "0 auto",
   padding: "12px 120px",
-  "@media (max-width: 768px)": {
-    padding: "12px 48px"
-  },
   fontFamily: "'Poppins', sans-serif",
   "& table": {
     width: "100%",
@@ -409,7 +406,7 @@ const MarkdownContainer = styled("div")({
     }
   },
   "@media (max-width: 768px)": {
-    padding: "16px",
+    padding: "12px 48px",
     "& h1": { fontSize: "2rem" },
     "& h2": { fontSize: "1.5rem" },
     "& h3": { fontSize: "1.25rem" },

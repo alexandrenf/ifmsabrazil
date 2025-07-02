@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import Loading from "../components/Loading.jsx";
 import MarkdownContent from "../components/MarkdownContent.jsx";
@@ -10,7 +10,7 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const Title = styled(Typography)({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
@@ -26,7 +26,7 @@ A IFMSA é a maior organização estudantil do planeta. Com mais de 1 milhão de
 
 ## O que é a IFMSA Brazil?
 
-A IFMSA Brazil (International Federation of Medical Students’ Associations of Brazil, traduzida para Federação Internacional das Associações de Estudantes de Medicina do Brasil) foi fundada em 1991 na Universidade Estadual de Londrina. Atualmente, estamos presentes em mais de 200 escolas médicas em todas as regiões brasileiras e atuamos em diversos eixos incluindo humanização, ciência e produção científica, promoção de saúde, educação médica, intercâmbios, representatividade estudantil, treinamentos e vários outros.
+A IFMSA Brazil (International Federation of Medical Students' Associations of Brazil, traduzida para Federação Internacional das Associações de Estudantes de Medicina do Brasil) foi fundada em 1991 na Universidade Estadual de Londrina. Atualmente, estamos presentes em mais de 200 escolas médicas em todas as regiões brasileiras e atuamos em diversos eixos incluindo humanização, ciência e produção científica, promoção de saúde, educação médica, intercâmbios, representatividade estudantil, treinamentos e vários outros.
 
 
 ## Missão, Visão e Valores
@@ -47,13 +47,13 @@ Humanização; União; Ética; Equidade; Cidadania.
 
 A IFMSA Brazil representa seus Coordenadores Locais e Alumni filiados e se posiciona a partir de deliberações em suas Assembleias Gerais. Contudo, para se organizar internamente e viabilizar uma adequada gestão de seus membros, também elege representantes voluntários da Federação.
 
-Somos uma instituição supra-partidária, ou seja,  não endossa propostas partidárias ou ideológicas sistemáticas, e não é definível por “direita” ou “esquerda”. Nossa comunidade de filiados congrega as mais diversas escolas de pensamento, assegurando o contraditório como ferramenta  para a construção de consensos adequados, caso a caso.
+Somos uma instituição supra-partidária, ou seja,  não endossa propostas partidárias ou ideológicas sistemáticas, e não é definível por "direita" ou "esquerda". Nossa comunidade de filiados congrega as mais diversas escolas de pensamento, assegurando o contraditório como ferramenta  para a construção de consensos adequados, caso a caso.
 
 `;
 
   return (
     <Root>
-      <Title variant="h4">{"Estrutura da IFMSA Brazil"}</Title>
+      <Title>{"Estrutura da IFMSA Brazil"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import Loading from "../components/Loading.jsx";
 import MarkdownContent from "../components/MarkdownContent.jsx";
@@ -10,7 +10,7 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const Title = styled(Typography)({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
@@ -49,7 +49,7 @@ Nesse sentido, as temáticas de atuação são pautadas em nossos Programas, que
 
   return (
     <Root>
-      <Title variant="h4">{"Ações e Temáticas"}</Title>
+      <Title>{"Ações e Temáticas"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

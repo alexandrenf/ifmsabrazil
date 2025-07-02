@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import MarkdownContent from "../components/MarkdownContent.jsx";
 
@@ -9,7 +9,7 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const Title = styled(Typography)({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
@@ -92,7 +92,7 @@ Para obter mais informações sobre os intercâmbios nacionais, os estudantes po
 
   return (
     <Root>
-      <Title variant="h4">{"Intercâmbios Nacionais"}</Title>
+      <Title>{"Intercâmbios Nacionais"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

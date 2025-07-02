@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import MarkdownContent from "../components/MarkdownContent.jsx";
 
@@ -10,7 +10,7 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const Title = styled(Typography)({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
@@ -102,7 +102,7 @@ Diante disso, a Federação incentiva os estudantes de medicina a serem protagon
 
   return (
     <Root>
-      <Title variant="h4">{"Eixos de Atuação"}</Title>
+      <Title>{"Eixos de Atuação"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );

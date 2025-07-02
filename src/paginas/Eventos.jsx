@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 import Loading from "../components/Loading.jsx";
 import MarkdownContent from "../components/MarkdownContent.jsx";
@@ -10,7 +10,7 @@ const Root = styled(Container)({
   color: "#333",
 });
 
-const Title = styled(Typography)({
+const Title = styled("h1")({
   color: "#00508C",
   marginBottom: "16px",
   fontWeight: "bold",
@@ -106,7 +106,7 @@ Existem ainda workshops que servem apenas para capacitar os coordenadores locais
 
 - Professional and Research Exchange Training (PRET)*
 - International PEER Education Training (IPET)*
-- Women’s Reproductive Health and Access to Safe Abortion Training (Ipas)*
+- Women's Reproductive Health and Access to Safe Abortion Training (Ipas)*
 - Public Health Leadership Training (PHLT)*
 - Human Rights for Medical Practitioners (HRMP)*
 - Training Advanced Trainers (TAT)
@@ -120,7 +120,7 @@ Os eventos acima contam pelo menos 24 horas de treinamentos, divididas em 3 ou 4
 
   return (
     <Root>
-      <Title variant="h4">{"Eventos e Workshops"}</Title>
+      <Title>{"Eventos e Workshops"}</Title>
       <MarkdownContent content={markdownContent1} />
     </Root>
   );
