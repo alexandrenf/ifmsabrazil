@@ -329,7 +329,7 @@ const MarkdownContainer = styled.div`
     border-left: 4px solid #00508c;
     
     &::before {
-      content: '""';
+      content: '';
       position: absolute;
       top: -10px;
       left: 20px;

@@ -84,6 +84,7 @@ const IntercambioNacional = lazy(() =>
   import("./paginas/IntercambioNacional.jsx")
 ); // Import the IntercambioNacional component
 const LinkPage = lazy(() => import("./paginas/LinkPage.jsx"));
+const AssembleiaGeral = lazy(() => import("./paginas/AssembleiaGeral.jsx"));
 
 const App = () => {
   return (
@@ -139,6 +140,7 @@ const App = () => {
               }
             />
             <Route path="/cobem" element={<LinkPage />} />
+            <Route path="/ag" element={<AssembleiaGeral />} />
             {/* Add other routes here */}
             <Route path="*" element={<NotFound />} />{" "}
             {/* Catch-all route for 404 */}
