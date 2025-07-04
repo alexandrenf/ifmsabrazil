@@ -145,10 +145,10 @@ const EventLogo = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  box-shadow: 0 20px 40px rgba(0, 80, 140, 0.3);
+  box-shadow: 0 15px 30px rgba(0, 80, 140, 0.2);
   position: relative;
   overflow: hidden;
-  padding: 1rem;
+  padding: 0.55rem;
 
   img {
     width: 100%;
@@ -156,7 +156,7 @@ const EventLogo = styled.div`
     object-fit: contain;
     border-radius: 40px;
     background: rgba(255, 255, 255, 1);
-    padding: 1rem;
+    padding: 0.55rem;
   }
 
   @media (max-width: 1200px) {

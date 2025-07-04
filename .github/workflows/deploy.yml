@@ -3,7 +3,7 @@ name: Deploy to FTP
 on:
   push:
     branches:
-      - main # Change this to your desired branch
+      - main
 
 jobs:
   deploy:
@@ -11,18 +11,46 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Unzip build.zip
-        run: unzip build.zip -d build
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build website
+        run: bun run build
+
+      - name: Install lftp for selective deletion
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Remove specific files/folders from server
+        run: |
+          lftp -c "
+          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}
+          cd /public_html
+          rm -rf assets || true
+          rm -rf markdown || true
+          rm -f index.html || true
+          rm -f index.html.br || true
+          bye
+          "
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: build/
-          server-dir: / # Change this to your server's deployment directory
-          dangerous-clean-slate: true # Deletes all files/folders in the server-dir before upload
+          local-dir: dist/
+          server-dir: /public_html/
+          dangerous-clean-slate: false
           exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/.vscode/**
