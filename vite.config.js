@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import markdown from "vite-plugin-md";
-import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression";
 import { babel } from "@rollup/plugin-babel";
 
@@ -20,10 +19,6 @@ export default defineConfig({
       },
     }),
     markdown(),
-    visualizer({
-      filename: "./build/stats.html",
-      open: true,
-    }),
     viteCompression({ algorithm: "brotliCompress" }), // Add compression plugin
     babel({
       babelHelpers: "bundled",
