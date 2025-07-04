@@ -31,7 +31,6 @@ jobs:
         run: |
           lftp -c "
           open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}
-          cd /public_html
           rm -rf assets || true
           rm -rf markdown || true
           rm -f index.html || true
